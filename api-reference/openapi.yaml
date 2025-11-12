@@ -1,0 +1,6093 @@
+openapi: 3.0.0
+info:
+  title: CI Public API
+  version: 1.0.0
+  description: >-
+    # Introduction
+
+    Welcome to the Content Ignite API. A central place for all Content Ignite
+    functionality. 
+
+
+    This API enforces a separation between function and form, meaning anything
+    you can do in our platforms can be replicated in your own bespoke solution.
+
+
+    # Authentication
+
+    Authentication is handled via JWTs. You can retrieve your unique JSON Web
+    Token from the settings page in the platform, which needs to be passed in
+    with every request.
+
+    To do this, simple include it in an Authorization header with the "Bearer"
+    key word.
+
+
+    Please contact support for help getting started.
+
+
+    # Error Codes
+
+    This is a fully RESTful API, so prepare for a number of different HTTP
+    status codes.
+
+
+    There is also a standard "success" field returned for each request. This
+    boolean value can provide a first check against a response.
+
+
+    # Rate limit
+
+    We reserve the right to block requests if we deem a client to be abusing the
+    API.
+servers:
+  - url: '{{url}}'
+paths:
+  /v1/report:
+    get:
+      summary: /report
+      tags:
+        - Reporting
+        - Revenue Reports
+      responses:
+        default:
+          description: report
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        title:
+                          type: string
+                        created_on:
+                          type: string
+                          format: style
+                        created_by:
+                          type: integer
+                        created_by_name:
+                          type: string
+                  success:
+                    type: boolean
+      description: Fetch a list of user generated reports
+    post:
+      summary: /report
+      tags:
+        - Reporting
+        - Revenue Reports
+      responses:
+        default:
+          description: report/:id
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      title:
+                        type: string
+                      created_by:
+                        type: integer
+                      organisation_id:
+                        type: integer
+                      fields:
+                        type: array
+                        items:
+                          type: string
+                      date_range:
+                        type: string
+                      custom_date:
+                        nullable: true
+                      filters:
+                        type: object
+                        properties:
+                          account_name:
+                            type: object
+                            properties:
+                              matches:
+                                type: array
+                                items: {}
+                              type:
+                                type: string
+                          config_id:
+                            type: object
+                            properties:
+                              matches:
+                                type: array
+                                items: {}
+                              type:
+                                type: string
+                          creative_size:
+                            type: object
+                            properties:
+                              matches:
+                                type: array
+                                items: {}
+                              type:
+                                type: string
+                          device:
+                            type: object
+                            properties:
+                              matches:
+                                type: array
+                                items: {}
+                              type:
+                                type: string
+                          geo:
+                            type: object
+                            properties:
+                              matches:
+                                type: array
+                                items: {}
+                              type:
+                                type: string
+                          oid:
+                            type: object
+                            properties:
+                              matches:
+                                type: array
+                                items: {}
+                              type:
+                                type: string
+                          partner:
+                            type: object
+                            properties:
+                              matches:
+                                type: array
+                                items: {}
+                              type:
+                                type: string
+                          platform:
+                            type: object
+                            properties:
+                              matches:
+                                type: array
+                                items: {}
+                              type:
+                                type: string
+                          uid:
+                            type: object
+                            properties:
+                              matches:
+                                type: array
+                                items: {}
+                              type:
+                                type: string
+                          unit:
+                            type: object
+                            properties:
+                              matches:
+                                type: array
+                                items: {}
+                              type:
+                                type: string
+                      created_on:
+                        type: string
+                        format: style
+                      table_state:
+                        nullable: true
+                      temporary:
+                        type: boolean
+                  success:
+                    type: boolean
+      description: >-
+        Create a new report
+
+
+        ## Data
+
+
+        | **Field Name** | **Field Type** | **Description** |
+
+        | --- | --- | --- |
+
+        | `title` (optional if `temporary` equals `true`) | `string` | Report
+        title. Used when saving a report for reuse. Max character length 50. |
+
+        | `temporary` | `boolean` | If true, the report will not show up in the
+        list of reports in the UI. |
+
+        | `date_range` |
+        `ENUM('custom','yesterday','seven_days','thirty_days','three_months','six_months','last_week','last_month','last_quarter','last_year','week_to_date','month_to_date','quarter_to_date','year_to_date','month_on_month','quarter_on_quarter')`
+        | Pick a dynamic or fixed date range. If `custom` then`custom_date` is
+        also required. |
+
+        | `fields` | `Array` of
+        `ENUM('account_name','account_owner','ad_impressions','ad_requests','field','ad_responses','field','ad_unit_loads','field','campaign_advertiser','campaign','channel','clicks','config_id','config_name','cost','field','creative_size','ctr','field','date','device','ecpm','field','environment','fill','field','geo','gross_revenue','imp_fill','field','line_item','month','net_revenue','organisation','partner','platform','publisher','q1_impressions','q1_percent','field','q2_impressions','q2_percent','field','q3_impressions','q3_percent','field','q4_impressions','q4_percent','field','region','revenue_source','rpm','field','uid','unit_fill','field','unit','viewability','field','viewable_impressions')`
+        | Pick two or more fields to build the report, note that some fields are
+        incompatible with others. |
+
+        | `filters` | Object with the following optional properties:
+        `account_name`,`account_owner`,`config_id`,`creative_size`,`campaign`,`campaign_advertiser`,`line_item`,`device`,`environment`,`geo`,`region`,`revenue_source`,`oid`,`partner`,`channel`,`platform`,`uid`,`unit` 
+        <br>  <br>in the format `{type: ENUM('include', 'exclude'), matches:
+        Array}` | Filter data on various fields. |
+
+        | `custom_date` (required if `date_range` is set to `custom`) | `{start:
+        Datetime, end: Datetime}` | Used when `date_range` is set to `custom` to
+        provide the start and end date |
+
+
+        ## Fields
+
+
+        | **Field Name** | **Field Description** |
+
+        | --- | --- |
+
+        | account_name | Account name of the primary platform e.g. your ad
+        server |
+
+        | ad_impressions | Total impressions served by the ad server |
+
+        | ad_requests | Total number of requests sent to the ad server |
+
+        | ad_responses | Total number of ad requests that successfully returned
+        an ad |
+
+        | ad_unit_loads | Number of times a target match was found on page (not
+        necessarily number of ads requested) |
+
+        | ag_video_clicks | Number of recirculation click on an auto-generated
+        video |
+
+        | ag_video_ctr | Percentage of auto-generated video views that clicked
+        through to the article |
+
+        | ag_video_impressions | Number of impressions on an auto-generated
+        video |
+
+        | config_id | The ID of the config that matched and served the ad
+        request |
+
+        | config_name | The name assigned to the config (if available) |
+
+        | creative_size | The creative size served |
+
+        | date | Date revenue is attributed to |
+
+        | device | Device category (desktop,mobile or tablet) |
+
+        | ecpm | Average cost per 1,000 impressions |
+
+        | fill | The percentage of ad requests that returned an ad |
+
+        | geo | Country iso-code |
+
+        | gross_revenue | Total revenue |
+
+        | net_revenue | Estimated publishers share of revenue |
+
+        | oid | Organisation ID |
+
+        | organisation | Organisation name |
+
+        | partner | Name of the ad network that sent the winning bid |
+
+        | platform | Name of the primary platform e.g. your ad server or demand
+        partner connection |
+
+        | publisher | Publishers domain plus optional label |
+
+        | q1_impressions | Number of times that a video plays to 25% of its
+        length |
+
+        | q1_percent | Percentage of views that played to 25% of videos length |
+
+        | q2_impressions | Number of times that a video plays to 50% of its
+        length |
+
+        | q2_percent | Percentage of views that played to 50% of videos length |
+
+        | q3_impressions | Number of times that a video plays to 75% of its
+        length |
+
+        | q3_percent | Percentage of views that played to 75% of videos length |
+
+        | q4_impressions | Number of times that a video plays to completion |
+
+        | q4_percent | Percentage of views that played to video end |
+
+        | rpm | Estimated publisher revenue per 1,000 ad requests |
+
+        | uid | The internal unique ID for the publisher |
+
+        | unit | Unit type e.g. In-image |
+
+        | unit_fill | The percentage of ad unit loads that returned an ad (can
+        be over 100% if refresh is enabled) |
+
+        | viewability | Ad impressions that were deemed "viewable" |
+  /v1/report/{id}:
+    get:
+      summary: /report/:id
+      tags:
+        - Reporting
+        - Revenue Reports
+      responses:
+        default:
+          description: report/:id
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      title:
+                        type: string
+                      created_by:
+                        type: integer
+                      organisation_id:
+                        type: integer
+                      fields:
+                        type: array
+                        items:
+                          type: string
+                      date_range:
+                        type: string
+                      custom_date:
+                        nullable: true
+                      filters:
+                        type: object
+                        properties:
+                          account_name:
+                            type: object
+                            properties:
+                              matches:
+                                type: array
+                                items: {}
+                              type:
+                                type: string
+                          config_id:
+                            type: object
+                            properties:
+                              matches:
+                                type: array
+                                items: {}
+                              type:
+                                type: string
+                          creative_size:
+                            type: object
+                            properties:
+                              matches:
+                                type: array
+                                items: {}
+                              type:
+                                type: string
+                          device:
+                            type: object
+                            properties:
+                              matches:
+                                type: array
+                                items: {}
+                              type:
+                                type: string
+                          geo:
+                            type: object
+                            properties:
+                              matches:
+                                type: array
+                                items: {}
+                              type:
+                                type: string
+                          oid:
+                            type: object
+                            properties:
+                              matches:
+                                type: array
+                                items: {}
+                              type:
+                                type: string
+                          partner:
+                            type: object
+                            properties:
+                              matches:
+                                type: array
+                                items: {}
+                              type:
+                                type: string
+                          platform:
+                            type: object
+                            properties:
+                              matches:
+                                type: array
+                                items: {}
+                              type:
+                                type: string
+                          uid:
+                            type: object
+                            properties:
+                              matches:
+                                type: array
+                                items: {}
+                              type:
+                                type: string
+                          unit:
+                            type: object
+                            properties:
+                              matches:
+                                type: array
+                                items: {}
+                              type:
+                                type: string
+                      created_on:
+                        type: string
+                        format: style
+                      table_state:
+                        type: object
+                        properties:
+                          aggregation:
+                            type: object
+                            properties:
+                              model:
+                                type: object
+                                properties:
+                                  ad_impressions:
+                                    type: string
+                                  ad_requests:
+                                    type: string
+                                  ad_responses:
+                                    type: string
+                                  ad_unit_loads:
+                                    type: string
+                                  ag_video_clicks:
+                                    type: string
+                                  ag_video_impressions:
+                                    type: string
+                                  gross_revenue:
+                                    type: string
+                                  net_revenue:
+                                    type: string
+                                  q1_impressions:
+                                    type: string
+                                  q2_impressions:
+                                    type: string
+                                  q3_impressions:
+                                    type: string
+                                  q4_impressions:
+                                    type: string
+                          rowGrouping:
+                            type: object
+                            properties:
+                              model:
+                                type: array
+                                items: {}
+                          pinnedColumns:
+                            type: array
+                            items: {}
+                          columns:
+                            type: object
+                            properties:
+                              orderedFields:
+                                type: array
+                                items:
+                                  type: string
+                              dimensions:
+                                type: object
+                                properties:
+                                  date:
+                                    type: object
+                                    properties:
+                                      maxWidth:
+                                        type: integer
+                                      minWidth:
+                                        type: integer
+                                      width:
+                                        type: integer
+                                  viewability:
+                                    type: object
+                                    properties:
+                                      maxWidth:
+                                        type: integer
+                                      minWidth:
+                                        type: integer
+                                      width:
+                                        type: integer
+                                  ad_unit_loads:
+                                    type: object
+                                    properties:
+                                      maxWidth:
+                                        type: integer
+                                      minWidth:
+                                        type: integer
+                                      width:
+                                        type: integer
+                                  ad_requests:
+                                    type: object
+                                    properties:
+                                      maxWidth:
+                                        type: integer
+                                      minWidth:
+                                        type: integer
+                                      width:
+                                        type: integer
+                                  ad_responses:
+                                    type: object
+                                    properties:
+                                      maxWidth:
+                                        type: integer
+                                      minWidth:
+                                        type: integer
+                                      width:
+                                        type: integer
+                                  ad_impressions:
+                                    type: object
+                                    properties:
+                                      maxWidth:
+                                        type: integer
+                                      minWidth:
+                                        type: integer
+                                      width:
+                                        type: integer
+                                  fill:
+                                    type: object
+                                    properties:
+                                      maxWidth:
+                                        type: integer
+                                      minWidth:
+                                        type: integer
+                                      width:
+                                        type: integer
+                                  ecpm:
+                                    type: object
+                                    properties:
+                                      maxWidth:
+                                        type: integer
+                                      minWidth:
+                                        type: integer
+                                      width:
+                                        type: integer
+                                  gross_revenue:
+                                    type: object
+                                    properties:
+                                      maxWidth:
+                                        type: integer
+                                      minWidth:
+                                        type: integer
+                                      width:
+                                        type: integer
+                                  rpm:
+                                    type: object
+                                    properties:
+                                      maxWidth:
+                                        type: integer
+                                      minWidth:
+                                        type: integer
+                                      width:
+                                        type: integer
+                                  net_revenue:
+                                    type: object
+                                    properties:
+                                      maxWidth:
+                                        type: integer
+                                      minWidth:
+                                        type: integer
+                                      width:
+                                        type: integer
+                          preferencePanel:
+                            type: object
+                            properties:
+                              open:
+                                type: boolean
+                          filter:
+                            type: object
+                            properties:
+                              filterModel:
+                                type: object
+                                properties:
+                                  items:
+                                    type: array
+                                    items: {}
+                                  linkOperator:
+                                    type: string
+                                  quickFilterValues:
+                                    type: array
+                                    items: {}
+                                  quickFilterLogicOperator:
+                                    type: string
+                          sorting:
+                            type: object
+                            properties:
+                              sortModel:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    field:
+                                      type: string
+                                    sort:
+                                      type: string
+                          pagination:
+                            type: object
+                            properties:
+                              pageSize:
+                                type: integer
+                              page:
+                                type: integer
+                      temporary:
+                        type: boolean
+                  success:
+                    type: boolean
+      description: Fetch a reports configuration details
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: Report ID
+        schema:
+          type: integer
+          default: <integer>
+    put:
+      summary: /report/:id
+      tags:
+        - Reporting
+        - Revenue Reports
+      responses:
+        default:
+          description: report/:id
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      title:
+                        type: string
+                      created_by:
+                        type: integer
+                      organisation_id:
+                        type: integer
+                      fields:
+                        type: array
+                        items:
+                          type: string
+                      date_range:
+                        type: string
+                      custom_date:
+                        nullable: true
+                      filters:
+                        type: object
+                        properties:
+                          account_name:
+                            type: object
+                            properties:
+                              matches:
+                                type: array
+                                items: {}
+                              type:
+                                type: string
+                          config_id:
+                            type: object
+                            properties:
+                              matches:
+                                type: array
+                                items: {}
+                              type:
+                                type: string
+                          creative_size:
+                            type: object
+                            properties:
+                              matches:
+                                type: array
+                                items: {}
+                              type:
+                                type: string
+                          device:
+                            type: object
+                            properties:
+                              matches:
+                                type: array
+                                items: {}
+                              type:
+                                type: string
+                          geo:
+                            type: object
+                            properties:
+                              matches:
+                                type: array
+                                items: {}
+                              type:
+                                type: string
+                          oid:
+                            type: object
+                            properties:
+                              matches:
+                                type: array
+                                items: {}
+                              type:
+                                type: string
+                          partner:
+                            type: object
+                            properties:
+                              matches:
+                                type: array
+                                items: {}
+                              type:
+                                type: string
+                          platform:
+                            type: object
+                            properties:
+                              matches:
+                                type: array
+                                items: {}
+                              type:
+                                type: string
+                          uid:
+                            type: object
+                            properties:
+                              matches:
+                                type: array
+                                items: {}
+                              type:
+                                type: string
+                          unit:
+                            type: object
+                            properties:
+                              matches:
+                                type: array
+                                items: {}
+                              type:
+                                type: string
+                      created_on:
+                        type: string
+                        format: style
+                      table_state:
+                        type: object
+                        properties:
+                          aggregation:
+                            type: object
+                            properties:
+                              model:
+                                type: object
+                                properties:
+                                  ad_impressions:
+                                    type: string
+                                  ad_requests:
+                                    type: string
+                                  ad_responses:
+                                    type: string
+                                  ad_unit_loads:
+                                    type: string
+                                  ag_video_clicks:
+                                    type: string
+                                  ag_video_impressions:
+                                    type: string
+                                  gross_revenue:
+                                    type: string
+                                  net_revenue:
+                                    type: string
+                                  q1_impressions:
+                                    type: string
+                                  q2_impressions:
+                                    type: string
+                                  q3_impressions:
+                                    type: string
+                                  q4_impressions:
+                                    type: string
+                          rowGrouping:
+                            type: object
+                            properties:
+                              model:
+                                type: array
+                                items: {}
+                          pinnedColumns:
+                            type: array
+                            items: {}
+                          columns:
+                            type: object
+                            properties:
+                              orderedFields:
+                                type: array
+                                items:
+                                  type: string
+                              dimensions:
+                                type: object
+                                properties:
+                                  date:
+                                    type: object
+                                    properties:
+                                      maxWidth:
+                                        type: integer
+                                      minWidth:
+                                        type: integer
+                                      width:
+                                        type: integer
+                                  viewability:
+                                    type: object
+                                    properties:
+                                      maxWidth:
+                                        type: integer
+                                      minWidth:
+                                        type: integer
+                                      width:
+                                        type: integer
+                                  ad_unit_loads:
+                                    type: object
+                                    properties:
+                                      maxWidth:
+                                        type: integer
+                                      minWidth:
+                                        type: integer
+                                      width:
+                                        type: integer
+                                  ad_requests:
+                                    type: object
+                                    properties:
+                                      maxWidth:
+                                        type: integer
+                                      minWidth:
+                                        type: integer
+                                      width:
+                                        type: integer
+                                  ad_responses:
+                                    type: object
+                                    properties:
+                                      maxWidth:
+                                        type: integer
+                                      minWidth:
+                                        type: integer
+                                      width:
+                                        type: integer
+                                  ad_impressions:
+                                    type: object
+                                    properties:
+                                      maxWidth:
+                                        type: integer
+                                      minWidth:
+                                        type: integer
+                                      width:
+                                        type: integer
+                                  fill:
+                                    type: object
+                                    properties:
+                                      maxWidth:
+                                        type: integer
+                                      minWidth:
+                                        type: integer
+                                      width:
+                                        type: integer
+                                  ecpm:
+                                    type: object
+                                    properties:
+                                      maxWidth:
+                                        type: integer
+                                      minWidth:
+                                        type: integer
+                                      width:
+                                        type: integer
+                                  gross_revenue:
+                                    type: object
+                                    properties:
+                                      maxWidth:
+                                        type: integer
+                                      minWidth:
+                                        type: integer
+                                      width:
+                                        type: integer
+                                  rpm:
+                                    type: object
+                                    properties:
+                                      maxWidth:
+                                        type: integer
+                                      minWidth:
+                                        type: integer
+                                      width:
+                                        type: integer
+                                  net_revenue:
+                                    type: object
+                                    properties:
+                                      maxWidth:
+                                        type: integer
+                                      minWidth:
+                                        type: integer
+                                      width:
+                                        type: integer
+                          preferencePanel:
+                            type: object
+                            properties:
+                              open:
+                                type: boolean
+                          filter:
+                            type: object
+                            properties:
+                              filterModel:
+                                type: object
+                                properties:
+                                  items:
+                                    type: array
+                                    items: {}
+                                  linkOperator:
+                                    type: string
+                                  quickFilterValues:
+                                    type: array
+                                    items: {}
+                                  quickFilterLogicOperator:
+                                    type: string
+                          sorting:
+                            type: object
+                            properties:
+                              sortModel:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    field:
+                                      type: string
+                                    sort:
+                                      type: string
+                          pagination:
+                            type: object
+                            properties:
+                              pageSize:
+                                type: integer
+                              page:
+                                type: integer
+                      temporary:
+                        type: boolean
+                  success:
+                    type: boolean
+      description: Update a reports config
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                fields:
+                  type: array
+                  items:
+                    type: string
+                date_range:
+                  type: string
+                filters:
+                  type: object
+                  properties:
+                    account_name:
+                      type: object
+                      properties:
+                        matches:
+                          type: array
+                          items: {}
+                        type:
+                          type: string
+                    config_id:
+                      type: object
+                      properties:
+                        matches:
+                          type: array
+                          items: {}
+                        type:
+                          type: string
+                    creative_size:
+                      type: object
+                      properties:
+                        matches:
+                          type: array
+                          items: {}
+                        type:
+                          type: string
+                    device:
+                      type: object
+                      properties:
+                        matches:
+                          type: array
+                          items: {}
+                        type:
+                          type: string
+                    geo:
+                      type: object
+                      properties:
+                        matches:
+                          type: array
+                          items: {}
+                        type:
+                          type: string
+                    oid:
+                      type: object
+                      properties:
+                        matches:
+                          type: array
+                          items: {}
+                        type:
+                          type: string
+                    partner:
+                      type: object
+                      properties:
+                        matches:
+                          type: array
+                          items: {}
+                        type:
+                          type: string
+                    platform:
+                      type: object
+                      properties:
+                        matches:
+                          type: array
+                          items: {}
+                        type:
+                          type: string
+                    uid:
+                      type: object
+                      properties:
+                        matches:
+                          type: array
+                          items: {}
+                        type:
+                          type: string
+                    unit:
+                      type: object
+                      properties:
+                        matches:
+                          type: array
+                          items: {}
+                        type:
+                          type: string
+                table_state:
+                  type: object
+                  properties:
+                    aggregation:
+                      type: object
+                      properties:
+                        model:
+                          type: object
+                          properties:
+                            ad_impressions:
+                              type: string
+                            ad_requests:
+                              type: string
+                            ad_responses:
+                              type: string
+                            ad_unit_loads:
+                              type: string
+                            ag_video_clicks:
+                              type: string
+                            ag_video_impressions:
+                              type: string
+                            gross_revenue:
+                              type: string
+                            net_revenue:
+                              type: string
+                            q1_impressions:
+                              type: string
+                            q2_impressions:
+                              type: string
+                            q3_impressions:
+                              type: string
+                            q4_impressions:
+                              type: string
+                    rowGrouping:
+                      type: object
+                      properties:
+                        model:
+                          type: array
+                          items: {}
+                    pinnedColumns:
+                      type: array
+                      items: {}
+                    columns:
+                      type: object
+                      properties:
+                        orderedFields:
+                          type: array
+                          items:
+                            type: string
+                        dimensions:
+                          type: object
+                          properties:
+                            date:
+                              type: object
+                              properties:
+                                maxWidth:
+                                  type: integer
+                                minWidth:
+                                  type: integer
+                                width:
+                                  type: integer
+                            viewability:
+                              type: object
+                              properties:
+                                maxWidth:
+                                  type: integer
+                                minWidth:
+                                  type: integer
+                                width:
+                                  type: integer
+                            ad_unit_loads:
+                              type: object
+                              properties:
+                                maxWidth:
+                                  type: integer
+                                minWidth:
+                                  type: integer
+                                width:
+                                  type: integer
+                            ad_requests:
+                              type: object
+                              properties:
+                                maxWidth:
+                                  type: integer
+                                minWidth:
+                                  type: integer
+                                width:
+                                  type: integer
+                            ad_responses:
+                              type: object
+                              properties:
+                                maxWidth:
+                                  type: integer
+                                minWidth:
+                                  type: integer
+                                width:
+                                  type: integer
+                            ad_impressions:
+                              type: object
+                              properties:
+                                maxWidth:
+                                  type: integer
+                                minWidth:
+                                  type: integer
+                                width:
+                                  type: integer
+                            fill:
+                              type: object
+                              properties:
+                                maxWidth:
+                                  type: integer
+                                minWidth:
+                                  type: integer
+                                width:
+                                  type: integer
+                            ecpm:
+                              type: object
+                              properties:
+                                maxWidth:
+                                  type: integer
+                                minWidth:
+                                  type: integer
+                                width:
+                                  type: integer
+                            gross_revenue:
+                              type: object
+                              properties:
+                                maxWidth:
+                                  type: integer
+                                minWidth:
+                                  type: integer
+                                width:
+                                  type: integer
+                            rpm:
+                              type: object
+                              properties:
+                                maxWidth:
+                                  type: integer
+                                minWidth:
+                                  type: integer
+                                width:
+                                  type: integer
+                            net_revenue:
+                              type: object
+                              properties:
+                                maxWidth:
+                                  type: integer
+                                minWidth:
+                                  type: integer
+                                width:
+                                  type: integer
+                    preferencePanel:
+                      type: object
+                      properties:
+                        open:
+                          type: boolean
+                    filter:
+                      type: object
+                      properties:
+                        filterModel:
+                          type: object
+                          properties:
+                            items:
+                              type: array
+                              items: {}
+                            linkOperator:
+                              type: string
+                            quickFilterValues:
+                              type: array
+                              items: {}
+                            quickFilterLogicOperator:
+                              type: string
+                    sorting:
+                      type: object
+                      properties:
+                        sortModel:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              field:
+                                type: string
+                              sort:
+                                type: string
+                    pagination:
+                      type: object
+                      properties:
+                        pageSize:
+                          type: integer
+                        page:
+                          type: integer
+                temporary:
+                  type: boolean
+    delete:
+      summary: /report/:id
+      tags:
+        - Reporting
+        - Revenue Reports
+      responses:
+        '204':
+          description: report/:id
+      description: Delete a report
+  /v1/report/filters:
+    get:
+      summary: /report/filters
+      tags:
+        - Reporting
+        - Revenue Reports
+      responses:
+        '200':
+          description: /report/filters
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: integer
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: Fetch options available for report filtering
+  /v1/report/{id}/data:
+    get:
+      summary: /report/:id/data
+      tags:
+        - Reporting
+        - Revenue Reports
+      responses:
+        default:
+          description: report/:id/data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  start:
+                    type: string
+                    format: date
+                  end:
+                    type: string
+                    format: date
+                  title:
+                    type: string
+                  currency:
+                    type: string
+                  table_state:
+                    type: object
+                    properties:
+                      aggregation:
+                        type: object
+                        properties:
+                          model:
+                            type: object
+                            properties:
+                              ad_impressions:
+                                type: string
+                              ad_requests:
+                                type: string
+                              ad_responses:
+                                type: string
+                              ad_unit_loads:
+                                type: string
+                              ag_video_clicks:
+                                type: string
+                              ag_video_impressions:
+                                type: string
+                              gross_revenue:
+                                type: string
+                              net_revenue:
+                                type: string
+                              q1_impressions:
+                                type: string
+                              q2_impressions:
+                                type: string
+                              q3_impressions:
+                                type: string
+                              q4_impressions:
+                                type: string
+                      rowGrouping:
+                        type: object
+                        properties:
+                          model:
+                            type: array
+                            items: {}
+                      pinnedColumns:
+                        type: array
+                        items: {}
+                      columns:
+                        type: object
+                        properties:
+                          orderedFields:
+                            type: array
+                            items:
+                              type: string
+                          dimensions:
+                            type: object
+                            properties:
+                              date:
+                                type: object
+                                properties:
+                                  maxWidth:
+                                    type: integer
+                                  minWidth:
+                                    type: integer
+                                  width:
+                                    type: integer
+                              viewability:
+                                type: object
+                                properties:
+                                  maxWidth:
+                                    type: integer
+                                  minWidth:
+                                    type: integer
+                                  width:
+                                    type: integer
+                              ad_unit_loads:
+                                type: object
+                                properties:
+                                  maxWidth:
+                                    type: integer
+                                  minWidth:
+                                    type: integer
+                                  width:
+                                    type: integer
+                              ad_requests:
+                                type: object
+                                properties:
+                                  maxWidth:
+                                    type: integer
+                                  minWidth:
+                                    type: integer
+                                  width:
+                                    type: integer
+                              ad_responses:
+                                type: object
+                                properties:
+                                  maxWidth:
+                                    type: integer
+                                  minWidth:
+                                    type: integer
+                                  width:
+                                    type: integer
+                              ad_impressions:
+                                type: object
+                                properties:
+                                  maxWidth:
+                                    type: integer
+                                  minWidth:
+                                    type: integer
+                                  width:
+                                    type: integer
+                              fill:
+                                type: object
+                                properties:
+                                  maxWidth:
+                                    type: integer
+                                  minWidth:
+                                    type: integer
+                                  width:
+                                    type: integer
+                              ecpm:
+                                type: object
+                                properties:
+                                  maxWidth:
+                                    type: integer
+                                  minWidth:
+                                    type: integer
+                                  width:
+                                    type: integer
+                              gross_revenue:
+                                type: object
+                                properties:
+                                  maxWidth:
+                                    type: integer
+                                  minWidth:
+                                    type: integer
+                                  width:
+                                    type: integer
+                              rpm:
+                                type: object
+                                properties:
+                                  maxWidth:
+                                    type: integer
+                                  minWidth:
+                                    type: integer
+                                  width:
+                                    type: integer
+                              net_revenue:
+                                type: object
+                                properties:
+                                  maxWidth:
+                                    type: integer
+                                  minWidth:
+                                    type: integer
+                                  width:
+                                    type: integer
+                      preferencePanel:
+                        type: object
+                        properties:
+                          open:
+                            type: boolean
+                      filter:
+                        type: object
+                        properties:
+                          filterModel:
+                            type: object
+                            properties:
+                              items:
+                                type: array
+                                items: {}
+                              linkOperator:
+                                type: string
+                              quickFilterValues:
+                                type: array
+                                items: {}
+                              quickFilterLogicOperator:
+                                type: string
+                      sorting:
+                        type: object
+                        properties:
+                          sortModel:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                field:
+                                  type: string
+                                sort:
+                                  type: string
+                      pagination:
+                        type: object
+                        properties:
+                          pageSize:
+                            type: integer
+                          page:
+                            type: integer
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        date:
+                          type: string
+                          format: date
+                        ad_requests:
+                          type: integer
+                        ad_unit_loads:
+                          type: integer
+                        ad_impressions:
+                          type: integer
+                        ad_responses:
+                          type: integer
+                        viewability:
+                          type: number
+                        ecpm:
+                          type: number
+                        gross_revenue:
+                          type: number
+                        fill:
+                          type: number
+                        net_revenue:
+                          type: number
+                        rpm:
+                          type: number
+                        id:
+                          type: string
+                          format: date
+                  timeMs:
+                    type: integer
+                  duration:
+                    type: string
+                  success:
+                    type: boolean
+      description: Fetch the data for a given report ID
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: Report ID
+        schema:
+          type: integer
+          default: <integer>
+  /v1/report/experiment:
+    get:
+      summary: /report/experiment
+      tags:
+        - Reporting
+        - Experiment Reporting
+      responses:
+        '200':
+          description: /report/experiment
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: string
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: Fetch a list of experiments with their status and top line configuration
+  /v1/report/experiment/{id}:
+    get:
+      summary: /report/experiment/:id
+      tags:
+        - Reporting
+        - Experiment Reporting
+      responses:
+        '200':
+          description: /report/experiment/:id
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: string
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: Fetches a full report for the given experiment
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: The experiment ID
+        schema:
+          deprecated: false
+          type: integer
+    put:
+      summary: /report/experiment/:id
+      tags:
+        - Reporting
+        - Experiment Reporting
+      responses:
+        '200':
+          description: /report/experiment/:id
+          headers:
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: string
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Content-Length:
+              schema:
+                type: integer
+      description: >-
+        Endpoint to save the table state of an experiment report, allowing user
+        to customise the report view for all who have access to the given report
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                table_state:
+                  nullable: true
+  /v1/report/campaign:
+    get:
+      summary: /report/campaign
+      tags:
+        - Reporting
+        - Campaign Reports
+      responses:
+        '200':
+          description: report/campaign
+          headers:
+            Host:
+              schema:
+                type: string
+                default: <string>
+            Date:
+              schema:
+                type: string
+                default: <string>
+            Connection:
+              schema:
+                type: string
+                default: <string>
+            X-Powered-By:
+              schema:
+                type: string
+                default: <string>
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                default: <string>
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                default: <string>
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                default: <string>
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                default: <string>
+            X-CI-Permissions:
+              schema:
+                type: string
+                default: <string>
+            X-CI-Token:
+              schema:
+                type: string
+                default: <string>
+            Content-Length:
+              schema:
+                type: integer
+                default: <integer>
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        campaign_id:
+                          type: integer
+                        campaign_name:
+                          type: string
+                        start_date:
+                          type: string
+                          format: date
+                        end_date:
+                          type: string
+                          format: date
+                        publisher:
+                          type: string
+                        status:
+                          type: string
+                  success:
+                    type: boolean
+      description: >-
+        # /v1/report/campaign
+
+
+        Fetches a list of campaign reports, including details such as campaign
+        ID, campaign name, start and end dates, publisher, and status. Use this
+        endpoint to obtain an overview of all campaigns and their current
+        states.
+  /v1/report/campaign/{id}:
+    get:
+      summary: /report/campaign/:id
+      tags:
+        - Reporting
+        - Campaign Reports
+      parameters:
+        - name: start
+          in: query
+          required: false
+          description: optional
+          schema:
+            type: integer
+            default: <integer>
+        - name: end
+          in: query
+          required: false
+          description: optional
+          schema:
+            type: integer
+            default: <integer>
+      responses:
+        default:
+          description: report/campaign/:id
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: object
+                    properties:
+                      campaign_id:
+                        type: integer
+                      campaign_name:
+                        type: string
+                      start_date:
+                        type: string
+                        format: date
+                      end_date:
+                        type: string
+                        format: date
+                      currency:
+                        type: string
+                      status:
+                        type: string
+                      total_impressions:
+                        type: integer
+                      total_clicks:
+                        type: integer
+                      total_ctr:
+                        type: number
+                      total_spend:
+                        type: integer
+                      total_viewability:
+                        type: number
+                      filter_data:
+                        type: object
+                        properties:
+                          publishers:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                uid:
+                                  type: integer
+                                domain:
+                                  type: string
+                                label:
+                                  nullable: true
+                          configs:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                config_id:
+                                  type: integer
+                                unit:
+                                  type: string
+                                unit_label:
+                                  type: string
+                      range:
+                        type: object
+                        properties:
+                          clicks:
+                            type: array
+                            items:
+                              type: integer
+                          impressions:
+                            type: array
+                            items:
+                              type: integer
+                          dates:
+                            type: array
+                            items:
+                              type: string
+                              format: date
+                      data:
+                        type: object
+                        properties:
+                          byUid:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                uid:
+                                  type: integer
+                                domain:
+                                  type: string
+                                impressions:
+                                  type: integer
+                                clicks:
+                                  type: integer
+                                spend:
+                                  type: integer
+                                viewable_impressions:
+                                  type: integer
+                                ctr:
+                                  type: number
+                                viewability:
+                                  type: number
+                          byLineItem:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                line_item_id:
+                                  type: integer
+                                line_item_name:
+                                  type: string
+                                impressions:
+                                  type: integer
+                                clicks:
+                                  type: integer
+                                spend:
+                                  type: integer
+                                viewable_impressions:
+                                  type: integer
+                                ctr:
+                                  type: number
+                                viewability:
+                                  type: number
+                          byConfig:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                config_id:
+                                  type: integer
+                                unit:
+                                  type: string
+                                unit_label:
+                                  type: string
+                                impressions:
+                                  type: integer
+                                clicks:
+                                  type: integer
+                                spend:
+                                  type: integer
+                                viewable_impressions:
+                                  type: integer
+                                ctr:
+                                  type: number
+                                viewability:
+                                  type: number
+                          byCreativeSize:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                creative_size:
+                                  type: string
+                                impressions:
+                                  type: integer
+                                clicks:
+                                  type: integer
+                                spend:
+                                  type: integer
+                                viewable_impressions:
+                                  type: integer
+                                ctr:
+                                  type: number
+                                viewability:
+                                  type: number
+                          byDevice:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                device:
+                                  type: string
+                                impressions:
+                                  type: integer
+                                clicks:
+                                  type: integer
+                                spend:
+                                  type: integer
+                                viewable_impressions:
+                                  type: integer
+                                ctr:
+                                  type: number
+                                viewability:
+                                  type: number
+                          all:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                uid:
+                                  type: integer
+                                domain:
+                                  type: string
+                                line_item_id:
+                                  type: integer
+                                line_item_name:
+                                  type: string
+                                config_id:
+                                  type: integer
+                                unit:
+                                  type: string
+                                unit_label:
+                                  type: string
+                                date:
+                                  type: string
+                                  format: date
+                                device:
+                                  type: string
+                                creative_size:
+                                  type: string
+                                impressions:
+                                  type: integer
+                                viewable_impressions:
+                                  type: integer
+                                clicks:
+                                  type: integer
+                                spend:
+                                  type: integer
+                                ctr:
+                                  type: string
+                                viewability:
+                                  type: number
+                  success:
+                    type: boolean
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: Campign ID
+        schema:
+          type: integer
+          default: <integer>
+  /v1/report/health-check:
+    get:
+      summary: /report/health-check
+      tags:
+        - Reporting
+        - Health Check
+      parameters:
+        - name: range
+          in: query
+          required: false
+          description: Date range for how far to look back for health check reports
+          schema:
+            type: string
+        - name: start
+          in: query
+          required: false
+          description: Needed when range is set to "custom"
+          schema:
+            type: string
+        - name: end
+          in: query
+          required: false
+          description: Needed when range is set to "custom"
+          schema:
+            type: string
+      responses:
+        '200':
+          description: /report/health-check
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: string
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: Returns a list of health check reports for the logged in organisation.
+  /v2/report/health-check/{uid}/{id}:
+    get:
+      summary: /report/health-check/:uid/:id
+      tags:
+        - Reporting
+        - Health Check
+      responses:
+        '200':
+          description: /report/health-check/:uid/:id
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: integer
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: Returns a single health check report
+    parameters:
+      - name: uid
+        in: path
+        required: true
+        description: Unique publisher ID
+        schema:
+          deprecated: false
+          type: integer
+      - name: id
+        in: path
+        required: true
+        description: Health check report ID
+        schema:
+          deprecated: false
+          type: integer
+  /v1/report/adstxt:
+    get:
+      summary: /report/adstxt
+      tags:
+        - Reporting
+        - Ads.txt
+      responses:
+        '200':
+          description: /report/adstxt
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: string
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: >-
+        Fetches a simple overview of every publisher in the given networks
+        ads.txt file
+  /v1/report/adstxt/{uid}:
+    get:
+      summary: /report/adstxt/:uid
+      tags:
+        - Reporting
+        - Ads.txt
+      responses:
+        '200':
+          description: /report/adstxt/:uid
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: integer
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: Fetches the ads.txt requirements for the given publisher
+    parameters:
+      - name: uid
+        in: path
+        required: true
+        description: Publisher ID
+        schema:
+          deprecated: false
+          type: integer
+  /v1/report/app-adstxt/{uid}:
+    get:
+      summary: /report/app-adstxt/:uid
+      tags:
+        - Reporting
+        - Ads.txt
+      responses:
+        '200':
+          description: /report/app-adstxt/:uid
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: string
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: Fetches the app-ads.txt requirements for the given publisher
+    parameters:
+      - name: uid
+        in: path
+        required: true
+        description: Publisher ID
+        schema:
+          deprecated: false
+          type: integer
+  /v1/report/date-range:
+    get:
+      summary: /report/date-range
+      tags:
+        - Reporting
+        - Utility
+      parameters:
+        - name: range
+          in: query
+          required: true
+          schema:
+            deprecated: false
+            type: string
+            enum:
+              - all_time
+              - seven_days
+              - fourteen_days
+              - thirty_days
+              - three_months
+              - six_months
+              - week_to_date
+              - month_to_date
+              - quarter_to_date
+              - year_to_date
+              - last_week
+              - last_month
+              - last_quarter
+              - last_year
+              - month_on_month
+              - quarter_on_quarter
+      responses:
+        '200':
+          description: /report/date-range
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: integer
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: >-
+        Converts a date range preset into a start and end date. Helpful for
+        clearly showing in the UI what a selected date range will map to when
+        pulling a report
+  /v1/report/insight/ssp:
+    get:
+      summary: /report/insight/ssp
+      tags:
+        - Reporting
+        - Insights Hub
+        - SSP Insights
+      parameters:
+        - name: uid
+          in: query
+          required: false
+          description: Publisher ID
+          schema:
+            type: integer
+        - name: range
+          in: query
+          required: false
+          description: Date range
+          schema:
+            type: string
+            enum:
+              - custom
+              - all_time
+              - seven_days
+              - fourteen_days
+              - thirty_days
+              - three_months
+              - six_months
+              - week_to_date
+              - month_to_date
+              - quarter_to_date
+              - year_to_date
+              - last_week
+              - last_month
+              - last_quarter
+              - last_year
+              - month_on_month
+              - quarter_on_quarter
+              - yesterday
+        - name: start
+          in: query
+          required: false
+          description: Start date when range=custom
+          schema:
+            type: string
+            format: date
+        - name: end
+          in: query
+          required: false
+          description: End date when range=custom
+          schema:
+            type: string
+            format: date
+        - name: date_group
+          in: query
+          required: false
+          description: Date grouping when range=custom
+          schema:
+            type: string
+            enum:
+              - day
+              - month
+              - quarter
+        - name: dimension
+          in: query
+          required: false
+          description: Dimension to report on
+          schema:
+            type: string
+            enum:
+              - unit
+              - config
+              - geo
+              - device
+              - partner
+        - name: rev_type
+          in: query
+          required: false
+          description: Revenue type
+          schema:
+            type: string
+            enum:
+              - gross
+              - net
+        - name: ssp
+          in: query
+          required: false
+          description: SSP to filter on
+          schema:
+            type: string
+        - name: aggregate
+          in: query
+          required: false
+          description: Aggregation method
+          schema:
+            type: string
+            enum:
+              - average
+              - total
+        - name: environment
+          in: query
+          required: false
+          description: App or web environment
+          schema:
+            type: string
+            enum:
+              - app
+              - web
+        - name: source
+          in: query
+          required: false
+          description: Revenue source, SaaS or Plug&Play (pap)
+          schema:
+            type: string
+            enum:
+              - saas
+              - pap
+              - all
+      responses:
+        '200':
+          description: /report/insight/ssp
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: string
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: Fetch SSP insights data for the given filters
+  /v1/report/insight/ssp/ssp-filter:
+    get:
+      summary: /report/insight/ssp/ssp-filter
+      tags:
+        - Reporting
+        - Insights Hub
+        - SSP Insights
+      parameters:
+        - name: uid
+          in: query
+          required: false
+          description: Publisher ID
+          schema:
+            type: integer
+        - name: range
+          in: query
+          required: false
+          description: Date range
+          schema:
+            type: string
+            enum:
+              - custom
+              - all_time
+              - seven_days
+              - fourteen_days
+              - thirty_days
+              - three_months
+              - six_months
+              - week_to_date
+              - month_to_date
+              - quarter_to_date
+              - year_to_date
+              - last_week
+              - last_month
+              - last_quarter
+              - last_year
+              - month_on_month
+              - quarter_on_quarter
+              - yesterday
+        - name: start
+          in: query
+          required: false
+          description: Start date when range=custom
+          schema:
+            type: string
+            format: date
+        - name: end
+          in: query
+          required: false
+          description: End date when range=custom
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: /report/insight/ssp/ssp-filter
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: integer
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: >-
+        Fetch a list of active SSPs for the given filters, allowing you to
+        filter the data returned from `/report/insights/ssp`
+  /v1/report/insight/cwv:
+    get:
+      summary: /report/insight/cwv
+      tags:
+        - Reporting
+        - Insights Hub
+        - Core Web Vitals
+      parameters:
+        - name: uid
+          in: query
+          required: false
+          description: Publisher ID
+          schema:
+            type: integer
+        - name: range
+          in: query
+          required: false
+          description: Date range
+          schema:
+            type: string
+            enum:
+              - custom
+              - all_time
+              - seven_days
+              - fourteen_days
+              - thirty_days
+              - three_months
+              - six_months
+              - week_to_date
+              - month_to_date
+              - quarter_to_date
+              - year_to_date
+              - last_week
+              - last_month
+              - last_quarter
+              - last_year
+              - month_on_month
+              - quarter_on_quarter
+              - yesterday
+        - name: start
+          in: query
+          required: false
+          description: Start date when range=custom
+          schema:
+            type: string
+            format: date
+        - name: end
+          in: query
+          required: false
+          description: End date when range=custom
+          schema:
+            type: string
+            format: date
+        - name: date_group
+          in: query
+          required: false
+          description: Date grouping when range=custom
+          schema:
+            type: string
+            enum:
+              - day
+              - month
+              - quarter
+      responses:
+        '200':
+          description: /report/insight/cwv
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: integer
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: Singular endpoint for fetching CWV data as collected by CI
+  /v1/report/insight/ads-txt:
+    get:
+      summary: /report/insight/ads-txt
+      tags:
+        - Reporting
+        - Insights Hub
+        - Ads.txt Insights
+      parameters:
+        - name: uid
+          in: query
+          required: true
+          description: Publisher ID
+          schema:
+            deprecated: false
+            type: integer
+        - name: environment
+          in: query
+          required: false
+          description: App or web environment
+          schema:
+            type: string
+            enum:
+              - app
+              - web
+      responses:
+        '200':
+          description: /report/insight/ads-txt
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: integer
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: Singular endpoint for fetching Ads.txt insight data
+  /v1/report/insight/live:
+    get:
+      summary: /report/insight/live
+      tags:
+        - Reporting
+        - Insights Hub
+        - Live Insights
+      parameters:
+        - name: uid
+          in: query
+          required: true
+          description: Publisher ID
+          schema:
+            deprecated: false
+            type: integer
+        - name: time
+          in: query
+          required: false
+          description: Time range in hours to return
+          schema:
+            type: integer
+            enum:
+              - '1'
+              - '2'
+              - '4'
+              - '6'
+              - '12'
+              - '24'
+              - '48'
+        - name: environment
+          in: query
+          required: false
+          description: App or web environment
+          schema:
+            type: string
+            enum:
+              - app
+              - web
+      responses:
+        '200':
+          description: /report/insight/live
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: string
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: Singular endpoint that fetches the live report data
+  /v1/report/insight/metrics:
+    get:
+      summary: /report/insight/metrics
+      tags:
+        - Reporting
+        - Insights Hub
+        - Metrics
+      parameters:
+        - name: uid
+          in: query
+          required: false
+          description: Publisher ID
+          schema:
+            type: integer
+        - name: range
+          in: query
+          required: false
+          description: Date range
+          schema:
+            type: string
+        - name: start
+          in: query
+          required: false
+          description: Start date when range=custom
+          schema:
+            type: integer
+        - name: end
+          in: query
+          required: false
+          description: End date when range=custom
+          schema:
+            type: integer
+        - name: date_group
+          in: query
+          required: false
+          description: Date grouping when range=custom
+          schema:
+            type: string
+        - name: environment
+          in: query
+          required: false
+          description: App or web environment
+          schema:
+            type: string
+        - name: Referer
+          in: header
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: /report/insight/metrics
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: string
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: >-
+        Fetches top level metrics such as page and ad impressions for the
+        network, or for a given publisher
+  /v1/report/insight/metrics/revenue:
+    get:
+      summary: /report/insight/metrics/revenue
+      tags:
+        - Reporting
+        - Insights Hub
+        - Metrics
+      parameters:
+        - name: uid
+          in: query
+          required: false
+          description: Publisher ID
+          schema:
+            type: integer
+        - name: range
+          in: query
+          required: false
+          description: Date range
+          schema:
+            type: string
+        - name: start
+          in: query
+          required: false
+          description: Start date when range=custom
+          schema:
+            type: integer
+        - name: end
+          in: query
+          required: false
+          description: End date when range=custom
+          schema:
+            type: integer
+        - name: date_group
+          in: query
+          required: false
+          description: Date grouping when range=custom
+          schema:
+            type: string
+        - name: environment
+          in: query
+          required: false
+          description: App or web environment
+          schema:
+            type: string
+        - name: rev_type
+          in: query
+          required: false
+          description: Revenue type
+          schema:
+            type: string
+        - name: rev_source
+          in: query
+          required: false
+          description: Revenue source, SaaS or Plug&Play (pap)
+          schema:
+            type: string
+      responses:
+        '200':
+          description: /report/insight/metrics/revenue
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: string
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: >-
+        View revenue over time, including the previous period and a 7 day
+        offset, helping to spot trends
+  /v1/report/insight/metrics/live-revenue:
+    get:
+      summary: /report/insight/metrics/live-revenue
+      tags:
+        - Reporting
+        - Insights Hub
+        - Metrics
+      parameters:
+        - name: uid
+          in: query
+          required: false
+          description: Publisher ID
+          schema:
+            type: integer
+        - name: range
+          in: query
+          required: false
+          description: Date range
+          schema:
+            type: string
+        - name: start
+          in: query
+          required: false
+          description: Start date when range=custom
+          schema:
+            type: integer
+        - name: end
+          in: query
+          required: false
+          description: End date when range=custom
+          schema:
+            type: integer
+        - name: date_group
+          in: query
+          required: false
+          description: Date grouping when range=custom
+          schema:
+            type: string
+        - name: environment
+          in: query
+          required: false
+          description: App or web environment
+          schema:
+            type: string
+        - name: rev_type
+          in: query
+          required: false
+          description: Revenue type
+          schema:
+            type: string
+        - name: rev_source
+          in: query
+          required: false
+          description: Revenue source, SaaS or Plug&Play (pap)
+          schema:
+            type: string
+      responses:
+        '200':
+          description: /report/insight/metrics/live-revenue
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: integer
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: >-
+        Fetches live revenue data. Note that this does not include all revenue
+        sources (due to limitations in those 3rd party platforms), also data is
+        typically 3 hours behind real-time. Data is useful for tracking how
+        today is trending.
+  /v1/report/insight/metrics/latency:
+    get:
+      summary: /report/insight/metrics/latency
+      tags:
+        - Reporting
+        - Insights Hub
+        - Metrics
+      parameters:
+        - name: uid
+          in: query
+          required: false
+          description: Publisher ID
+          schema:
+            type: integer
+        - name: range
+          in: query
+          required: false
+          description: Date range
+          schema:
+            type: string
+        - name: start
+          in: query
+          required: false
+          description: Start date when range=custom
+          schema:
+            type: integer
+        - name: end
+          in: query
+          required: false
+          description: End date when range=custom
+          schema:
+            type: integer
+        - name: environment
+          in: query
+          required: false
+          description: App or web environment
+          schema:
+            type: string
+        - name: date_group
+          in: query
+          required: false
+          description: Date grouping when range=custom
+          schema:
+            type: string
+        - name: Referer
+          in: header
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: /report/insight/metrics/latency
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: integer
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      security:
+        - BearerAuth: []
+      description: >-
+        Fetches latency data. Where every millisecond counts in advertising,
+        spotting slowdowns can be vital to improving revenue.
+  /v1/dash/stats:
+    get:
+      summary: /stats
+      tags:
+        - Reporting
+      parameters:
+        - name: rev_type
+          in: query
+          required: false
+          schema:
+            type: string
+            default: gross
+            enum:
+              - net
+              - ' gross'
+        - name: rev_source
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - pap
+              - saas
+      responses:
+        '200':
+          description: /stats
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: integer
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: Quick network wide stats, ideal for a landing dashboard usage
+  /v1/organisation/{id}/mapping:
+    get:
+      summary: /organisation/:id/mapping
+      tags:
+        - Organisation
+        - Organisation Meta
+      responses:
+        '200':
+          description: /organisation/:id/mapping
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: integer
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: >-
+        Fetches all integrations that suport organisation mapping, the schemas
+        and the data for each
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: Organisation ID
+        schema:
+          deprecated: false
+          type: integer
+  /v1/organisation/{id}/roles:
+    get:
+      summary: /organisation/:id/roles
+      tags:
+        - Organisation
+        - Organisation Meta
+      responses:
+        '200':
+          description: /organisation/:id/roles
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: integer
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: Returns a list of users that have access to the given organisation
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: Organisation ID
+        schema:
+          deprecated: false
+          type: integer
+  /v1/ad-stack:
+    get:
+      summary: /ad-stack
+      tags:
+        - Ad Stack
+      parameters:
+        - name: uid
+          in: query
+          required: false
+          description: Publisher ID
+          schema:
+            type: integer
+        - name: cid
+          in: query
+          required: false
+          description: Config ID
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: /ad-stack
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: integer
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: Fetches a list of ad stacks in use by the provided publisher
+    post:
+      summary: /ad-stack
+      tags:
+        - Ad Stack
+      parameters:
+        - name: uid
+          in: query
+          required: false
+          description: Publisher ID
+          schema:
+            deprecated: false
+            type: integer
+      responses:
+        '200':
+          description: /ad-stack
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: string
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: Creates a new ad stack
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                stack:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      type:
+                        type: string
+  /v1/ad-stack/{id}:
+    get:
+      summary: /ad-stack/:id
+      tags:
+        - Ad Stack
+      responses:
+        '200':
+          description: /ad-stack/:id
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: string
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: Gets an individual ad stack and all the integrations connected to it
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: Ad stack ID
+        schema:
+          deprecated: false
+          type: integer
+    delete:
+      summary: /ad-stack/:id
+      tags:
+        - Ad Stack
+      responses:
+        '200':
+          description: /ad-stack/:id
+          headers:
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: integer
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Content-Length:
+              schema:
+                type: integer
+      description: Deletes the given ad stack
+    put:
+      summary: /ad-stack/:id
+      tags:
+        - Ad Stack
+      responses:
+        '200':
+          description: /ad-stack/:id
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: string
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: Updates an existing ad stack
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                stack:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      type:
+                        type: string
+  /v1/ad-stack/integration:
+    get:
+      summary: /ad-stack/integration
+      tags:
+        - Ad Stack
+      parameters:
+        - name: uid
+          in: query
+          required: false
+          description: Publisher ID
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: /ad-stack/integration
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: integer
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: >-
+        Fetches a list of integrations that could be used to build an ad stack
+        under the given publisher
+  /v1/ad-stack/integration/{type}/{id}:
+    get:
+      summary: /ad-stack/integration/:type/:id
+      tags:
+        - Ad Stack
+      parameters:
+        - name: uid
+          in: query
+          required: false
+          description: Publisher ID
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: /ad-stack/integration/:type/:id
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: integer
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: >-
+        Fetches an individual integration, The response includes everything
+        needed to configure that integration within an ad stack, such as the
+        schema for any config fields
+    parameters:
+      - name: type
+        in: path
+        required: true
+        description: Integration type
+        schema:
+          deprecated: false
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: Integration ID
+        schema:
+          deprecated: false
+          type: integer
+    post:
+      summary: /ad-stack/integration/:type/:id
+      tags:
+        - Ad Stack
+      parameters:
+        - name: uid
+          in: query
+          required: false
+          description: Publisher ID
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: /ad-stack/integration/:type/:id
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: integer
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: >-
+        Validate the configuration of a given integration. Each integrations
+        requirements vary, so use this endpoint to check all requirements have
+        been met
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+  /v1/pub-stack/{uid}/integration:
+    get:
+      summary: /pub-stack/:uid/integration
+      tags:
+        - Publisher
+        - Publisher Stack
+      responses:
+        '200':
+          description: /pub-stack/:uid/integration
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: integer
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: >-
+        Fetches a list of publisher level integrations that could be connected
+        to the given publisher
+    parameters:
+      - name: uid
+        in: path
+        required: true
+        description: Publisher ID
+        schema:
+          deprecated: false
+          type: integer
+    post:
+      summary: /pub-stack/:uid/integration
+      tags:
+        - Publisher
+        - Publisher Stack
+      responses:
+        '200':
+          description: /pub-stack/:uid/integration
+          headers:
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: integer
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Content-Length:
+              schema:
+                type: integer
+      description: >-
+        Creates an association between a publisher and a publisher level
+        integration (adding it to the "Pub stack")
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+  /v1/pub-stack/{uid}/integration/{id}:
+    get:
+      summary: /pub-stack/:uid/integration/:id
+      tags:
+        - Publisher
+        - Publisher Stack
+      responses:
+        '200':
+          description: /pub-stack/:uid/integration/:id
+          headers:
+            Host:
+              schema:
+                type: string
+            Date:
+              schema:
+                type: string
+            Connection:
+              schema:
+                type: string
+            X-Powered-By:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+            X-CI-Permissions:
+              schema:
+                type: string
+            X-CI-Token:
+              schema:
+                type: string
+            Content-Length:
+              schema:
+                type: integer
+      description: Fetches the field schema and data for a single connected integration
+    parameters:
+      - name: uid
+        in: path
+        required: true
+        description: Publisher ID
+        schema:
+          deprecated: false
+          type: integer
+      - name: id
+        in: path
+        required: true
+        description: Integration ID
+        schema:
+          deprecated: false
+          type: integer
+    put:
+      summary: /pub-stack/:uid/integration/:id
+      tags:
+        - Publisher
+        - Publisher Stack
+      responses:
+        '200':
+          description: /pub-stack/:uid/integration/:id
+          headers:
+            Host:
+              schema:
+                type: string
+            Date:
+              schema:
+                type: string
+            Connection:
+              schema:
+                type: string
+            X-Powered-By:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+            X-CI-Permissions:
+              schema:
+                type: string
+            X-CI-Token:
+              schema:
+                type: string
+            Content-Length:
+              schema:
+                type: integer
+      description: Updates an existing integration association
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+    delete:
+      summary: /pub-stack/:uid/integration/:id
+      tags:
+        - Publisher
+        - Publisher Stack
+      responses:
+        '200':
+          description: /pub-stack/:uid/integration/:id
+          headers:
+            Host:
+              schema:
+                type: string
+            Date:
+              schema:
+                type: string
+            Connection:
+              schema:
+                type: string
+            X-Powered-By:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+            X-CI-Permissions:
+              schema:
+                type: string
+            X-CI-Token:
+              schema:
+                type: string
+            Content-Length:
+              schema:
+                type: integer
+      description: Deletes the assosication between the publisher and an integration
+  /v1/tag/{uid}/email/preview:
+    get:
+      summary: /tag/:uid/email/preview
+      tags:
+        - Publisher
+        - Publisher Tag
+      responses:
+        '200':
+          description: /tag/:uid/email/preview
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: integer
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: >-
+        Provides an email template for onboarding a publisher. It contains the
+        tag that needs to be deployed and the ads.txt requirents
+    parameters:
+      - name: uid
+        in: path
+        required: true
+        description: Publisher ID
+        schema:
+          deprecated: false
+          type: integer
+  /v1/tag/{uid}/status:
+    get:
+      summary: /tag/:uid/status
+      tags:
+        - Publisher
+        - Publisher Tag
+      responses:
+        '200':
+          description: /tag/:uid/status
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: integer
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: >-
+        Fetches the status of the publisher tag and the app sdk for the given
+        publisher
+    parameters:
+      - name: uid
+        in: path
+        required: true
+        description: Publisher ID
+        schema:
+          deprecated: false
+          type: integer
+  /v1/tag/{uid}/stats:
+    get:
+      summary: '[TBC] /publisher/:uid/stats'
+      tags:
+        - Publisher
+        - Publisher Meta
+      parameters:
+        - name: Origin
+          in: header
+          required: false
+          schema:
+            deprecated: false
+        - name: Referer
+          in: header
+          required: false
+          schema:
+            deprecated: false
+      responses:
+        '200':
+          description: /publisher/:uid/stats
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: integer
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      security:
+        - BearerAuth: []
+      description: >-
+        Provides some top line stats for the given publisher, useful for giving
+        a quick visual insight into common metrics
+    parameters:
+      - name: uid
+        in: path
+        required: true
+        description: Publisher ID
+        schema:
+          deprecated: false
+          type: integer
+  /v1/publisher/{uid}/status:
+    get:
+      summary: '[TBC] /publisher/:uid/status'
+      tags:
+        - Publisher
+        - Publisher Meta
+      responses:
+        '200':
+          description: /publisher/:uid/status
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: string
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: Provides the onboarding tasks for the given publisher, and their status
+    parameters:
+      - name: uid
+        in: path
+        required: true
+        description: Publisher ID
+        schema:
+          deprecated: false
+          type: integer
+  /v1/tag/{uid}/owners:
+    get:
+      summary: '[TBC] /publisher/:uid/owners'
+      tags:
+        - Publisher
+        - Publisher Meta
+      responses:
+        '200':
+          description: /publisher/:uid/owners
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: integer
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: >-
+        Fetch a list of organisations that are in the owner hierachy of the
+        given publisher, useful for populating the O&O (Owned & Operated) field
+        on the publisher
+    parameters:
+      - name: uid
+        in: path
+        required: true
+        description: Publisher ID
+        schema:
+          deprecated: false
+          type: integer
+  /v1/tag/{uid}:
+    get:
+      summary: '[TBC] /publisher/:uid/overview'
+      tags:
+        - Publisher
+        - Publisher Meta
+      responses:
+        '200':
+          description: /publisher/:uid
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: integer
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: Returns the top level configuration for the given publisher
+    parameters:
+      - name: uid
+        in: path
+        required: true
+        description: Publisher ID
+        schema:
+          deprecated: false
+          type: integer
+    delete:
+      summary: '[TBC] /publisher/:uid'
+      tags:
+        - Publisher
+      responses:
+        '200':
+          description: /publisher/:uid
+          headers:
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: integer
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Content-Length:
+              schema:
+                type: integer
+      description: >-
+        Permenantly archives the given publisher, this will stop the tag from
+        serving ads
+  /v1/tag/{uid}/experiment:
+    get:
+      summary: /tag/:uid/experiment
+      tags:
+        - Publisher
+        - Experiment
+      responses:
+        '200':
+          description: /tag/:uid/experiment
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: integer
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: Returns a list of experiments for a given publisher
+    parameters:
+      - name: uid
+        in: path
+        required: true
+        description: Publisher ID
+        schema:
+          deprecated: false
+          type: integer
+    post:
+      summary: /tag/:uid/experiment
+      tags:
+        - Publisher
+        - Experiment
+      responses:
+        '200':
+          description: /tag/:uid/experiment
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: integer
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: ADMIN ONLY
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                audience_filter:
+                  type: object
+                  properties:
+                    matches:
+                      type: array
+                      items: {}
+                    type:
+                      type: string
+                browser_filter:
+                  type: object
+                  properties:
+                    matches:
+                      type: array
+                      items: {}
+                    type:
+                      type: string
+                description:
+                  type: string
+                device_filter:
+                  type: object
+                  properties:
+                    matches:
+                      type: array
+                      items: {}
+                    type:
+                      type: string
+                geo_filter:
+                  type: object
+                  properties:
+                    matches:
+                      type: array
+                      items: {}
+                    type:
+                      type: string
+                region_filter:
+                  type: object
+                  properties:
+                    matches:
+                      type: array
+                      items: {}
+                    type:
+                      type: string
+                subject:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      allocation:
+                        type: integer
+                      config_id:
+                        type: integer
+                title:
+                  type: string
+                url_filter:
+                  type: object
+                  properties:
+                    matches:
+                      type: array
+                      items: {}
+                    type:
+                      type: string
+                viewport_filter:
+                  type: object
+                  properties:
+                    matches:
+                      type: array
+                      items: {}
+                    type:
+                      type: string
+                os_filter:
+                  type: object
+                  properties:
+                    matches:
+                      type: array
+                      items: {}
+                    type:
+                      type: string
+                end:
+                  type: string
+                  format: date
+                start:
+                  type: string
+                  format: date
+  /v1/tag/{uid}/experiment/{id}:
+    get:
+      summary: /tag/:uid/experiment/:id
+      tags:
+        - Publisher
+        - Experiment
+      responses:
+        '200':
+          description: /tag/:uid/experiment/:id
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: integer
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: Get the configuration for a given experiment
+    parameters:
+      - name: uid
+        in: path
+        required: true
+        description: Publisher ID
+        schema:
+          deprecated: false
+          type: integer
+      - name: id
+        in: path
+        required: true
+        description: Experiment ID
+        schema:
+          deprecated: false
+          type: integer
+    put:
+      summary: /tag/:uid/experiment/:id
+      tags:
+        - Publisher
+        - Experiment
+      responses:
+        '200':
+          description: /tag/:uid/experiment/:id
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: integer
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: >-
+        Updates an existing config. Actions are restricted for live experiments,
+        to just modifying dates and the title & description
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                start:
+                  type: string
+                  format: date
+                end:
+                  type: string
+                  format: date
+    delete:
+      summary: /tag/:uid/experiment/:id
+      tags:
+        - Publisher
+        - Experiment
+      responses:
+        '200':
+          description: /tag/:uid/experiment/:id
+          headers:
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: string
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Content-Length:
+              schema:
+                type: integer
+      description: Terminates an experiment immediately
+  /v1/tag/{uid}/experiment/compare:
+    get:
+      summary: /tag/:uid/experiment/compare
+      tags:
+        - Publisher
+        - Experiment
+      parameters:
+        - name: config_ids
+          in: query
+          required: true
+          schema:
+            deprecated: false
+            type: string
+      responses:
+        '200':
+          description: /tag/:uid/experiment/compare
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: integer
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: >-
+        Takes a list of configs, and returns the differences between them. Used
+        before creating an experiment to confirm the bahavioural subject(s) that
+        the experiment will be testing
+    parameters:
+      - name: uid
+        in: path
+        required: true
+        description: Publisher ID
+        schema:
+          deprecated: false
+          type: integer
+  /v1/tag/{uid}/experiment/{id}/activate-winner:
+    put:
+      summary: /tag/:uid/experiment/:id/activate-winner
+      tags:
+        - Publisher
+        - Experiment
+      responses:
+        '200':
+          description: /tag/:uid/experiment/:id/activate-winner
+          headers:
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: string
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Content-Length:
+              schema:
+                type: integer
+      description: >-
+        Activates the winnning config of an experiment. This can be run upon
+        completion, or during an experiment, where the experiment will be
+        immmediately terminated
+    parameters:
+      - name: uid
+        in: path
+        required: true
+        description: Publisher ID
+        schema:
+          deprecated: false
+          type: integer
+      - name: id
+        in: path
+        required: true
+        description: Experiment ID
+        schema:
+          deprecated: false
+          type: integer
+  /v1/tag/{uid}/config:
+    get:
+      summary: /tag/:uid/config
+      tags:
+        - Publisher
+        - Config (Ad Unit)
+      responses:
+        '200':
+          description: /tag/:uid/config
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: integer
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: Fetches the list of configs under the given publisher
+    parameters:
+      - name: uid
+        in: path
+        required: true
+        description: Publisher ID
+        schema:
+          deprecated: false
+          type: integer
+    post:
+      summary: /tag/:uid/config
+      tags:
+        - Publisher
+        - Config (Ad Unit)
+      responses:
+        '201':
+          description: /tag/:uid/config
+          headers:
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: integer
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Content-Length:
+              schema:
+                type: integer
+      description: Creates a new config under the given publisher
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                audience_filter:
+                  type: object
+                  properties:
+                    matches:
+                      type: array
+                      items: {}
+                    type:
+                      type: string
+                browser_filter:
+                  type: object
+                  properties:
+                    matches:
+                      type: array
+                      items: {}
+                    type:
+                      type: string
+                device_filter:
+                  type: object
+                  properties:
+                    matches:
+                      type: array
+                      items: {}
+                    type:
+                      type: string
+                disable_adhesion_bg:
+                  type: boolean
+                disable_branding:
+                  type: boolean
+                floors_model:
+                  type: string
+                geo_filter:
+                  type: object
+                  properties:
+                    matches:
+                      type: array
+                      items: {}
+                    type:
+                      type: string
+                in_view:
+                  type: boolean
+                limit:
+                  type: string
+                os_filter:
+                  type: object
+                  properties:
+                    matches:
+                      type: array
+                      items: {}
+                    type:
+                      type: string
+                refresh:
+                  type: boolean
+                region_filter:
+                  type: object
+                  properties:
+                    matches:
+                      type: array
+                      items: {}
+                    type:
+                      type: string
+                relocate:
+                  type: boolean
+                sizes:
+                  type: object
+                  properties:
+                    desktop:
+                      type: array
+                      items:
+                        type: string
+                    mobile:
+                      type: array
+                      items:
+                        type: string
+                    tablet:
+                      type: array
+                      items:
+                        type: string
+                target:
+                  type: string
+                target_injection:
+                  type: string
+                unit:
+                  type: string
+                url_filter:
+                  type: object
+                  properties:
+                    matches:
+                      type: array
+                      items: {}
+                    type:
+                      type: string
+                viewport_filter:
+                  type: object
+                  properties:
+                    matches:
+                      type: array
+                      items: {}
+                    type:
+                      type: string
+                stack:
+                  type: integer
+                start:
+                  nullable: true
+                end:
+                  nullable: true
+                label:
+                  type: string
+  /v1/tag/{uid}/config/{id}:
+    get:
+      summary: /tag/:uid/config/:id
+      tags:
+        - Publisher
+        - Config (Ad Unit)
+      responses:
+        '200':
+          description: /tag/:uid/config/:id
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: integer
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: Fetches a single publisher config (ad unit)
+    parameters:
+      - name: uid
+        in: path
+        required: true
+        description: Publisher ID
+        schema:
+          deprecated: false
+          type: integer
+      - name: id
+        in: path
+        required: true
+        description: Config ID
+        schema:
+          deprecated: false
+          type: integer
+    put:
+      summary: /tag/:uid/config/:id
+      tags:
+        - Publisher
+        - Config (Ad Unit)
+      responses:
+        '200':
+          description: /tag/:uid/config/:id
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: integer
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: Updates and existing config
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                audience_filter:
+                  type: object
+                  properties:
+                    matches:
+                      type: array
+                      items: {}
+                    type:
+                      type: string
+                browser_filter:
+                  type: object
+                  properties:
+                    matches:
+                      type: array
+                      items: {}
+                    type:
+                      type: string
+                device_filter:
+                  type: object
+                  properties:
+                    matches:
+                      type: array
+                      items: {}
+                    type:
+                      type: string
+                disable_adhesion_bg:
+                  type: boolean
+                disable_branding:
+                  type: boolean
+                floors_model:
+                  type: string
+                geo_filter:
+                  type: object
+                  properties:
+                    matches:
+                      type: array
+                      items: {}
+                    type:
+                      type: string
+                in_view:
+                  type: boolean
+                limit:
+                  type: string
+                os_filter:
+                  type: object
+                  properties:
+                    matches:
+                      type: array
+                      items: {}
+                    type:
+                      type: string
+                refresh:
+                  type: boolean
+                region_filter:
+                  type: object
+                  properties:
+                    matches:
+                      type: array
+                      items: {}
+                    type:
+                      type: string
+                relocate:
+                  type: boolean
+                sizes:
+                  type: object
+                  properties:
+                    desktop:
+                      type: array
+                      items:
+                        type: string
+                    mobile:
+                      type: array
+                      items:
+                        type: string
+                    tablet:
+                      type: array
+                      items:
+                        type: string
+                target:
+                  type: string
+                target_injection:
+                  type: string
+                unit:
+                  type: string
+                url_filter:
+                  type: object
+                  properties:
+                    matches:
+                      type: array
+                      items: {}
+                    type:
+                      type: string
+                viewport_filter:
+                  type: object
+                  properties:
+                    matches:
+                      type: array
+                      items: {}
+                    type:
+                      type: string
+                stack:
+                  type: integer
+                start:
+                  nullable: true
+                end:
+                  nullable: true
+                label:
+                  type: string
+    delete:
+      summary: /tag/:uid/config/:id
+      tags:
+        - Publisher
+        - Config (Ad Unit)
+      responses:
+        '200':
+          description: /tag/:uid/config/:id
+          headers:
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: string
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Content-Length:
+              schema:
+                type: integer
+      description: Deletes a config
+  /v1/tag/{uid}/placement:
+    get:
+      summary: /tag/:uid/placement
+      tags:
+        - Publisher
+        - App Placement
+      responses:
+        '200':
+          description: /tag/:uid/placement
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: string
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: Fetch a list of all app placements under the given publisher
+    parameters:
+      - name: uid
+        in: path
+        required: true
+        description: Publisher ID
+        schema:
+          deprecated: false
+          type: integer
+    post:
+      summary: /tag/:uid/placement
+      tags:
+        - Publisher
+        - App Placement
+      responses:
+        '200':
+          description: /tag/:uid/placement
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: string
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: Creates a new app placement
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+  /v1/tag/{uid}/placement/{id}:
+    get:
+      summary: /tag/:uid/placement/:id
+      tags:
+        - Publisher
+        - App Placement
+      responses:
+        '200':
+          description: /tag/:uid/placement/:id
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: integer
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: Fetch the app placement from the given placement ID
+    parameters:
+      - name: uid
+        in: path
+        required: true
+        description: Publisher ID
+        schema:
+          deprecated: false
+          type: integer
+      - name: id
+        in: path
+        required: true
+        description: Placement ID
+        schema:
+          deprecated: false
+          type: integer
+    put:
+      summary: /tag/:uid/placement/:id
+      tags:
+        - Publisher
+        - App Placement
+      responses:
+        '200':
+          description: /tag/:uid/placement/:id
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: integer
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: Updates an existing app placement
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                activation:
+                  type: integer
+    delete:
+      summary: /tag/:uid/placement/:id
+      tags:
+        - Publisher
+        - App Placement
+      responses:
+        '200':
+          description: /tag/:uid/placement/:id
+          headers:
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: string
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Content-Length:
+              schema:
+                type: integer
+      description: Deletes the given app placement.
+  /v1/tag/{uid}/settings:
+    get:
+      summary: '[TBC] /publisher/:uid'
+      tags:
+        - Publisher
+      responses:
+        '200':
+          description: /publisher/:uid/settings
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: string
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: Fetches all the publisher level settings for the given publisher
+    parameters:
+      - name: uid
+        in: path
+        required: true
+        description: Publisher ID
+        schema:
+          deprecated: false
+          type: integer
+    put:
+      summary: '[TBC] /publisher/:uid'
+      tags:
+        - Publisher
+      responses:
+        '200':
+          description: /publisher/:uid
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: integer
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: Sets the publisher level configuration for the given publisher
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                uid:
+                  type: integer
+                organisation:
+                  type: integer
+                domain:
+                  type: string
+                display_name:
+                  type: string
+                label:
+                  type: string
+                tier:
+                  type: integer
+                config:
+                  type: object
+                  properties:
+                    rss_feed:
+                      type: string
+                    dev_cipt:
+                      type: boolean
+                    dpcd:
+                      type: boolean
+                date_added:
+                  type: string
+                  format: style
+                status:
+                  type: integer
+                tag_version:
+                  type: string
+                target_branch:
+                  type: string
+                iabCategories:
+                  type: string
+                logo:
+                  nullable: true
+                logo_dark:
+                  nullable: true
+                o&o:
+                  type: integer
+                custom_kv:
+                  nullable: true
+                beta:
+                  type: boolean
+                deploy_freeze:
+                  type: object
+                  properties:
+                    start:
+                      nullable: true
+                    end:
+                      nullable: true
+                approval_status:
+                  type: integer
+                third_party_adstxt:
+                  type: string
+                mapping:
+                  type: object
+                  properties:
+                    '622':
+                      nullable: true
+                    '623':
+                      nullable: true
+                    '624':
+                      nullable: true
+                    '625':
+                      nullable: true
+                    '626':
+                      nullable: true
+                    '627':
+                      nullable: true
+                    '628':
+                      nullable: true
+                    '630':
+                      nullable: true
+                    '645':
+                      nullable: true
+                    '647':
+                      nullable: true
+                    '653':
+                      nullable: true
+                    '676':
+                      nullable: true
+                    '706':
+                      type: string
+                    '714':
+                      nullable: true
+                    '768':
+                      type: string
+                    '773':
+                      nullable: true
+                    '790':
+                      nullable: true
+  /v1/tag:
+    post:
+      summary: '[TBC] /publisher'
+      tags:
+        - Publisher
+      responses: {}
+      description: Creates a new publisher from the given domain
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                dupe_configs:
+                  type: boolean
+                dupe_from:
+                  nullable: true
+                targets:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      domain:
+                        type: string
+                      label:
+                        type: string
+    get:
+      summary: '[TBC] /publisher'
+      tags:
+        - Publisher
+      responses:
+        '200':
+          description: /publisher
+          headers:
+            vary:
+              schema:
+                type: string
+            access-control-allow-origin:
+              schema:
+                type: string
+            access-control-allow-headers:
+              schema:
+                type: string
+            access-control-allow-methods:
+              schema:
+                type: string
+            access-control-expose-headers:
+              schema:
+                type: string
+            x-ci-permissions:
+              schema:
+                type: string
+            x-ci-token:
+              schema:
+                type: string
+            content-encoding:
+              schema:
+                type: string
+            x-cloud-trace-context:
+              schema:
+                type: string
+            date:
+              schema:
+                type: string
+            server:
+              schema:
+                type: string
+            Transfer-Encoding:
+              schema:
+                type: string
+      description: >-
+        List all publishers under the loggedin organisation, and some top level
+        configuration
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+security:
+  - BearerAuth: []
