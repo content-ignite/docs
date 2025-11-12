@@ -1,5 +1,10 @@
 {
   "openapi": "3.0.0",
+  "x-mint": {
+    "mcp": {
+      "enabled": true
+    }
+  },
   "info": {
     "title": "CI Public API",
     "version": "1.0.0",
