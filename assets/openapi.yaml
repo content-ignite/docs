@@ -41,7 +41,7 @@ info:
     We reserve the right to block requests if we deem a client to be abusing the
     API.
 servers:
-  - url: '{{url}}'
+  - url: "{{url}}"
 paths:
   /v1/report:
     get:
@@ -1260,7 +1260,7 @@ paths:
         - Reporting
         - Revenue Reports
       responses:
-        '204':
+        "204":
           description: report/:id
       description: Delete a report
   /v1/report/filters:
@@ -1270,7 +1270,7 @@ paths:
         - Reporting
         - Revenue Reports
       responses:
-        '200':
+        "200":
           description: /report/filters
           headers:
             vary:
@@ -1578,7 +1578,7 @@ paths:
         - Reporting
         - Experiment Reporting
       responses:
-        '200':
+        "200":
           description: /report/experiment
           headers:
             vary:
@@ -1625,7 +1625,7 @@ paths:
         - Reporting
         - Experiment Reporting
       responses:
-        '200':
+        "200":
           description: /report/experiment/:id
           headers:
             vary:
@@ -1679,7 +1679,7 @@ paths:
         - Reporting
         - Experiment Reporting
       responses:
-        '200':
+        "200":
           description: /report/experiment/:id
           headers:
             access-control-allow-origin:
@@ -1730,7 +1730,7 @@ paths:
         - Reporting
         - Campaign Reports
       responses:
-        '200':
+        "200":
           description: report/campaign
           headers:
             Host:
@@ -2088,7 +2088,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: /report/health-check
           headers:
             vary:
@@ -2135,7 +2135,7 @@ paths:
         - Reporting
         - Health Check
       responses:
-        '200':
+        "200":
           description: /report/health-check/:uid/:id
           headers:
             vary:
@@ -2197,7 +2197,7 @@ paths:
         - Reporting
         - Ads.txt
       responses:
-        '200':
+        "200":
           description: /report/adstxt
           headers:
             vary:
@@ -2246,7 +2246,7 @@ paths:
         - Reporting
         - Ads.txt
       responses:
-        '200':
+        "200":
           description: /report/adstxt/:uid
           headers:
             vary:
@@ -2301,7 +2301,7 @@ paths:
         - Reporting
         - Ads.txt
       responses:
-        '200':
+        "200":
           description: /report/app-adstxt/:uid
           headers:
             vary:
@@ -2380,7 +2380,7 @@ paths:
               - month_on_month
               - quarter_on_quarter
       responses:
-        '200':
+        "200":
           description: /report/date-range
           headers:
             vary:
@@ -2542,7 +2542,7 @@ paths:
               - pap
               - all
       responses:
-        '200':
+        "200":
           description: /report/insight/ssp
           headers:
             vary:
@@ -2636,7 +2636,7 @@ paths:
             type: string
             format: date
       responses:
-        '200':
+        "200":
           description: /report/insight/ssp/ssp-filter
           headers:
             vary:
@@ -2742,7 +2742,7 @@ paths:
               - month
               - quarter
       responses:
-        '200':
+        "200":
           description: /report/insight/cwv
           headers:
             vary:
@@ -2807,7 +2807,7 @@ paths:
               - app
               - web
       responses:
-        '200':
+        "200":
           description: /report/insight/ads-txt
           headers:
             vary:
@@ -2869,13 +2869,13 @@ paths:
           schema:
             type: integer
             enum:
-              - '1'
-              - '2'
-              - '4'
-              - '6'
-              - '12'
-              - '24'
-              - '48'
+              - "1"
+              - "2"
+              - "4"
+              - "6"
+              - "12"
+              - "24"
+              - "48"
         - name: environment
           in: query
           required: false
@@ -2886,7 +2886,7 @@ paths:
               - app
               - web
       responses:
-        '200':
+        "200":
           description: /report/insight/live
           headers:
             vary:
@@ -2976,7 +2976,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: /report/insight/metrics
           headers:
             vary:
@@ -3075,7 +3075,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: /report/insight/metrics/revenue
           headers:
             vary:
@@ -3174,7 +3174,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: /report/insight/metrics/live-revenue
           headers:
             vary:
@@ -3268,7 +3268,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: /report/insight/metrics/latency
           headers:
             vary:
@@ -3326,7 +3326,7 @@ paths:
             default: gross
             enum:
               - net
-              - ' gross'
+              - " gross"
         - name: rev_source
           in: query
           required: false
@@ -3336,7 +3336,7 @@ paths:
               - pap
               - saas
       responses:
-        '200':
+        "200":
           description: /stats
           headers:
             vary:
@@ -3383,7 +3383,7 @@ paths:
         - Organisation
         - Organisation Meta
       responses:
-        '200':
+        "200":
           description: /organisation/:id/mapping
           headers:
             vary:
@@ -3440,7 +3440,7 @@ paths:
         - Organisation
         - Organisation Meta
       responses:
-        '200':
+        "200":
           description: /organisation/:id/roles
           headers:
             vary:
@@ -3507,7 +3507,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: /ad-stack
           headers:
             vary:
@@ -3560,7 +3560,7 @@ paths:
             deprecated: false
             type: integer
       responses:
-        '200':
+        "200":
           description: /ad-stack
           headers:
             vary:
@@ -3623,7 +3623,7 @@ paths:
       tags:
         - Ad Stack
       responses:
-        '200':
+        "200":
           description: /ad-stack/:id
           headers:
             vary:
@@ -3676,7 +3676,7 @@ paths:
       tags:
         - Ad Stack
       responses:
-        '200':
+        "200":
           description: /ad-stack/:id
           headers:
             access-control-allow-origin:
@@ -3715,7 +3715,7 @@ paths:
       tags:
         - Ad Stack
       responses:
-        '200':
+        "200":
           description: /ad-stack/:id
           headers:
             vary:
@@ -3783,7 +3783,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: /ad-stack/integration
           headers:
             vary:
@@ -3838,7 +3838,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: /ad-stack/integration/:type/:id
           headers:
             vary:
@@ -3908,7 +3908,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: /ad-stack/integration/:type/:id
           headers:
             vary:
@@ -3963,7 +3963,7 @@ paths:
         - Publisher
         - Publisher Stack
       responses:
-        '200':
+        "200":
           description: /pub-stack/:uid/integration
           headers:
             vary:
@@ -4019,7 +4019,7 @@ paths:
         - Publisher
         - Publisher Stack
       responses:
-        '200':
+        "200":
           description: /pub-stack/:uid/integration
           headers:
             access-control-allow-origin:
@@ -4070,7 +4070,7 @@ paths:
         - Publisher
         - Publisher Stack
       responses:
-        '200':
+        "200":
           description: /pub-stack/:uid/integration/:id
           headers:
             Host:
@@ -4128,7 +4128,7 @@ paths:
         - Publisher
         - Publisher Stack
       responses:
-        '200':
+        "200":
           description: /pub-stack/:uid/integration/:id
           headers:
             Host:
@@ -4176,7 +4176,7 @@ paths:
         - Publisher
         - Publisher Stack
       responses:
-        '200':
+        "200":
           description: /pub-stack/:uid/integration/:id
           headers:
             Host:
@@ -4220,7 +4220,7 @@ paths:
         - Publisher
         - Publisher Tag
       responses:
-        '200':
+        "200":
           description: /tag/:uid/email/preview
           headers:
             vary:
@@ -4277,7 +4277,7 @@ paths:
         - Publisher
         - Publisher Tag
       responses:
-        '200':
+        "200":
           description: /tag/:uid/status
           headers:
             vary:
@@ -4329,7 +4329,7 @@ paths:
           type: integer
   /v1/tag/{uid}/stats:
     get:
-      summary: '[TBC] /publisher/:uid/stats'
+      summary: "[TBC] /publisher/:uid/stats"
       tags:
         - Publisher
         - Publisher Meta
@@ -4345,7 +4345,7 @@ paths:
           schema:
             deprecated: false
       responses:
-        '200':
+        "200":
           description: /publisher/:uid/stats
           headers:
             vary:
@@ -4399,12 +4399,12 @@ paths:
           type: integer
   /v1/publisher/{uid}/status:
     get:
-      summary: '[TBC] /publisher/:uid/status'
+      summary: "[TBC] /publisher/:uid/status"
       tags:
         - Publisher
         - Publisher Meta
       responses:
-        '200':
+        "200":
           description: /publisher/:uid/status
           headers:
             vary:
@@ -4454,12 +4454,12 @@ paths:
           type: integer
   /v1/tag/{uid}/owners:
     get:
-      summary: '[TBC] /publisher/:uid/owners'
+      summary: "[TBC] /publisher/:uid/owners"
       tags:
         - Publisher
         - Publisher Meta
       responses:
-        '200':
+        "200":
           description: /publisher/:uid/owners
           headers:
             vary:
@@ -4512,12 +4512,12 @@ paths:
           type: integer
   /v1/tag/{uid}:
     get:
-      summary: '[TBC] /publisher/:uid/overview'
+      summary: "[TBC] /publisher/:uid/overview"
       tags:
         - Publisher
         - Publisher Meta
       responses:
-        '200':
+        "200":
           description: /publisher/:uid
           headers:
             vary:
@@ -4566,11 +4566,11 @@ paths:
           deprecated: false
           type: integer
     delete:
-      summary: '[TBC] /publisher/:uid'
+      summary: "[TBC] /publisher/:uid"
       tags:
         - Publisher
       responses:
-        '200':
+        "200":
           description: /publisher/:uid
           headers:
             access-control-allow-origin:
@@ -4613,7 +4613,7 @@ paths:
         - Publisher
         - Experiment
       responses:
-        '200':
+        "200":
           description: /tag/:uid/experiment
           headers:
             vary:
@@ -4667,7 +4667,7 @@ paths:
         - Publisher
         - Experiment
       responses:
-        '200':
+        "200":
           description: /tag/:uid/experiment
           headers:
             vary:
@@ -4803,7 +4803,7 @@ paths:
         - Publisher
         - Experiment
       responses:
-        '200':
+        "200":
           description: /tag/:uid/experiment/:id
           headers:
             vary:
@@ -4864,7 +4864,7 @@ paths:
         - Publisher
         - Experiment
       responses:
-        '200':
+        "200":
           description: /tag/:uid/experiment/:id
           headers:
             vary:
@@ -4924,7 +4924,7 @@ paths:
         - Publisher
         - Experiment
       responses:
-        '200':
+        "200":
           description: /tag/:uid/experiment/:id
           headers:
             access-control-allow-origin:
@@ -4972,7 +4972,7 @@ paths:
             deprecated: false
             type: string
       responses:
-        '200':
+        "200":
           description: /tag/:uid/experiment/compare
           headers:
             vary:
@@ -5030,7 +5030,7 @@ paths:
         - Publisher
         - Experiment
       responses:
-        '200':
+        "200":
           description: /tag/:uid/experiment/:id/activate-winner
           headers:
             access-control-allow-origin:
@@ -5089,7 +5089,7 @@ paths:
         - Publisher
         - Config (Ad Unit)
       responses:
-        '200':
+        "200":
           description: /tag/:uid/config
           headers:
             vary:
@@ -5143,7 +5143,7 @@ paths:
         - Publisher
         - Config (Ad Unit)
       responses:
-        '201':
+        "201":
           description: /tag/:uid/config
           headers:
             access-control-allow-origin:
@@ -5297,7 +5297,7 @@ paths:
         - Publisher
         - Config (Ad Unit)
       responses:
-        '200':
+        "200":
           description: /tag/:uid/config/:id
           headers:
             vary:
@@ -5358,7 +5358,7 @@ paths:
         - Publisher
         - Config (Ad Unit)
       responses:
-        '200':
+        "200":
           description: /tag/:uid/config/:id
           headers:
             vary:
@@ -5517,7 +5517,7 @@ paths:
         - Publisher
         - Config (Ad Unit)
       responses:
-        '200':
+        "200":
           description: /tag/:uid/config/:id
           headers:
             access-control-allow-origin:
@@ -5558,7 +5558,7 @@ paths:
         - Publisher
         - App Placement
       responses:
-        '200':
+        "200":
           description: /tag/:uid/placement
           headers:
             vary:
@@ -5612,7 +5612,7 @@ paths:
         - Publisher
         - App Placement
       responses:
-        '200':
+        "200":
           description: /tag/:uid/placement
           headers:
             vary:
@@ -5667,7 +5667,7 @@ paths:
         - Publisher
         - App Placement
       responses:
-        '200':
+        "200":
           description: /tag/:uid/placement/:id
           headers:
             vary:
@@ -5728,7 +5728,7 @@ paths:
         - Publisher
         - App Placement
       responses:
-        '200':
+        "200":
           description: /tag/:uid/placement/:id
           headers:
             vary:
@@ -5782,7 +5782,7 @@ paths:
         - Publisher
         - App Placement
       responses:
-        '200':
+        "200":
           description: /tag/:uid/placement/:id
           headers:
             access-control-allow-origin:
@@ -5818,11 +5818,11 @@ paths:
       description: Deletes the given app placement.
   /v1/tag/{uid}/settings:
     get:
-      summary: '[TBC] /publisher/:uid'
+      summary: "[TBC] /publisher/:uid"
       tags:
         - Publisher
       responses:
-        '200':
+        "200":
           description: /publisher/:uid/settings
           headers:
             vary:
@@ -5871,11 +5871,11 @@ paths:
           deprecated: false
           type: integer
     put:
-      summary: '[TBC] /publisher/:uid'
+      summary: "[TBC] /publisher/:uid"
       tags:
         - Publisher
       responses:
-        '200':
+        "200":
           description: /publisher/:uid
           headers:
             vary:
@@ -5977,43 +5977,43 @@ paths:
                 mapping:
                   type: object
                   properties:
-                    '622':
+                    "622":
                       nullable: true
-                    '623':
+                    "623":
                       nullable: true
-                    '624':
+                    "624":
                       nullable: true
-                    '625':
+                    "625":
                       nullable: true
-                    '626':
+                    "626":
                       nullable: true
-                    '627':
+                    "627":
                       nullable: true
-                    '628':
+                    "628":
                       nullable: true
-                    '630':
+                    "630":
                       nullable: true
-                    '645':
+                    "645":
                       nullable: true
-                    '647':
+                    "647":
                       nullable: true
-                    '653':
+                    "653":
                       nullable: true
-                    '676':
+                    "676":
                       nullable: true
-                    '706':
+                    "706":
                       type: string
-                    '714':
+                    "714":
                       nullable: true
-                    '768':
+                    "768":
                       type: string
-                    '773':
+                    "773":
                       nullable: true
-                    '790':
+                    "790":
                       nullable: true
   /v1/tag:
     post:
-      summary: '[TBC] /publisher'
+      summary: "[TBC] /publisher"
       tags:
         - Publisher
       responses: {}
@@ -6038,11 +6038,11 @@ paths:
                       label:
                         type: string
     get:
-      summary: '[TBC] /publisher'
+      summary: "[TBC] /publisher"
       tags:
         - Publisher
       responses:
-        '200':
+        "200":
           description: /publisher
           headers:
             vary:
