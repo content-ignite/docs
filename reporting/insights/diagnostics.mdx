@@ -1,0 +1,152 @@
+---
+title: "Diagnostics"
+description: "A central place to identify common pitfalls in your setup"
+---
+
+<img
+  className="block dark:hidden"
+  src="/assets/images/insights-hub-diagnostics--light.png"
+  alt="Preview of the diagnostics insights report in Fusion"
+/>
+<img
+  className="block dark:block"
+  src="/assets/images/insights-hub-diagnostics--dark.png"
+  alt="Preview of the diagnostics insights report in Fusion"
+/>
+
+The Diagnostics Hub is designed to highlight any issues that we know will affect monetisation. Through our years of experience dealing with these issues, we are well-equipped to detect and remedy them alongside you.
+
+When you first land in the diagnostics report, you will see a network-wide view of issues, known as your "Network Health".
+
+By choosing a single publisher via the publisher filter in the top right, you will then see a "Publisher Health" view. This provides a deeper dive into nuanced publisher issues, such as a missing CMP Stub, presented via a simple traffic light tile system.
+
+<Note>
+  **Data freshness**
+
+    Most data is pulled daily, especially for things like analytics data, CMP, or ads.txt data. However, there are a few exceptions. The following publisher tiles are real-time, where a fix on your side should reflect upon a page refresh of the Diagnostics Hub: Stub Status and Expired Integrations.
+
+</Note>
+
+## Issues
+
+Depending on whether you've selected an individual publisher or are viewing issues across your network as a whole, you may see a number of different issues highlighted to you:
+
+<img
+  className="block dark:hidden"
+  src="/assets/images/insights-hub-diagnostics-tiles--light.png"
+  alt="Shows a snapshot of the diagnostic tiles and the simple traffic light system used to highlight issues"
+/>
+<img
+  className="block dark:block"
+  src="/assets/images/insights-hub-diagnostics-tiles--dark.png"
+  alt="Shows a snapshot of the diagnostic tiles and the simple traffic light system used to highlight issues"
+/>
+
+### Drop-off Issue (Network Issue)
+
+A drop-off issue means a publisher's impressions have dropped off by 75% or more over the past 24-hour period. If unexpected, this could indicate that tags have been removed or there is a configuration issue. Something worth looking into!
+
+### Ads.txt Issue
+
+A missing Ads.txt entry can have big consequences on ad serving and therefore revenue. Always aim for zero reported Ads.txt issues and chase anything highlighted!
+
+Learn more about your Ads.txt file in the [Ads.txt hub](reporting/insights/ads-txt).
+
+### Incomplete Supply Chain (Network Issue)
+
+This refers to a specific missing line in your Ads.txt. While all missing Ads.txt lines will impact ad serving and revenue, this line (typically containing `sid-` in the middle of them) will have an increasingly negative impact.
+
+Ensure your ads.txt is up-to-date to resolve these issues.
+
+### CMP Not Found (Network Issue)
+
+If we cannot detect a CMP in a GDPR or CCPA region, we will default to non-personalised ads, which have a much lower CPM. Ensure you have the CMP 'Stub' in place, directly in the head of your page (not served via a tag manager). Any queries, just reach out to your account manager who look into any potential issues for you. Learn more in our [CMP Guide](/getting-started/cmp-guide).
+
+### Tag Latency
+
+Tag latency measures how long it takes for your site to load our tag onto the page. In advertising, it is key to load ads as quicklyas possible, before the user scrolls past the unit target or even navigates away to another page.
+
+The best way to deploy our tag is to have it directly in the head of your site. Any other method, such as using a tag manager or serving via an ad server will introduce latency, impacting your earnings.
+
+### Traffic Stats (Graph)
+
+The traffic stats graph merges your analytics data (if connected) with your publisher tag data. Typically, Analytics page views will be lower than CI Page Impressions due to filtering of bots and invalid traffic by your analytics partner. If Analytics data is higher, it is likely that your publisher tag is not deployed to every page on your site, potentially leading to lost opportunities.
+
+### CMP Status (Graph)
+
+It’s important to track consent rates over time. Sudden drops in consent rates often correlate with decreased monetisation. These drops could result from CMP changes, triggering mass re-consent, or issues with CMP implementation.
+
+It’s crucial to note that this consent rate reflects what we as an ad tech vendor are seeing. This provides valuable insight beyond your CMP platform, allowing you to spot issues early with real-world data.
+
+Aim for a consent rate of 80%+, though this can vary by audience type. For example, a tech savy audience might have lower consent rates.
+
+### CMP Error Rate (Publisher Issue)
+
+If a CMP is implemented correctly, the error rate should be zero. Any higher rate will signal a stub issue or configuration problem with your CMP.
+
+As a reminder, CMP issues cause advertising to default to "Non-personalised", which performs considerably worse in terms of monetisation.
+
+CMPs are a very common failure point; read more over in our [CMP Guide](/getting-started/cmp-guide).
+
+### Stub Status (Publisher Issue)
+
+A 'Stub' is part of your CMP setup, and is the publishers responsibility to implement. It's a small piece of Javascript code, that **must exist** directly in the head of your site.
+
+Missing or incorrectly implemented stubs lead to CMP errors and poorly monetised traffic.
+
+Read more about stubs and common CMP mistakes in our [CMP Guide](/getting-started/cmp-guide).
+
+### Heavy Ad Intervention (Publisher Issue)
+
+HAI is a Google Chrome feature that removes ads from the page if it is found they are making excessive network requests or use too much CPU resource. Once removed, that ad cannot generate any revenue.
+
+While there is little you can do to directly effect this behaviour in the open market, indirectly, a well-built site with healthy user traffic tends to attract higher-quality advertisers, reducing HAI occurrences. Typically, HAI values are around 0.3%.
+
+Source
+[https://developer.chrome.com/blog/heavy-ad-interventions](https://developer.chrome.com/blog/heavy-ad-interventions)
+
+### Mobile Ad Density (Publisher Issue)
+
+The measurement for Mobile Ad Density is universally agreed upon, unlike for desktop where there is no single standard.
+
+30% is the cut off here. Anything above this can result in penalties, and will most importantly, impact your sites user experience.
+
+Content Ignite measures both our own contribution to mobile ad density, as well as any third parties. The score displayed in your Diagnostics Hub represents a combination of both, giving you an overview of your total mobile ad density.
+
+### Tag Error Rate (Publisher Issue)
+
+There are a number of possible tag errors that can occur, some of which are less likely to cause notable impact but should still be addressed, while others may indicate more serious issues.
+
+One common error is not serving our tag directly, for example by bundling it into a large JavaScript file via a caching plugin. This not only affects tag behaviour but also violates our terms of service.
+
+Another issue is loading our tag multiple times on a page. Although protections are in place to prevent a secondary tag from loading, it is best to centralise our tag serving in one location to maintain control over your site's ad-serving logic.
+
+### Viewability (Publisher Issue)
+
+Viewability is a publisher quality metric that measures the ratio of impressions served to those that are viewable, where an ad is considered viewable if 50% or more of it is in view for at least one second.
+
+A high viewability rate is appealing for advertisers, as it assures them that their ads are being seen by users. To help maintain a strong viewability score, utilising features like "In-view" in Fusion is beneficial.
+
+A very low viewability rate could suggest that the "In-view" feature is disabled for certain units or that an element on the page is obscuring the ad unit.
+
+### Expired Integrations (Publisher Issue)
+
+Most integrations in Fusion don't expire unless you explicitly revoke access, but there is one key exception: Amazon's APS integration. This integration expires every three months and cannot be renewed.
+
+If an active integration expires, you may lose access to reporting data or even have the integration removed from your ad stack.
+
+You will receive an email notification two weeks before expiration, but if any integrations lapse, they will appear in this section for your immediate attention.
+
+### Direct Demand Mix (Publisher Issue)
+
+While having direct demand on your site is certainly not an "issue," this tile becomes particularly helpful when reviewing programmatic performance.
+
+If direct spend is taking up a large portion of your inventory, it’s understandable that revenue and performance from programmatic demand will drop.
+
+To better understand where your earnings are coming from, you can refer to the specific report in the [Demand Mix Hub](/reporting/insights/demand-mix).
+
+### Traffic Trend (Publisher Issue)
+
+Ad revenue is directly tied to your traffic. Without traffic, there’s no ad spend (obviously!). Therefore, it’s crucial to monitor how your traffic is performing. If traffic trends downwards, you can expect a corresponding drop in ad revenue.
+
+Our [Revenue Analytics Hub](/reporting/insights/revenue-analytics) does a great job of showing you how we are performing for your given traffic.

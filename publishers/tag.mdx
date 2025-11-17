@@ -1,0 +1,80 @@
+---
+title: "Publisher Tag"
+description: "Our single publisher tag is at the core everything we do"
+sidebarTitle: "Features"
+---
+
+We operate our units via a single publisher tag, unique to your domain. This tag orchestrates as many units as required, minimising resources while providing maximum flexibility.
+
+Upon signing up to Content Ignite and creating your first publisher, you will be presented with your unique publisher tag.
+We advise you put this live as quickly as possible, along with your ads.txt requirements, to minimise delays in earnings. (no ads will be shown until onboarding is complete and you directly toggle on the tag in our UI).
+
+## Privacy
+
+Our tags only collect anonymised logs, which are only stored for 5 days to be processed and stored as daily summary reports.
+
+We also read from CMPs to ensure GDPR compliance, defaulting to non-personalised ads if consent could/was not obtained. We, therefore, recommend that all publishers have a CMP in place, and ensure that Content Ignite is enabled as an advertising partner/vendor.
+
+We also abide by CCPA and global privacy laws by offering opt-out functionality via contentignite.com, and additionally we read and honour GPC (Global Privacy Control) flags.
+
+All of our high-impact ads have an info button for users to find out more information and opt-out of personalisation if they so wish, this can be found at [https://info.contentignite.com/](https://info.contentignite.com/).
+
+Full details about privacy can be found over on our [Privacy Policy](https://contentignite.com/privacy-policy/).
+
+## Tag & Unit Features
+
+Our publisher tag has a number of features that can be used to your advantage. At the top level, before individual units are initiated, there are:
+
+- Custom tracking support
+- GDPR management (CMP support)
+- Custom events
+
+Find out more about these publisher-level settings over on the [Publisher Settings help page](/publishers/settings).
+
+Other features are unit (config) specific, as follows:
+
+|                                     | **In-Image** | **In-Article** | **Adhesion**  | **IAB** | **Interstitial** |
+| ----------------------------------- | ------------ | -------------- | ------------- | ------- | ---------------- |
+| **Native & Display**                | ✔            | ✔              | ✔             | ✔       | ✔                |
+| **Interval Refresh**                | ✔            | ✔              | ✔             | ✔       | \-               |
+| **High Viewability <sup>[1]</sup>** | ✔            | ✔              | ✔             | ✔       | \-               |
+| **Brandable**                       | ✔            | ✔              | ✔             | 𐄂       | \-               |
+| **Auto-scaling**                    | ✔            | ✔ (down only)  | ✔ (down only) | 𐄂       | \-               |
+| **In-View <sup>[2]</sup>**          | ✔            | ✔              | 𐄂             | ✔       | \-               |
+| **Multi-target**                    | ✔            | ✔              | 𐄂             | 𐄂       | \-               |
+| **Every-other targeting**           | ✔            | 𐄂              | 𐄂             | 𐄂       | \-               |
+| **Video**                           | 𐄂            | ✔              | 𐄂             | 𐄂       | 𐄂                |
+| **Responsive re-locate**            | 𐄂            | 𐄂              | ✔             | 𐄂       | \-               |
+
+{" "}
+
+<sup>[1]</sup> High Viewability is a progressive feature, supported by all modern
+browsers, older browsers will not refresh. This ensures we can guarantee industry-leading
+viewability while practising responsible advertising. [https://caniuse.com/#feat=intersectionobserver](https://caniuse.com/#feat=intersectionobserver)
+
+{" "}
+
+<sup>[2]</sup> InView is a progressive feature, supported by all modern browsers,
+older browsers will load the ad immediately as a fallback (IE). [https://caniuse.com/#feat=intersectionobserver](https://caniuse.com/#feat=intersectionobserver)
+
+### High Viewability
+
+Our high viewability feature ensures ads _only_ load & refresh when we know the ad is in view of the user, ensuring maximum efficiency and inventory viewability.
+
+By keeping track of a unit's visibility in the user's current viewport, taking into account minimised windows and background tabs, we can ensure we only process a unit when a user can see it in that moment.
+
+This feature is enabled for all publishers. You may see a reduction in your overall impressions if coming from a less viewable solution. With high-quality traffic, this will reduce your revenue in the short term, but boost viewability and click-through rate, and therefore you should see an increase in CPMs after a short while.
+
+### Ad Refreshing
+
+Google requires that you declare inventory that refreshes. If you are a SaaS customer, you must do this yourself by following Google's instructions: [https://support.google.com/admanager/answer/6286179](https://support.google.com/admanager/answer/6286179). We operate off of "Time intervals" at a default of "35 seconds" between refreshes.
+
+## Custom Key Values
+
+As the publisher, you have the ability to pass key values directly to the Content Ignite Publisher Tag via our [tags JS API](/publishers/js-api#setting-targeting).
+
+While the API method gives you full control over custom key values, for those publishers that are resource constrained, we have the ability to pull key values from the page without any dev on the publisher side. This could be data in meta tags, data attributes on HTML elements, or really anything that exists in the pages source code.
+
+This is particularly useful when migrating ad servers to Content Ignite and continuing campaigns via the GAM Teams feature. We can mimic your existing setup to help ease the transition.
+
+Custom key values are something that can be set up by your account manager and will be visible in your publisher settings page.

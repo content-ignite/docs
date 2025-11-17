@@ -1,0 +1,79 @@
+---
+title: "Ad Stacks"
+description: "Group ad servers, demand and more into reusable ad stacks"
+---
+
+<img
+  className="block dark:hidden"
+  src="/assets/images/ad-stacks--light.png"
+  alt="Preview of the drag-and-drop ad stack interface in Fusion"
+/>
+<img
+  className="block dark:block"
+  src="/assets/images/ad-stacks--dark.png"
+  alt="Preview of the drag-and-drop ad stack interface in Fusion"
+/>
+
+Ad stacks are powerful groupings of all the various pieces that make up the ad tech ecosystem. This could be as simple as a single ad server, or as complicated as header bidding, Amazon TAM, ad block recovery tech and custom fallback creatives all bundled together.
+
+Ad stacks are designed to make building complex set-ups that would otherwise involve a huge technological undertaking to implement, as simple as dragging and dropping your desired platforms.
+
+## Core Concepts
+
+### Reusable
+
+Ad stacks can be reused across any publisher in your organisation if desired, simply give your ad stack a name, and it will be surfaced for selection. Changes to a shared ad stack will be applied to all uses of it in one go.
+
+Going further, you can select an existing ad stack and "detach" it, making a copy for you to change as needed. This makes it nice and easy to create a new ad stack based on an existing one.
+
+So how many ad stacks do I need? What is the optimal setup? Really this depends on your requirements, but we'd recommend you start with a single ad stack across all your publishers. Handily, a "Default Ad Stack" is automatically created for every organisation, which contains the Content Ignite Ad Server; the easiest route to monetisation. Speak with your account manager should you need help with more advanced set ups.
+
+### Your relationships or ours?
+
+All elements of an ad stack can utalise Content Ignite's direct relationships with the various platforms or your own existing contracts, the choice is yours!
+
+If you'd like to connect in your own integrations, you can do so easily via the [Integrations section]integrations).
+
+### Mapping
+
+Certain integrations require mapping. This is the process of connecting an entity in the third-party platform, with an entity inside of Fusion.
+
+A common example of this is publisher mapping, where it is likely that each publisher needs to be set up in the third-party platform, and will have some sort of unique identifier associated with it. You can then enter this identifier into Fusion, against the correct publisher via Publisher Mapping.
+
+This ensures that when you build an ad stack that is shared across publishers, Fusion can deduce the correct ID to use when running an ad auction on-site. Do it once and forget about it!
+
+Mapping can be done by the integration owner, and for integrations that require it, will prevent the integration from going live until this step is complete. You will be warned of any missing requirements in the UI. If you are using Fusion on P&P basis, all mapping requirements will be on your account manager.
+
+More info available here: [Integration Mapping](/integrations/settings#mapping)
+
+## Ad Tech
+
+Here you can activate per unit tech such as ID solutions. In the case of ID solutions, including a 3rd party into your ad stack only facilitates the passing of IDs into the bid stream. There are a number of other key steps that may need to be followed for IDs to come into effect:
+
+1. **Accepting of terms** -- Some ID providers handle/require Personal Information (PI) such as email addresses, in these cases you need to agree to the terms of the 3rd party over in [Fusion's Policy Centre](/integrations/policy-centre).
+2. **Include the publisher level integration** -- Each ID solution require a script on page that exchanges user information for the all important "ID". This ID is what is then passed into the bid stream. Fusion can handle this step for you if you have not deployed these scripts already, simply [include the ID integration in your publisher stack](/publishers/settings#integrations-publisher-stack)!
+3. **Pass user information** -- Some ID providers require PI such as email address, this should be passed via your [publisher tags JS API](/publishers/js-api).
+
+## Ad Demand
+
+The first integration type for ad stacks is ad demand. This is header bidding partners/SSPs/wrappers. Essentially any bidding that will occur before the ad server auction. The great thing here is that you don't need to worry about the underlying technology, just pick the SSP's you want and away you go!
+
+Content Ignite have carefully curated settings that we believe will work optimally for all our publishers, but you always have the control to make changes yourself. Clicking the cog icon next to the ad demand section allows you to control things such as timeouts and user ID modules.
+
+Clicking the cog icon on individual integrations will show you all configuration options available.
+
+## Ad Servers
+
+The ad server is responsible for hosting the final auction that returns an ad to page. You have the option to use yours or ours and even set things up in a first-look second-look setup, meaning that if your ad server failed to deliver an ad, it would automatically pass the request onto our server!
+
+Clicking the cog icon on individual integrations will show you all configuration options available.
+
+## Fallback Creatives
+
+Fusion is laser-focused on optimising for yield, ensuring the maximum revenue for you, but with this comes less than 100% fill. If you'd like to make use of that empty space when an ad is not served, you can place your own creatives to page! This is perfect if you have a merchandise shop you'd like to promote.
+
+Fallbacks can take the form of images uploaded to Fusion, where you can set the click URL and standard and high-resolution images. All activity is tracked and viewable in your report builder as you'd expect.
+
+The second option is script creatives, where we can serve a custom JavaScript file to page, unlocking limitless possibilities.
+
+Multiple creatives can be added at the same time, where they will be randomly cycled through. An optional weighting allows you to show some creatives more than others if preferred.

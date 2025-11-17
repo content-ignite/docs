@@ -1,0 +1,28 @@
+---
+title: "API Reporting"
+description: "Use your own BI systems? Pull in your Fusion data easily with our API"
+---
+
+Content Ignite provide a fully open API for all core aspects of our Fusion platform, and this includes reporting.
+
+Anything you pull from your revenue report section, you can pull via API for ingestion into your own reporting systems.
+
+## API Documentation
+
+Our API docs can be found linked in the top right of this docs site, or via this link: [API Reference](/api-reference)
+
+### API Key
+
+You personal API key can be found on your account page inside Fusion: [https://admin.contentignite.com/account](https://admin.contentignite.com/account).
+
+Do not share this token with anyone as it is unique to you and has the same access to Fusion as you do.
+
+## Recommendations
+
+While you can build a report and then pull that report all via API, we recommend that you build the report you need inside the Fusion UI fo ease.
+
+Once built, you will see the report ID in the URL. Simply use this with the `GET report/:id/data` endpoint to pull data daily or as needed.
+
+Reports are only updated once per day from 6am UTC and should generally be complete by 7am UTC.
+
+Reports are reconciled over a 4 day period, meaning data for the past 4 days can change. With this in mind, we recommend you always pull for a 4 day period as minimum, overwriting any previously pulled data.

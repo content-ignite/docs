@@ -1,0 +1,49 @@
+---
+title: "Ad Tech Integrations"
+description: "Beyond demand; think ID's, think ad block recovery"
+---
+
+Ad technology integrations are typically publisher level connections, weather it be connecting in your CMP, or utilising an ad block recovery platform, these complimentary technology offerings can boost the features of your ad tech set up.
+
+## Sub Types
+
+### CMP's
+
+Consent Management Platforms (CMP's) are a requirement when serving in the EAA and UK, and are even becoming required in some form by other countries and US states. A CMP's job is to collect user consent, and make it readable by ad tech providers like us.
+
+The Content Ignite Fusion platform tracks CMP issues in the health report, as unfortunately, there are many mistakes that can be made during the implementation of a CMP on site, namely script execution order and missing out of the CMP "Stub". The net result of incorrect CMP implementation is a direct loss in revenue.
+
+A CMP is a third party piece of tech that must make it to page, and Content Ignite always recommends you implement this directly in the head of your site wherever possible, however, integrating a CMP through the Fusion platform guarantees a correct set up and peace of mind.
+
+Privacy is at the forefront of everything we do at Content Ignite, and it is our belief that you the publisher should own control of privacy, so we do not provide a "default" CMP set up. We can however advise on various third party CMP's based on our extensive experience and knowledge in this field, simple reach out to your account manager who will be happy to assist you!
+
+### ID/Signal Providers
+
+We offer various integrations with ID/Signal providers to help identify users/audiences unlocking better monetisation.
+
+Our implementation of ID’s is designed to be as easy as possible. Most providers require a user email address or phone number to function, so this must be [passed via our tags JS API](/publishers/js-api). By using this method, you only need to implement the passing of PI once, from there you can activate or deactivate these ID integrations inside Fusion and we will take care of passing the required data as needed.
+
+It is important to note, as a privacy-first company, there are protections in place our side to ensure consent is given via your on-page CMP, before we pass any PI on to the ID provider. In addition, we take care of deploying the ID providers script to page as and when needed.
+
+ID solutions are unique in a number of ways, first in that there are two parts to them, one at the publisher level (the data collection and ID exchange script), and one at the ad stack level (which passes the ID into the bid stream). Both are separately configurable so you the publisher remain in control (you may already have one part in place already), but both need to be on page in one form or another.
+
+Secondly, an ID provider that handles PI will require you to accept terms over in [Fusions Policy Centre](/integrations/policy-centre). This is to protect you and your users by communicating any legal requirements (such a privacy policy amends) and by preventing unauthorised activation of an ID provider.
+
+The main steps involved in activating an ID provider are:
+
+1. **Accepting of terms** -- Some ID providers handle/require Personal Information (PI) such as email addresses, in these cases you need to agree to the terms of the 3rd party over in [Fusion's Policy Centre](/integrations/policy-centre).
+2. **Include the publisher level integration** -- Every ID solution requires a script on page that exchanges user information for the all important "ID". This ID is what is then passed into the bid stream. Fusion can handle this step for you if you have not deployed these scripts already, simply [include the ID integration in your publisher stack](/publishers/settings#integrations-publisher-stack)!
+3. **Include the ad stack integration** -- This is the important bridge between the collection and generation of the ID, and the ID actually making it into the bid stream where it can hopefully provide incremental uplift.
+4. **Pass user information** -- Some ID providers require PI such as email address, this should be passed via your [publisher tags JS API](/publishers/js-api).
+
+We highly recommend you [run an experiment](/publishers/experiments) when you activate IDs for the first time, it is notoriously difficult to measure incremental uplift from ID's, but Fusion makes it a breeze!
+
+### Others
+
+There are other ad stack integration sub types such as ad block recovery, all of which follow a similar setup and connection process, follow on for how to connect these to a publisher.
+
+## Connection to publishers
+
+Once you've connected an ad tech integration into Fusion, you'll want to make use of it at the publisher level.
+
+You can do this via your publisher settings page, under the "Integrations" section by simply clicking "Connect Integration" and picking the integration you just added to Fusion!

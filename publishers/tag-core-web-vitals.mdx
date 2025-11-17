@@ -1,0 +1,36 @@
+---
+title: "Core Web Vitals"
+description: "CWV's represent industry defined performance metrics"
+---
+
+Core Web Vitals (CWV) are a group of universal metrics that inform on the overall performance of a site. These metrics have an effect on how your site is perceived by users and by search engines alike.
+
+Advertising in general will effect CWV's as an unavoidable consequence of making network requests to fetch ads, running auctions (header bidding) and downloading various assets such as ad creatives. Sites need revenue to operate, and for most, that revenue comes from some form of advertising, so while building a new site its easy to be disappointed to see those perfect CWV scores decline once advertising is activated, but it is a balancing act, as a site with no income can't operate for long!
+
+Content Ignite is dedicated to minimising the impact we have on a site, there are some areas we can control and some we can't, so lets take a deeper dive:
+
+## CLS, Ad containers & targeting flexibility
+
+We have the ability to target ads to any area of your site without any dev requirements on your side, this is incredibly powerful and allows the flexibility to experiment with ad position and refine over time, for example; targeting ads after every 5th paragraph inside articles.
+
+That being said, CLS (Content Layout Shift) is a core web vital that is commonly tracked by publishers, so how do Content Ignite ads effect this? As with any third party script you place on page, we aren't present the second your site loads, browsers load us just after page load, so there is no way for us to directly prevent CLS for content we place on page, however that doesn't render our flexible targeting void!
+
+CLS is about shifting content around that is in the primary viewport (aka whats in view of the user). Our recommendation is to set fixed sized ad containers for your known units, such as billboard/leaderboard header units, MPU in the side bar etc, anything that is in that initial viewport. This prevents CLS as we can place an ad inside this container. You can then leave us to flexibly target article content, end of article etc.
+
+Remember that our high impact Adhesion and In-image units never effect CLS.
+
+## General Performance, TTI
+
+Our tag operates asynchronously, meaning we don't block the page from loading, ensuring we don't effect the all important Time to First Interaction.
+
+## Network request and Bandwidth
+
+The content ignite scripts are carefully built for each publisher, optimising for the specific features and configuration you have set up. For example, if you don't set up header bidding or video units, we wont include those files, which contribute to over all file size.
+
+We compress our scripts and serve them from a globally distributed CDN to ensure our files download quickly no matter where your users are browsing from, and often see lightning quick file lookup speeds of around 40 milliseconds.
+
+### Third party scripts
+
+As much as we tightly control our own scripts, we don't have control over required third party scripts such as Googles publisher tag scripts (gpt.js and pubads_impl.js). These are scripts that handle the final ad auction and are controlled by Google, but are often flagged for having unused code.
+
+The same goes for ad creatives. Programmatic advertising means no prior knowledge of the winning creative, so the content of that ad (images, scripts) are out of our control. We push for quality by optimising for yield, which will help, but we can not optimise the assets that a winning ad loads.

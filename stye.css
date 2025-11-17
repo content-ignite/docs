@@ -1,0 +1,16 @@
+.nav-logo {
+  height: 2rem;
+}
+.num-ref {
+  color: #222;
+  background: #f66f5e;
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  text-align: center;
+  border-radius: 11px;
+  line-height: 22px;
+  font-family: "Fira code", monospace;
+  font-weight: 700;
+  font-size: 13px;
+}

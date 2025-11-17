@@ -1,0 +1,67 @@
+---
+title: "4. Going Live"
+description: "Your list of pre-flight checks"
+---
+
+<img
+  className="block dark:hidden"
+  src="/assets/images/going-live--light.png"
+  alt="Powering on Graphic"
+/>
+<img
+  className="block dark:block"
+  src="/assets/images/going-live--dark.png"
+  alt="Powering on Graphic"
+/>
+
+Now that your first publisher and tag config have been created, you can prepare for go-live.
+
+The onboarding checklist on your publisher page is your guide here.
+
+1. You will need to deploy the publisher tag to your site ([tag deployment](/publishers/tag-deployment))
+2. Set up payment (depending on your ad server choices)
+3. Await approval
+4. Deploy any ads.txt requirements
+5. Ensure you have a CMP in place for applicable regions, and that Content Ignite is included as a vendor option.
+
+Once all those pieces are in place and all you see are lovely green ticks, you are ready to go!
+
+Make sure the tag config is enabled by clicking the switch next to it so it is green, and then finally enable the tag by clicking the switch in the "Publisher tag status" box. This will turn on your tag for the first time!
+
+Tag enablement can take a few minutes, and if using our Ad Server, demand can take 15 minutes or so to start coming through, so give it half an hour, enjoy a cup of tea and revel in the stress-free setup of your first publisher.
+
+### Notes on CMP's
+
+Consent Management Platforms (CMP's) are a requirement when serving in the EAA and UK, and are even becoming required in some form by other countries and US states. A CMP's job is to collect user consent and make it readable by ad tech providers like us.
+
+The Content Ignite Fusion platform tracks CMP issues in the [Diagnostics insights](/reporting/insights/diagnostics) report, as unfortunately, there are many mistakes that can be made during the implementation of a CMP on site, namely script execution order and missing out of the CMP "Stub". The net result of incorrect CMP implementation is a direct loss in revenue.
+
+The CMP Stub is a piece of JavaScript code that should be placed inside `<script>...</script>` tags, and **not** included as a hosted file (`<script src="...">`). This script block needs to be placed within the head section of your HTML (between the opening `<head>` and closing `</head>` tags). It **must** be before the Content Ignite Publisher Tag and before the CMP tag.
+
+This is such an important topic, that we cover it in depth over in our [CMP Guide](/getting-started/cmp-guide).
+
+It pays to get this set up right, as issues here directly impact revenue. Reach out to your AM if you need help, or integrate your CMP through the Fusion platform to have Content Ignite optimally deploy it to page for you.
+
+### Notes on caching and firewalls
+
+If you are new to the world of digital advertising, it is important to understand that bots are an important part of the eco system. It may be the case that without ads, you have taken a blanket approach to bots, blocking them from your site entirely. However this approach will block ad partners verifying key information, and hence block ads from running.
+
+If you have a Web Application Firewall, it is important to ensure that all bots can access Ads.txt (and Robots.txt while your at it!).
+
+It is also recommended you whitelist our Content Ignite Bot, as this is what checks your site for outages, is vital for contextual crawling and various other protective features. Our bot identifies itself with the following user agent: `ContentIgniteBot/1.0 (compatible; Mozilla/5.0; +https://api.tagdeliver.com)`
+
+Lastly, caching plugins. It is common to utilise caching plugins or caching services such as Cloudflare and their "Rocketloader" product. These types of services can do a number of things that can corrupt your publisher tag, and even breach our terms of service, such as taking a copy of your publisher tag and merging it with other Javascript from your site.
+
+Rocketloader can even "defer" Javascript, which means blocking it from execution until the rest of the page has loaded. This can impact your CMP setup and add latency to ad loading, directly impacting monetisation.
+
+It is therefore vital that you exclude your publisher tag and your CMP (+stub) from these services. Luckily it is often as simple as adding a parameter to these tags, so do refer to your services documentation on how to approach these exclusions.
+
+## What's next?
+
+From here, you can repeat the process for any other publishers you have. You can also try out other ad formats that you feel are suited to your site.
+
+Performance needs a good 2-3 week period to settle in. If using our ad server, our ad operations team will be monitoring performance and actively optimising your setup on your behalf.
+
+From here, you can start to explore our other features such as [contextual audiences and segments](/audiences), [our video unit](/publishers/tag-video) or dig into [your reporting](/reporting/revenue).
+
+And always remember, help is only ever [one click away](https://resource.contentignite.com/support).

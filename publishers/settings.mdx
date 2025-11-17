@@ -1,0 +1,121 @@
+---
+title: "Publisher Settings"
+description: "Powerful high-level settings for your publisher, enable contextual, integration and so much more"
+---
+
+<img
+  className="block dark:hidden"
+  src="/assets/images/publisher-settings--light.png"
+  alt="Preview of publisher setting management in Fusion"
+/>
+<img
+  className="block dark:block"
+  src="/assets/images/publisher-settings--dark.png"
+  alt="Preview of publisher setting management in Fusion"
+/>
+
+Clicking the cog icon in the top right of a publisher page will take you through to publisher settings. From here you can manage various publisher-specific settings.
+
+## Branding
+
+Set internal labels for easier identification throughout the system as well as branding & RSS feed URL for use in video content.
+
+## Integrations (Publisher Stack)
+
+There are a number of integrations grouped as "Publisher-level integrations". These are integrations that apply to a publisher as a whole, rather than individual parts of the ad stack (such as demand sources). Common examples of these integration types are CMP's, ad block recovery tech and ID solutions.
+
+You can activate these integrations in this section by simply picking from a list of applicable integrations that have been [previously connected in](/integrations).
+
+Some integrations are a simple one click to integrate, others require further information, if they do need additional input, you will be guided through the process.
+
+## Tracking
+
+You can use this section to add custom pixel or JavaScript trackers. This section is for technically trained users only. It is worth speaking to your account manager if you have additional tracking needs, where we can then advise you on the required setup.
+
+## Visual Customisations
+
+You can set Global CSS overwrites here to fix publisher-specific styling issues. However, this feature is for experienced web developers only. It is recommended you do not change this field, and leave it to your account manager to fix styling issues on your behalf.
+
+## Custom Key Values
+
+Custom key values allow you to pass in targetable data into the ad server. More on this over on [Publisher Tag Features](/publishers/tag#custom-key-values).
+
+## Optional Features
+
+Optional features are features that can be enabled with a simple toggle.
+
+### AI Dynamic Floors
+
+Whether P&P or SaaS, you can make use of our AI Dynamic Floors system. Dynamic Floors are enabled on a traffic percentage basis, so you can be confident in the model as you ramp up. Simply drag the slider between 0% (completely off) and 100% (fully on).
+
+Dynamic floors are deployed daily at midnight (UTC), so the percentage traffic split you have chosen will only take effect come midnight, and will remain as is for a full 24-hour period.
+
+Our model takes into account historic date trends, device, browser and country all applied at the granular tag config level for highly targeted floors.
+
+Note: Dynamic floors apply to your ad server demand (some set up required for SaaS) and all Prebid SSP's. Dynamic floors do not apply to wrappers such as OpenWrap and Amazon Publisher Services.
+
+### Debug Mode
+
+Debug mode can be enabled on a per page basis by adding the `?cipt_debug=true` query parameter to the page URL. This is the recommended way of debugging our publisher tag. In cases where our tag is served into a safe frame, for example, that query parameter will not work, so enabling the debug mode toggle here turns it on globally.
+
+Debug mode provides additional output in your browser's developer console. This is to be used by your development team only to help identify or track down any issues and should be disabled as soon as it is no longer needed.
+
+### βeta Tag
+
+<Warning>
+  This feature should not be used without first discussing it with your account
+  manager.
+</Warning>
+
+We are constantly developing and improving our publisher tag, and before we release an update to everyone, we release it in "βeta". This is an early development preview and comes with the risk of not being tested. Enabling this could therefore break your ad serving and reduce your revenue.
+
+If we are working with you on a new feature that benefits your particular publisher, we may enable this for you to test its effectiveness.
+
+### Page change detection
+
+Our tags can detect when a page change event occurs, these are events triggered by client-side scripts that dont reload the whole page. This is often used by Single-Page Applications (SPA's) or by feature libraries such as galleries, where each change in viewed image, updates the URL accordingly which helps users share or bookmark pages.
+
+When our tag detects these events, we reload the ads on page as if a full page change occurred, ensuring we re-assess all the targets on page, and load ads as expected.
+
+This feature should be enabled as required by your developers, there is a small risk that rouge scripts could cause page change events when they are not supposed to, causing ads to reload and performance stats to decrease.
+
+For SPA sites, we recommend you disable this feature and use the more targeted method of calling `window.__ciads.reload()` to trigger our tag to reload, as this is a much more narrow and controlled approach. More on this method in our [JS API section](/publishers/js-api#spa-reloads).
+
+### Guarantee roadblocks
+
+<Warning>
+  Usage of this feature is discouraged as it disables in-view and the
+  efficiencies it brings, please discuss with your account manager before
+  activation.
+</Warning>
+
+Guaranteed roadblocks are roadblocks where the ad server guarantees that multiple creatives will be served together on a page.
+
+In most cases, guaranteed roadblocks are unnecessary. We recommend you serve campaigns via tenancy, where creatives serve throughout the page. This is the most flexible and efficient setup while maintaining pacing control, targeting etc.
+
+In the case of guaranteed roadblocks, for the ad server to ensure all units fill from the same line-item, it needs to receive all ad requests together. This means that in-view can not be active (where we efficiently load a unit only when it comes into view), causing units to inefficiently load out-of-view, directly impacting your viewability stats and increasing the resources used on each page load.
+
+Caveat; For targets that are not initially found on page, but load in later on (for example, lazy-load images or extra content via infinite scroll), these will not participate in the shared session, unless loaded in with 10 seconds of the rest.
+
+## Deployment freeze
+
+You can schedule a deployment pause for the publisher tag being rebuilt, temporarily queuing up any changes to the publisher tag between the selected start and end dates. Once the end date has passed, your tag will resume building automatically.
+
+Benefits of this feature include:
+
+- The ability to make lots of changes to publisher settings, tag configs etc, and deploying them all together at a set time.
+- Pausing new tag builds over a period where publisher management is trickier, such as over a company Christmas 'shutdown'.
+
+We've setup a 30-day maximum period from the start date to ensure your tag doesn't go too long without a rebuild, guaranteeing it stays up-to-date with the latest features and security upgrades.
+
+## Third-party Ads.txt Requirements
+
+As part of our [Ads.Txt Insights](/reporting/insights/ads-txt#file-lines) analysis, we are able to map a publishers current ads.txt file lines against the required lines derived from the demand partners in your ad stacks. This allows us to discover what lines fall outside of our requirements and are deemed as "Untracked".
+
+These untracked lines may include genuine inventory required from other third party partners you work with.
+
+In order for us to ascertain between genuine inventory and lines that may be legacy or dormant (which can pose many complications and negative revenue effects), we provide a field on the publisher settings page where you can enter any **active** third party ads.txt lines. This allows us to track these lines and add them as part of the requirements for the given publisher, making any untracked lines a flag for removal as part of the ads.txt insights.
+
+Simply input your line-separated ads.txt requirements, remembering to follow [IAB Ads.txt 1.1](https://iabtechlab.com/wp-content/uploads/2022/04/Ads.txt-1.1.pdf) guidance, and we'll do the rest.
+
+Further information on how we use these requirements, macro usage and relationship management which can be applied, [read more](/integrations/settings#adstxt-requirements) in our docs.

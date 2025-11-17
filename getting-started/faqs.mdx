@@ -1,0 +1,174 @@
+---
+title: "FAQ's"
+description: "Let's cover off some common FAQ's for publishers looking at Content Ignite for the first time."
+---
+
+Any burning questions that we haven't covered off here? We'd love to know them! Please reach out via [hello@contentignite.com](mailto:hello@contentignite.com)
+
+### How do I reach out for additional support?
+
+You can create a ticket in our support centre, found here: [https://resource.contentignite.com/support](https://resource.contentignite.com/support).
+
+### Where do I log into my dashboard from?
+
+The dashboard log-in can be found here: [https://admin.contentignite.com/](https://admin.contentignite.com/).
+
+### Why am I seeing blank ads?
+
+We optimise based on yield. This is the balancing of CPM's and fill to ensure you get the most revenue possible by maximising the value of your inventory. This will lead to blank ads now and then, but more revenue!
+
+The bottom line is, more fill **does not equal** more revenue.
+
+### Just one tag on page? really? How would we target units?
+
+So unlike using the standard Google Publisher Tag, where `<script/>` elements need to be placed throughout your site, and units need defining in the head of your site, we operate on a true one tag solution. Place our tag in the head of your page once, and forget about it.
+
+But how do we target ads? We use standard CSS selectors to target ads, we can use Div ID's, classes or even target every 5th paragraph in an article for example.
+
+All of this is set up inside our Fusion platform, so you dont need to keep making development changes to your site for every change in ad targeting or behavior.
+
+### What does your tag look like?
+
+Once you have set up a publisher in Fusion, you will find your publisher tag shown to you.
+
+Our tag is a JavaScript script tag, and looks something like this:
+
+```html
+<script src="https://cdn.tagdeliver.com/cipt/12345.js" async="async"></script>
+```
+
+This tag is unique for each publisher and is designed to run site-wide by being placed directly in the head of your site along with a CMP (where applicable), and that's all you need!
+
+### Migrating over from Google Publisher Tag
+
+If Content Ignite is becoming your sole ad-tech provider and you are moving over from Google, the setup process is pretty seamless. First and foremost, there is Google's GPT tag that gets replaced with your Content Ignite Publisher tag:
+
+<Columns cols={2}>
+
+```html title="Before"
+<head>
+  <script
+    src="//securepubads.g.doubleclick.net/tag/js/gpt.js"
+    async="async"
+  ></script>
+</head>
+```
+
+```html title="After"
+<head>
+  <script src="https://cdn.tagdeliver.com/cipt/12345.js" async="async"></script>
+</head>
+```
+
+</Columns>
+
+You will then have some sort of header script or file where you previously had to define your Google ad units, this can be removed or commented out:
+
+<Columns cols={2}>
+```html title="Before"
+<script>
+    window.googletag = window.googletag || { cmd: [] }
+    googletag.cmd.push(function () {
+        googletag
+            .defineSlot(
+                '/21711907894/example.com/unit_1',
+                [300, 250],
+                'div-gpt-ad-1611935295857-0'
+            )
+            .addService(googletag.pubads())
+        googletag.pubads().enableSingleRequest()
+        googletag.enableServices()
+    })
+</script>
+```
+
+```html title="After"
+<script>
+  /* window.googletag = window.googletag || { cmd: [] }
+    googletag.cmd.push(function () {
+        googletag
+            .defineSlot(
+                '/21711907894/example.com/unit_1',
+                [300, 250],
+                'div-gpt-ad-1611935295857-0'
+            )
+            .addService(googletag.pubads())
+        googletag.pubads().enableSingleRequest()
+        googletag.enableServices()
+    }) */
+</script>
+```
+
+</Columns>
+
+Finally, you will have ad containers throughout your site with unique ID's such as `div-gpt-ad-1611935295857-0`, you can keep these containers in place if you still want ads there, removing or commenting out the inner script tags:
+
+<Columns cols={2}>
+
+```html title="Before"
+<div id="div-gpt-ad-1611935295857-0" style="width: 300px; height: 250px">
+  <script>
+    googletag.cmd.push(function () {
+      googletag.display("div-gpt-ad-1611935295857-0");
+    });
+  </script>
+</div>
+```
+
+```html title="After"
+<div id="div-gpt-ad-1611935295857-0" style="width: 300px; height: 250px">
+  <!-- <script>
+        googletag.cmd.push(function () {
+            googletag.display('div-gpt-ad-1611935295857-0')
+        })
+    </script> -->
+</div>
+```
+
+</Columns>
+
+Then simply enter the container ID's into the Fusion platform as unit targets to place ads in your existing containers! Nice and simple, and even means you can easily switch back at any time (although we are confident you won't want to).
+
+### How do SaaS setups work?
+
+The Fusion platform can be fully set up to use your connections (your GAM account, your SSP's), ours, or a mix of both. When using your own connections, this is classed as SaaS (Software As A Service).
+
+For SaaS you are charged a CPM fee for using our technology (compared with the revenue share of P&P -- Plug and Play; using our connections).
+
+To use a SaaS setup, you can connect your GAM account into Fusion via our [integrations section](/integrations), this is a simple approval flow that grants us the access we need. This gives you the ability to see centralised reporting inside Fusion and have child units set up automatically for you.
+
+The same goes for ad demand, if you already have contracts in place with SSP's, you can set those up in Fusion too.
+
+### For SaaS, do we need to re-map all our units and targeting?
+
+If you have containers on page already, you can easily add them into Fusion, no changes to your site are required in this regard. Our team can even help migrate targeting for you so you are up and running quickly.
+
+Targeting inside your Ad Server (if using our SaaS feature) can also remain the same, no need for new line items if you have demand set up already. Fusion can use your existing ad units to create the required child units, or create new ones automatically for you, the choice is yours.
+
+Our aim is not to change the way you are set up to work, but to be flexible and agnostic as a platform. Read more about [Fusion "Pro" vs Fusion "Mapped"](/getting-started/pro-vs-mapped) if you want to preserve your entire ad unit setup within GAM.
+
+### Your Google Ad Manager Account or Ours?
+
+This is actually up to you! For those who dont want to be overly involved in ad operations, the simplest route to monetisation is to use Content Ignites GAM account where we pay you your revenure share each month, but you can also use your GAM account (SaaS) or even use both:
+
+A hybrid setup can have different ad servers targeted to different geos, audiences etc, or served via a "second-look", where if your ad server fails to return an ad, ours can jump in and attempt to fill the opportunity. View our [example ad stacks](/getting-started/ad-stack-examples) to find out more.
+
+### How does the second look "hybrid" setup work?
+
+Through our drag-and-drop ad stacks, you can drag multiple Google Ad Manager ad servers in. The order matters here as only one ad server gets first-look, then another can get second-look and so on.
+
+There is no setup inside of GAM needed to make this work. We get all the relevant signals for when an ad request has not been filled, we will then pass the opportunity on to the next ad server if one is set up, this "second-look" is orchestrated by our tag so doesn't suffer the inherent inefficiencies of legacy passback tags.
+
+If using our Ad Server in the mix, all the P&P requirements apply; billing information so we can pay you your earnings, MCM connection in place, site approved etc. Then your ad server will need to be set up with all SaaS requirements in place. This is why we class this as a "hybrid" setup. View our [example ad stacks](/getting-started/ad-stack-examples) to find out more.
+
+### What is your "Fallback" feature?
+
+Creative fallbacks give you the opportunity to fill a space that has otherwise failed to serve an ad. "Blanks" or missed ad opportunities are common and by design as we always optimise for yield, meaning more revenue for you the publisher.
+
+This opens the door for you to place ads directing users to your merch shop for example. You can upload image assets and a link, or get more involved with script fallbacks.
+
+All fallbacks impressions are tracked, and image fallbacks are click-tracked and all available in your revenue reporting as you'd expect.
+
+You can even configure multiple fallback and have them cycle (and even weight them accordingly).
+
+Fallbacks do not replace booked campaigns, where you can target creative, control serving and compete with programmatic, they are purely a final chance to fill a space when all other options have been exhausted. View our [example ad stacks](/getting-started/ad-stack-examples) to find out more.

@@ -1,0 +1,89 @@
+---
+title: "Publisher Tag - Video Unit"
+description: "A video unit designed to server your supplementary content"
+---
+
+<img
+  className="block dark:hidden"
+  src="/assets/images/video-unit-config--light.png"
+  alt="Preview of video behaviour fields in Fusion"
+/>
+<img
+  className="block dark:block"
+  src="/assets/images/video-unit-config--dark.png"
+  alt="Preview of video behaviour fields in Fusion"
+/>
+
+Our video unit is an in-stream unit, this means ads are served alongside a video of the publisher's choice. Allowing your site to host engaging video content for the user, supplemented with ads.
+
+Like all our units, video has several configurable options that you as a publisher have ultimate control of:
+
+## Video content
+
+The content that is served to the video units is controlled in the separated [Video Configs](/publishers/video-config) section of your dashboard. This allows you to set various settings such as enabling auto-content and running that across various publishers in one fell swoop. Leaving these unit configs for video, to control just the behaviour of the unit such as when and where it is served.
+
+Why not tie video content and unit config together? It's incredibly flexible having the two separate and reduces duplication (and therefore the chance for human error). Consider these scenarios:
+
+1. A sponsor provides a video to run in a certain section of your site, you have one video unit running across your site so to do this you can simply create an audience for the target section of your site, and create a new video config to target that audience with the sponsor's video file. Video serving across the rest of your site remains unaffected and the video unit doesn't have to be changed in any way.
+2. You've got your video serving set up via a single network-wide config, but you want units in different places in different sections of your site, with different behaviours for mobile vs tablet/desktop. You can set up as many unit configs as needed to achieve this while defining the content that will serve to all those different unit setups in a single video config.
+
+## Behaviours
+
+Our unit has three distinct behaviour types as explained below. Regardless of the chosen behaviour, we take steps to ensure a users experience is not diminished by our ads, and that advertisers are treated fairly, to this effect we implement intelligent "Auto pause" functionality, to pause videos when scrolled out of view; avoiding frustrating background audio for users and ensuring high viewability for advertisers (and more revenue for you!).
+
+In addition, our video unit never hides or collapses after being shown, preventing disruptive content shift.
+
+Only one video unit can be loaded per page - less is more in this case!
+
+Be sure to check out "Click-to-stick" for publishers concerned about the impact video ads have on user experience.
+
+### Static
+
+![](/assets/images/video-static.png)
+
+This is how you'd expect any standard video element to behave on the page, it stays where you put it; completely non-intrusive.
+
+### Scroll-to-stick
+
+![](/assets/images/video-scroll-to-stick.png)
+
+This is what is commonly seen in the advertising industry; a unit that sticks to a corner of the page as the user scrolls past the inline element, keeping it in view at all times. High viewability stats often lead to great revenue, hence it's commonplace, but potentially at the detriment of the user's browsing experience.
+
+#### Stick-on-load
+
+For all our behaviours, our "in-view" tech is enabled and can not be turned off, except for Scroll-to-stick. Here you get the option to disable in-view. This allows for Stick-on-load behaviour where the video will load and stick to the position of your choosing, as soon as the page loads. This is a highly engaging setup, but it's down to you as the publisher to weigh that up against user experience impact.
+
+### Click-to-stick
+
+![](/assets/images/video-click-to-stick.png)
+
+This is Content Ignites hybrid solution. A unit that is static by default, but when scrolling past it, a small floating button appears, allowing the user to pop the video out and continue watching.
+
+This type remains highly viewable for users who want to engage, but stays out of the way for those not interested - ensuring their experience on the site is unaffected by video advertising.
+
+## Position
+
+Chose where a "popped out" video appears. Whether initiated by the user, or via the "Scroll-to-stick" behaviour, you have control of where a floating video is positioned, allowing you to place it somewhere that best fits the design of your site.
+
+## Disable auto-play with sound
+
+We aim for the most engaging behaviour we can to drive good ad revenue balanced against a good user experience. Therefore, the decision on when to play videos with or without sound is given to the user's browser, which has much more knowledge about that user than us (privacy is of top importance to us here at Content Ignite!).
+
+The browser's decision is based on a “Media Engagement Index” MEI. This takes into account how much someone has previously interacted with the site to gauge their interest in a publisher. For most users, this will mean the video will play without sound with the option for them to unmute it at their own convenience.
+
+This is the best balance for the user. If they have actively engaged with the site and have a high MEI, videos may play for them with sound.
+Most site owners will be interacting with their site daily, so are likely to hear sound on videos more often, but this will not be the norm for the majority of users.
+
+If however, you have had user complaints or want to take the executive decision to block sound by default and disable MEI control, you can do so via the "Disable auto-play with sound" toggle.
+
+For more information on how MEI works, please visit the explainer here: [Chrome Auto-play, new behaviours](https://developer.chrome.com/blog/autoplay/#new-behaviors)
+
+## Config Flexibility
+
+A general note on the flexibility of the Content Ignite publisher tag config setup.
+
+You can create as many configs as needed to achieve your desired setup. Want scroll-to-stick on desktop, but click-to-stick on tablet and mobile? Simply create two configs targeting these two groups and configure as needed!
+
+Want "Always play" enabled on video articles and disabled on everything else? no problem!
+
+There is great flexibility and control afforded to you as a publisher, you can do what is best for your site and your user base.

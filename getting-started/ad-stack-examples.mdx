@@ -1,0 +1,91 @@
+---
+title: "Ad Stack Examples"
+description: "Your demand sources, ad servers and tech; grouped"
+---
+
+Ad stacks may seem overwhelming at first glance, their inherent flexibility leads to a magnitude of configuration options, but we can assure you they are very easy to grasp and use! So let's explore some real-world examples from simple to complex.
+
+## The minimalist
+
+The minimum you need to get up and running with digital ads is an ad server! Ours is available by default, and if you have connected in your own, then that will be available too. You can have a fully working setup with this simple ad stack.
+
+<img
+  className="block dark:hidden"
+  src="/assets/images/ad-stack-simple--light.png"
+  alt="A simple ad stack containing a single Google Ad Manager ad server"
+/>
+<img
+  className="block dark:block"
+  src="/assets/images/ad-stack-simple--dark.png"
+  alt="A simple ad stack containing a single Google Ad Manager ad server"
+/>
+
+## A sprinkle of client-side demand
+
+Enabling Prebid is as simple as dragging in a Prebid SSP into your stack, if the SSP supports it, you can set it to run server-side via Content Ignites Prebid Server. The same goes for Amazon UAM/TAM, just drag it in to enable it!
+
+<img
+  className="block dark:hidden"
+  src="/assets/images/ad-stack-demand--light.png"
+  alt="Three prebid.js SSPs and Amazon UAM/TAM in an ad stack with a single Google Ad Manager ad server"
+/>
+<img
+  className="block dark:block"
+  src="/assets/images/ad-stack-demand--dark.png"
+  alt="Three prebid.js SSPs and Amazon UAM/TAM in an ad stack with a single Google Ad Manager ad server"
+/>
+
+## The works
+
+The final block in ad stacks is Fallbacks. These serve when nothing else has, and take the form of either simple image creatives (image & link) or advanced script creatives (created and hosted by you). You can create fallbacks from within an ad stack and drag it in to enable it. More than one can be used too, and will be cycled through at random.
+
+<img
+  className="block dark:hidden"
+  src="/assets/images/ad-stack-the-works--light.png"
+  alt="Various ad demand SSPs, an ad server and some fallback creatives within an ad stack"
+/>
+<img
+  className="block dark:block"
+  src="/assets/images/ad-stack-the-works--dark.png"
+  alt="Various ad demand SSPs, an ad server and some fallback creatives within an ad stack"
+/>
+
+## Second-Look Ad Server
+
+It is possible to have a primary ad server in the stack, that passes back to a "second-look" ad server when it fails to fill a request. This is typically used as a hybrid SaaS setup, where your ad server gets first look with all your connections and direct campaigns, and then upon an unfilled impression, passes back to Content Ignite.
+
+Unlike days of the past, there is no need to mess around with passback tags and configuration in your GAM account. The Content Ignite publisher tag orchestrates the entire ad request process, so can efficiently trigger the second ad server as needed.
+
+All of that boils down to you simply dragging a second ad server into the ad stack:
+
+<img
+  className="block dark:hidden"
+  src="/assets/images/ad-stack-multi-server--light.png"
+  alt="A full ad stack set up, with two ad servers"
+/>
+<img
+  className="block dark:block"
+  src="/assets/images/ad-stack-multi-server--dark.png"
+  alt="A full ad stack set up, with two ad servers"
+/>
+
+### Understanding the flow of events
+
+If you have ad demand partners included in your ad stack, these partners will be called again before sending the ad request to the second ad server.
+
+As you can include a mix of ad-demand relationships, it is important to note that your integrations can remain in the mix even when calling our ad server and vice-versa, if your integration wins, then normal SaaS logic applies for that impression.
+
+Note that both servers need to be set up as applicable to the ad demand you have dragged in. For example, APS and Prebid require certain line-items to be present as a one-time setup task, so if using our Prebid demand and your ad server, this setup will need to be completed, or any bids from those SSP's will always fail at auction.
+
+If your ad server was first-look, and failed to load an ad, the flow may look something like this:
+
+<img
+  className="block dark:hidden"
+  src="/assets/images/multi-server-flow--light.png"
+  alt="The flow of ad demand though the first ad server then second call to ad demand passing on to second look ad server"
+/>
+<img
+  className="block dark:block"
+  src="/assets/images/multi-server-flow--dark.png"
+  alt="The flow of ad demand though the first ad server then second call to ad demand passing on to second look ad server"
+/>

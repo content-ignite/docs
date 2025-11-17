@@ -1,0 +1,297 @@
+---
+title: "Ads.txt Insights"
+description: "Refine your Ads.txt file for optimal performance"
+---
+
+<img
+  className="block dark:hidden"
+  src="/assets/images/insights-hub-adstxt--light.png"
+  alt="Preview of the ads.txt insights report in Fusion"
+/>
+<img
+  className="block dark:block"
+  src="/assets/images/insights-hub-adstxt--dark.png"
+  alt="Preview of the ads.txt insights report in Fusion"
+/>
+
+Our ads.txt hub allows publishers to gather insights and highlight valuable actionable steps that can be taken to ensure your ads.txt file is healthy and maximising your revenue potential.
+
+## What is ads.txt?
+
+The ads.txt (Authorised Digital Sellers) is a simple, text-based file that is defined by publishers to list all the companies authorised to sell their ad inventory. Introduced by the Interactive Advertising Bureau (IAB) and defined in latest [Ads.txt 1.1](https://iabtechlab.com/wp-content/uploads/2022/04/Ads.txt-1.1.pdf) specification, this initiative aims to increase transparency in programmatic advertising, reduce fraud, and ensure that advertisers are buying legitimate ad impressions from approved sources.
+
+Here's a great analogy to help explain what your ads.txt is for:
+
+> Think of ads.txt as your party invite guest list. If your guest list is too long, it will take ages for the party to actually start and also make it hard to manage uninvited gatecrashers. Some guest names might be duplicated and cause more confusion. So a clean guest list will ensure that the party starts early and only the invited guests are admitted without any problems or delays.
+
+## Relationship Types
+
+<img
+  className="block dark:hidden"
+  src="/assets/images/insights-hub-adstxt-relationships--light.png"
+  alt="Shows the relationship type tile in the ads.txt insights report"
+/>
+<img
+  className="block dark:block"
+  src="/assets/images/insights-hub-adstxt-relationships--dark.png"
+  alt="Shows the relationship type tile in the ads.txt insights report"
+/>
+
+There are the two relationship types that publishers are able to sell their ad inventory through programmatic bidding systems: **DIRECT** and **RESELLER**.
+
+A DIRECT relationship means the publisher works directly with the AdTech vendor to sell its inventory, whereas RESELLER indicates that the publisher has authorised another ad network/digital ad agency to sell its inventory on its behalf.
+
+This insight provides an overview of the weighting of these two types, along with the percentage difference between them.
+
+At CI we understand that RESELLER relationships are required for publishers to operate their ad solutions effectively, but do encourage pushing for greater DIRECT relationships where possible throughout your inventory. This can benefit optimising the supply chain, reducing costs and avoid common pitfalls such as [bidflation](https://www.linkedin.com/pulse/bidflation-phenomenon-costing-publishers-millions-christopher-francia/).
+
+## Exchanges
+
+<img
+  className="block dark:hidden"
+  src="/assets/images/insights-hub-adstxt-exchanges--light.png"
+  alt="Shows the exchanges tile in the ads.txt insights report"
+/>
+<img
+  className="block dark:block"
+  src="/assets/images/insights-hub-adstxt-exchanges--dark.png"
+  alt="Shows the exchanges tile in the ads.txt insights report"
+/>
+
+Each ad exchange line in the ads.txt file contains the authorised name/domain that is selling inventory. This insight demonstrates the correlation between how many of those total exchanges are **unique**.
+
+Explore our [exchange insights](#exchange-insights) section to dive deeper and learn more.
+
+## File Lines
+
+<img
+  className="block dark:hidden"
+  src="/assets/images/insights-hub-adstxt-filelines--light.png"
+  alt="Shows the file lines chart in the ads.txt insights report"
+/>
+<img
+  className="block dark:block"
+  src="/assets/images/insights-hub-adstxt-filelines--dark.png"
+  alt="Shows the file lines chart in the ads.txt insights report"
+/>
+
+Our tool allows you to review all the lines that exist in your ads.txt, listing them each out by type to form the makeup of the entire file. This insight highlights the count and percentage split of these lines to help drill down where improvements can be made to reduce your file, which not only can increase performance, but can directly boost your revenue.
+
+When we crawl the ads.txt. we look for the following:
+
+#### Required lines
+
+These refer to the required lines provided by the demand sources you’ve included in your ad stack, or via any included third party ads.txt lines added under your [publisher settings](/publishers/settings#third-party-adstxt-requirements).
+
+When working directly with us, these should be all you need to get setup and working with no fuss.
+
+#### Untracked lines
+
+These lines are regarded as exchange or variable declaration lines that fall outside of the required lines derived by Fusion. These may include legacy lines left over from previous inventory that now lay dormant.
+
+<Warning>
+    **Laying dormant**
+
+    Dormant lines can pose a serious risk where former partners that are no longer being worked with can access and resell inventory without your knowledge or permission. [Learn more](#number-of-exchanges-pros-cons)
+
+</Warning>
+
+[Follow our guidance](/publishers/settings#third-party-adstxt-requirements) on how to add **active** third party ads.txt lines so they become tracked through Fusion.
+
+#### Duplicates
+
+These include any exchange or variable declaration lines that appear more than once across the file. There are many factors that might cause this to happen, from unauthorised reselling of seller inventory to simple copy-paste mistakes. Whatever the reason, the presence of duplicates may expose a publisher to risk and is a clear indicator that the file isn’t being properly managed.
+
+Using our validation tool, we make it easy to identify these so that you can start getting your ads.txt ‘ship shape'.
+
+#### Comment lines
+
+Comments are optional lines that are useful to help identify blocks of inventory in your ads.txt. These won’t be crawled, however you should be aware that overuse will bloat your file which if not careful could add to latency or load issues.
+
+#### Empty lines
+
+Although empty lines are valid, it is recommended to use these to break up blocks of inventory when needed. This will help to keep the file shorter and quicker to crawl, avoiding weighty files which can impact latency and performance - which may affect overall revenue.
+
+## Your ads.txt file
+
+The next section allows you to drill down and analyse the areas of your ads.txt file in greater detail. It’s purpose is to provide actionable details covering validation of your file to highlighting what lines are required, missing or untracked.
+
+A replicated version of your ads.txt file is presented in a coded text block, allowing you to explore the individual lines, colour coded to match the validation and requirements throughout.
+
+<img
+  className="block dark:hidden"
+  src="/assets/images/insights-hub-adstxt-yourfile--light.png"
+  alt="Shows the detailed breakdown of an ads.txt file line by line in the ads.txt insights report"
+/>
+<img
+  className="block dark:block"
+  src="/assets/images/insights-hub-adstxt-yourfile--dark.png"
+  alt="Shows the detailed breakdown of an ads.txt file line by line in the ads.txt insights report"
+/>
+
+### Features
+
+- Last crawled date to highlight the last time your ads.txt file was analysed <span className="num-ref">1</span>
+- Scrollable code view <span className="num-ref">2</span>
+- Colour coded validation lines with hoverable chips to indicate corresponding line references (duplicates) <span className="num-ref">3</span>
+- Untracked line indicators (<span style={{color:'#ff9800', fontSize:'40px', lineHeight:1, verticalAlign:'middle'}}>&bull;</span>) <span className="num-ref">4</span>
+- Missing lines button - launching a modal to copy missing lines in one go <span className="num-ref">5</span>
+- Instructions on how to add in third-party requirements through the [publisher settings](/publishers/settings#third-party-adstxt-requirements) to track untracked lines within Fusion <span className="num-ref">6</span>
+- Start from scratch button - launching a modal to copy only the required lines to easily replace your ads.txt content in one hit <span className="num-ref">7</span>
+
+### Validation
+
+Invalid, duplicate or incorrect lines in an ads.txt file can lead to unauthorised ad sales, increasing ad fraud risk, blocking or misdirecting legitimate ads. All leading to lost revenue for you the publisher, and wasted spend for advertisers.
+
+Our validation tool helps to highlight these issues and provide clear feedback on where to clean up your ads.txt file. We look for the following:
+
+- Duplicated lines
+- Duplicate variable declarations
+- Invalid relationship types that don’t match either DIRECT or RESELLER
+- Lines that don’t correctly include all required parts (ad exchange, account ID, relationship type)
+- ID’s that are not correctly formatted (letters and numbers)
+
+### Requirements
+
+Based on the requirements for each publisher, we are able to determine between what lines are required, which are missing and which ones are untracked.
+
+Here we are analysing the lines to check each type, highlighting corresponding lines and providing actions to help fix any issues.
+
+#### Required lines
+
+Lines that are correctly present in the ads.txt, highlighted in green in the code view.
+
+#### Missing lines
+
+Lines that are in the requirements but appear to be missing from the ads.txt lines. To ensure revenue is not lost, it is important to review these and add them as soon as possible.
+
+A "LET’S FIX IT" button will enable you to launch a modal where the missing lines can be easily copied, ready to drop into your ads.txt file.
+
+#### Untracked lines
+
+Highlighting (<span style={{color:'#ff9800', fontSize:'40px', lineHeight:1, verticalAlign:'middle'}}>&bull;</span>) any lines that fall outside of the required lines.
+
+## Exchange Insights
+
+The exchange insights gather together all the found exchange lines from your ads.txt and match them against the required lines determined from our ad demand integrations with various SSPs, or via entered third party ads.txt requirements.
+
+From this, we are able to determine the source of each exchange, the relationship between direct vs reseller lines, along with highlighting all the [untracked](#untracked-lines) lines that fall outside of our known ad demand partners.
+
+<img
+  className="block dark:hidden"
+  src="/assets/images/insights-hub-adstxt-exchange-insights--light.png"
+  alt="Shows a table with exchange data broken out in the ads.txt insights report"
+/>
+<img
+  className="block dark:block"
+  src="/assets/images/insights-hub-adstxt-exchange-insights--dark.png"
+  alt="Shows a table with exchange data broken out in the ads.txt insights report"
+/>
+
+This information can be valuable in providing additional details about where your inventory is coming from and what relationships they are. The key information that can be taken from this includes:
+
+- Highlighting potential bloating of ads.txt file through unnecessary inventory.
+- Indicating possible multiple paths to the same inventory.
+- Exposing multiple direct relationships for the the same exchanges.
+
+<Tip>
+    **Make a positive impact**
+
+    Addressing these key points can have a huge impact not only on improving revenue, but driving a more sustainable pathway to reduce energy consumption, operational overheads and your carbon footprint.
+
+</Tip>
+
+#### Features
+
+- The table is grouped by exchange but can be grouped by other columns.
+- Aggregation provides total counts for total/direct/reseller values.
+- The table provides filtering, sorting, and pagination.
+- Export functionality of the data to .csv, excel or print.
+- The "VIEW LINES" button provides insight into the corresponding lines from the ads.txt file.
+
+#### View lines
+
+Under each source row, a "VIEW LINES" link will allow you to open a modal view that shows each direct and reseller line for the selected source.
+
+<img
+  className="block dark:hidden"
+  src="/assets/images/insights-hub-adstxt-exchange-insights-modal--light.png"
+  alt="Shows a modal presenting the lines that correspond to the given exchange in the ads.txt insights report"
+/>
+<img
+  className="block dark:block"
+  src="/assets/images/insights-hub-adstxt-exchange-insights-modal--dark.png"
+  alt="Shows a modal presenting the lines that correspond to the given exchange in the ads.txt insights report"
+/>
+
+Each line directly corresponds to the line from your ads.txt file for easy cross-referencing.<sup>\*</sup>
+
+<sup>\*</sup>Note: Duplicate lines are not excluded and will appear in the total
+counts and returned viewed lines.
+
+### Number of exchanges: Pros & cons
+
+Modern ads.txt files can contain anything from a handful to thousands of exchanges, but what are the pros and cons of having more or fewer of these exchanges in the mix?
+
+Benefits of having more unique exchanges include:
+
+- Reducing dependance on any single source by providing a wider range of supply sources and benefiting from a broader reach.
+- Increasing competition amongst bidders which can result in driving up CPM’s.
+- Reducing ad fraud through careful selection of reputable exchanges and greater transparency of who is selling the inventory.
+- Potential of targeting opportunities in more specialised niche markets.
+
+Disadvantages of having too many or duplicated exchanges include:
+
+- Slowing down of the verification processes from duplicated ad exchanges can impact real-time bidding and ad-placements, negatively impacting the effectiveness of the overall supply chain.
+- Impact on sustainability, with added resources/processes and lengthy supply chains all leading to unnecessary energy consumption and operational costs.
+- Increased likelihood of same exchange partners having both direct and reseller relationships, which can lead to bidflation and adding confusion for publishers to determine the legitimate and true source of the inventory.
+- Multiple paths to the same inventory decreases transparency in the ad buying process, whilst creating inefficient bidding as the result of advertisers potentially bidding against themselves through different resellers. This ultimately can impact publisher revenue through lost trust and shift in buyer spend through other cost-effective options.
+- Diluting the overall quality of your ad inventory through the presence of possible lower quality exchanges, potentially decreasing CPMs and advertiser interest.
+- Increased complexity, with greater time management and resources required, along with introducing a higher risk of mistakes, outdated information and errors which can all lead to revenue loss and reduced trust.
+
+## Common Implementation Errors
+
+Here are some key common implementation errors that can be easily overcome through some simple checks and setup. Ads.txt 1.1 provides in-depth [documentation](https://iabtechlab.com/wp-content/uploads/2022/04/Ads.txt-1.1.pdf) on these.
+
+#### Serving through HTTPS
+
+To ensure all crawlers can crawl your ads.txt, making sure your domain is properly encrypted and served as HTTPS rather than HTTP.
+
+#### Missing ads.txt
+
+There can be a few reasons why your ads.txt might appear missing.
+
+- **Its simply missing**
+
+  Make sure your ads.txt is being uploaded to your server.
+
+- **Sub vs Top-domain**
+
+  Crawlers will typically only look for your ads.txt on the top domain. Make sure it doesn’t sit in a sub domain such as ‘www’ without proper redirects in place.
+
+- **Wrong file location**
+
+  Make sure your ads.txt file location is in the **root** directory of the domain and not nested in other folders.
+
+#### Incorrect file format
+
+In order for your ads.txt to be served as the correct Content-type: `text/plain`, the file needs to be formatted and saved as a .txt file.
+
+All other formats can prevent crawlers and systems from finding it, resulting in lost trust, increased fraud vulnerability and lost revenue.
+
+Causes for incorrect file/content types could include:
+
+- Misconfiguration or default content-types on a server level (e.g. not configured to serve file types such as text/plain).
+- Redirection or Rewrite rules incorrectly setup/returning as HTML.
+- 404 page served for missing files which will be present as an HTML file.
+- Saving the file as a different file type.
+- Caching old version of the file after changes are made.
+
+## Further reading
+
+If you’d like to find out more information about what ads.txt is, coding standards, formatting, or general best practices: check out these usual sources:
+
+- [IAB Ads.txt 1.1](https://iabtechlab.com/wp-content/uploads/2022/04/Ads.txt-1.1.pdf)
+- [IAB Ads.txt implementation guide](https://iabtechlab.com/wp-content/uploads/2022/04/Ads.txt-1.1-Implementation-Guide.pdf)
+- [Forbes - How to avoid the pitfalls and loopholes of ads.txt](https://www.forbes.com/sites/augustinefou/2020/10/15/how-to-avoid-the-pitfalls-and-loopholes-of-adstxt/?sh=56a4ec535346)
+- [Bidflation, The Phenomenon Costing Publishers Millions](https://www.linkedin.com/pulse/bidflation-phenomenon-costing-publishers-millions-christopher-francia/)

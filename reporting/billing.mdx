@@ -1,0 +1,190 @@
+---
+title: "Billing"
+description: "Simple auto-generated invoices and billing processes"
+---
+
+<img
+  className="block dark:hidden"
+  src="/assets/images/billing--light.png"
+  alt="Preview of the billing page in Fusion"
+/>
+<img
+  className="block dark:block"
+  src="/assets/images/billing--dark.png"
+  alt="Preview of the billing page in Fusion"
+/>
+
+Billing can be found in the primary navigation of the platform. From here you can see your current month's estimate, your billing profile set up and your invoice history.
+
+## Profiles
+
+We allow the set up of two organisation billing profiles; one for paying out and one for collection.
+
+Payouts come from using the Content Ignite ad server within your publisher tags. Our demand fills the ad units and earnings get paid directly to us on Net30 terms, we then pass this on to you the publisher after applying our agreed revenue share.
+
+Collections come from using your own ad server (using our tech on a SaaS basis) or from using our contextual features where we charge you on a simple per-page-crawl basis.
+
+Your account allows you to use any combination of features you wish, you can use our ad server in some places, and your own in others! As you set up various use cases throughout the system, you will be prompted to set up the relevant billing profile if you have not done so already.
+
+### Processing Bills
+
+If you have a mixed set-up where both collection and payout profiles are required, we will calculate the sum of what we owe you, and what you owe us each month. We will then make a single payment in the direction required.
+
+It is important you have both billing profiles in place if requested of you. While it might be the case that your payout total will always exceed your collection total (meaning you will never be charged), invoices can vary month by month and if we can not take payment your account may be disabled.
+
+## Currency Usage
+
+Currency is set as part of your payment setup (you can set the currency your dashboard is shown in separately). We are always looking to support as many countries/currencies as possible, so if you don't see yours on the support list, please do [get in touch](https://resource.contentignite.com/support).
+
+Invoices will always be generated in GBP (our base currency) but will be paid out / collected according to your configured local currency, with the final exchange rate/amount details shown at the time of payment.
+
+## Fees
+
+You will not be charged fees for billing in your local currencies. Exchange values are taken at the time of payment and we use mid-market rates to ensure you get the truest value, no hidden nasties!
+
+You can check out current rates and subscribe to rate notifications here: [https://wise.com/tools/exchange-rate-alerts/](https://wise.com/tools/exchange-rate-alerts/)
+
+## Invoice Parent
+
+If your organisation is configured with child organisations, you can enable "Invoice Parent" on each child. This will mean that the invoice and subsequent payment will be made to you, and not directly to the child.
+
+This trickles down to all children. For example, consider the following setup:
+
+```
+    Parent Organisation (you)
+    ├── Child 1
+    ├── Child 2
+         └── Child 3
+```
+
+If you enable pay parent on child 2, you will receive invoices and payment for all publishers under child 2 and child 3.
+
+This setting removes all payment setting screens from the child. They will however still see their reporting and will be told that payment will be directed to their parent organisation.
+
+## Collection - SaaS
+
+SaaS fees are calculated off of impressions served.
+
+SaaS pricing is tiered, meaning if you cross a certain ad impression threshold, the CPM cost decreases. This means that reporting partway through the month may show a higher CPM which may decrease throughout the month as more impressions register under a cheaper tier.
+
+Ad impressions are totals at the liable parent organisation level, for example, if you have one parent organisation and multiple child organisations that are all configured to "Invoice parent", then the total ad impressions across all child organisations are used to calculate cost. This ensures you get the best rate through use of the higher impression pricing tiers.
+
+### Supported Currencies
+
+The following currencies are supported for payment collection:
+
+| Code | Currency             |
+| ---- | -------------------- |
+| AUD  | Australian dollar    |
+| CAD  | Canadian dollar      |
+| DKK  | Danish krone         |
+| EUR  | Euro                 |
+| GBP  | Pound sterling       |
+| NZD  | New Zealand dollar   |
+| SEK  | Swedish krona        |
+| USD  | United States Dollar |
+
+If your currency is not on the above list, please [reach out](https://resource.contentignite.com/support) to us as manual invoicing is available on request.
+
+## Payout - P&P
+
+Earnings from the use of Content Ignite demand is paid based on an agreed revenue share. For example 85/15 where the larger amount (85%) goes to you, the publisher. You will see the revenue share applied in reporting for the `Net revenue` and `RPM` fields.
+
+### Supported Currencies
+
+The following currencies are supported for the payout of earnings:
+
+| Code          | Currency                    |
+| ------------- | --------------------------- |
+| AED           | United Arab Emirates dirham |
+| AUD           | Australian dollar           |
+| BGN           | Bulgarian lev               |
+| CZK           | Czech koruna                |
+| DKK           | Danish krone                |
+| EGP           | Egyptian pound              |
+| EUR           | Euro                        |
+| GBP           | Pound sterling              |
+| GEL           | Georgian lari               |
+| GHS           | Ghanaian cedi               |
+| HKD           | Hong Kong dollar            |
+| HRK           | Croatian kuna               |
+| HUF           | Hungarian forint            |
+| IDR           | Indonesian rupiah           |
+| ILS           | Israeli Shekel              |
+| INR           | Indian rupee                |
+| KES           | Kenyan shilling             |
+| MAD           | Moroccan dirham             |
+| NGN           | Nigerian naira              |
+| NOK           | Norwegian krone             |
+| NZD           | New Zealand dollar          |
+| PLN           | Polish złoty                |
+| RON           | Romanian leu                |
+| SEK IBAN Only | Swedish krona               |
+| SGD           | Singapore dollar            |
+| THB           | Thai baht                   |
+| TRY           | Turkish lira                |
+| USD           | United States dollar        |
+| VND           | Vietnamese dong             |
+
+We are looking to support the following currencies in the future, if one of these is your currency, please [reach out](https://resource.contentignite.com/support) as we may be able to fast-track its integration!
+
+| Code               | Currency           |
+| ------------------ | ------------------ |
+| ARS                | Argentine peso     |
+| CAD                | Canadian dollar    |
+| CHF                | Swiss franc        |
+| CLP                | Chilean peso       |
+| CNY                | Renminbi           |
+| JPY                | Japanese yen       |
+| KRW                | South Korean won   |
+| LKR                | Sri Lankan rupee   |
+| MXN                | Mexican peso       |
+| MYR                | Malaysian ringgit  |
+| NPR                | Nepalese rupee     |
+| PEN                | Peru Sol           |
+| PHP                | Philippine peso    |
+| RUB                | Russian Rouble     |
+| SEK Direct Account | Swedish krona      |
+| UAH                | Ukrainian hryvnia  |
+| ZAR                | South African rand |
+
+## Billing Estimates
+
+For each active billing profile, you will see a running month estimate.
+
+Please note, this is just an estimate and does not take accurately into account exchange rates, as these are calculated at the time of invoice processing.
+
+## Net30
+
+We invoice on Net30 terms. We generate invoices on the 6th of each month, that are due 30 days after the 1st of that month (this allows for ad server deductions).
+
+For example, March's invoice would be generated on the 6th of April and will be paid out on the 30th of April.
+
+## Invoice History
+
+The invoice history table will show all the invoices we have issued, when they are due and the current status.
+
+You can click on an invoices description to view further details including a breakdown by publisher.
+
+For non-GBP currencies, you may see an invoice without an exchange rate, exchange rates are fixed once payment has been initiated, at which point the invoice will be updated to reflect this.
+
+### Invoice Life Cycle
+
+An invoice life cycle consists of many different stages, the explanation for which can be found below. If additional explanatory information is available for any given stage, it will be displayed via a little 'info' icon.
+
+| **Stage Name**           | **Description**                                                                                                |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------- |
+| `GENERATED`              | Generated internally, but has not been submitted to bank                                                       |
+| `MINIMUM_NOT_MET`        | The minimum payment threshold has not been met. We will attempt to re-process after the next invoice is issued |
+| `MISSING_PAYMENT_INFO`   | We don’t have payment details on file to even attempt a payment with                                           |
+| `PROCESSING`             | Processed and submitted to bank                                                                                |
+| `CONFIRMED`              | Confirmed by bank as successful                                                                                |
+| `PAID_OUT`               | Monies have been confirmed received                                                                            |
+| `CHARGE_BACK`            | Payment was cancelled and returned to you by your bank. We will attempt to set up a new payment request        |
+| `RESUBMISSION_REQUESTED` | We have resubmitted the payment request after a previous failure                                               |
+| `CANCELLED`              | The payment was cancelled (see reason). We will attempt to set up a new payment request                        |
+| `FAILED`                 | The payment failed (see reason). We will attempt to set up a new payment request                               |
+| `REFUNDED`               | We have issued a full refund<sup>[1]</sup>                                                                     |
+| `VOID`                   | We have voided the invoice, and it will not be reattempted                                                     |
+
+<sup>[1]</sup> Partial refunds will be issued via a new invoice.

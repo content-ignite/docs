@@ -1,0 +1,34 @@
+---
+title: "Publisher Tag Deployment"
+description: "Get your publisher tag to page once, and manage the rest inside Fusion"
+---
+
+There are two primary ways you can deploy our tag on your site; direct on page, or via an ad server.
+
+## 1. Tag-on-page - Recommended
+
+Direct tag on page deployment is the most flexible integration method, a “do it once and forget about it” option. By deploying directly on the page you can amend your units at any time inside our platform without making any changes on your end. This method also offers the quickest load speeds and minimises resources and impact on your site.
+
+You will be provided with a script tag during onboarding. It is as simple as inserting this tag in the `<head>` of your site after your CMP Stub.
+
+Learn more here: [Getting Started: Going Live](/getting-started/going-live)
+
+### Via WordPress plugin
+
+We offer a WordPress plugin for quick integration with WordPress sites, search for "Content Ignite" or follow this link: [https://wordpress.org/plugins/content-ignite/](https://wordpress.org/plugins/content-ignite/) to install the plugin. Activate the plugin, navigate to the settings page and insert your UID then save to activate.
+
+### Via a 3rd party service or Ad Server
+
+You can also use a service such as Google Tag Manager to deploy our script. Or serve our tag onto your page via a “1x1 unit”, from your ad server, for example through GAM. This will add a slight delay to the initial loading of ads but maintains the other benefits of a direct deployment.
+
+"Ad Server Integration" code is available on each publisher page, along with "Tag-on-page Integration" for easy reference.
+
+## 2. Ad Server - Single-serve unit
+
+Note: Serving multiple units to your page via this method increases the resource demand. If you require multiple units, consider the much more flexible and efficient “Tag-on-page” method detailed above.
+
+If you need to load a single unit, via an ad server, sandboxed in an iframe and targeted by your ad team, you can do so by adding our tag as a custom creative.
+
+In these cases, and in addition to the script tag, we will provide you with a `div` to include.
+
+Simply include these two elements in a custom creative and serve accordingly.

@@ -1,0 +1,66 @@
+---
+title: "Audiences & Segments"
+description: "Build audiences right from within Fusion"
+sidebarTitle: "Overview"
+---
+
+<img
+  className="block dark:hidden"
+  src="/assets/images/audiences--light.png"
+  alt="Preview of audience enablement in Fusion"
+/>
+<img
+  className="block dark:block"
+  src="/assets/images/audiences--dark.png"
+  alt="Preview of audience enablement in Fusion"
+/>
+
+Audiences &amp; segments allow you to filter your contextual data along with other publisher filters such as IAB category, to build a targetable pool of users that an advertiser can then buy against.
+
+This is an incredibly powerful feature, allowing you to dice up your publisher in a way that can make it highly attractive to an advertiser, opening up high CPMs and all from simply having our single publisher tag on the page!
+
+## Concepts
+
+### Segments
+
+A segment is simply a group of filters that you've defined. This could be a segment for "Volvo Cars", where you have selected filters for a contextual category of "Automotive" and contextual terms of "Volvo v70", "Volvo v60" etc.
+
+A segment can include another segment. How you structure things is completely down to you and your requirements.
+
+You could, for example, build a segment for General Motors and include all Cadillac and Chevrolet related terms. Alternatively, if you could see yourself selling to Cadillac and Chevrolet separately in addition to General Motors, build a separate segment for Cadillac and Chevrolet, and then build a third segment for General Motors that includes both the Cadillac and Chevrolet segments within it. In this example, the outcome of the "General Motors" segment is identical, but both methods use a different structure.
+
+### Audiences
+
+An audience is simply a segment that can be pushed into the ad server to make it available to advertisers.
+
+You will get an overview of an audiences reach, the publishers that are included in it, and the option to enable or disable it at any time.
+
+In the same way as described above, where segments can be structured how you see fit, audiences are the same. You can build your re-usable segments and then as a final step, include them in an audience ready to be enabled. Or you can skip using segments altogether and build in all your fitters directly into an audience. The net result would be the same, but if you see yourself building a lot of similar audiences, then using segments might just save you some time.
+
+## Management
+
+You can create a new audience from the "New Audience" button on the main audience page.
+
+From this page, you can also navigate to segments, and view your list of existing audiences.
+
+When creating a new audience, the title and description fields are the first fields you will see, these are for your own internal reference only, and are also present for segments. The only extra fields you will find in an audience (compared to a segment) are `Key` and `Value`. These fields allow you to control how the audience will be seen inside the ad server.
+
+You will then see a list of available filters. As you select filters the estimated reach figure will update, along with the other filters. This is an interactive way of building an audience and seeing how various filters affect the reach as you get more and more targeted.
+
+When you save an audience, you will be taken to an overview page where you can see that audience's monthly reach, monthly impressions and its impressions over time (this gives you a great insight into how the audience is trending).
+
+You will also see a breakdown by publisher for full transparency on where the filtering falls across your network.
+
+### URL Path Filter
+
+If your site follows a logical nested URL structure like `https://exampleblog.com/category/dogs/best-dog-breeds`, you can segment the URL path to group any pages under `/category/dogs` with the topic of "dogs".
+
+For more information about what you can enter in this field, see our [URL Path Targeting guide](/publishers/tag-targeting#wildcard-matching), the URL path targeting field works in exactly the same way allowing the use of wildcards to match path patterns flexibly and easily.
+
+## Enablement
+
+Enabling an audience is as simple as clicking a button. Once enabled, every time a user visits a page on your publisher's site that matches that audience, the audience will be passed to the ad server as part of our ad request.
+
+New page crawls will be automatically checked for matches against existing audiences, to ensure your audience stays up-to-date.
+
+An Audience becomes a live entity, constantly updated and constantly checked against for page matches before an auction takes place.

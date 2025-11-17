@@ -1,0 +1,143 @@
+---
+title: "Integrating Ad Servers"
+description: "The all important ad server, the minimum needed for a complete ad stack"
+---
+
+The role of an ad server is host the final ad auction, which ultimately decides which ad creative will be served to page. Ad servers allow the connection in of multiple demand partners, as well as the ability to traffic direct campaigns.
+
+By default, all accounts get access to Content Ignites P&P Google Ad Manager account. This comes preloaded with a number of great performing demand partners and is optimally set up to deliver the highest yields for our partners. Additionally, we have a team of Ad Operation experts that are always monitoring and optimising our set up, and our GCPP status grants us access to certain restricted features and functionality along with direct access to the Google team to ensure we get the best out of GAM.
+
+## Google Ad Manager (GAM)
+
+By connecting to your own GAM account, you can choose to use our tech for its high-impact ad formats and our easy-to-use management and reporting platform while remaining in complete control of demand.
+
+<Warning>
+  **Requested access**
+
+    Google Ad Manager currently only has a single level of access that a platform can request from a user, and that is complete access to an account.
+
+    Unfortunately, this makes it seem that we are accessing more than we require, but there are currently no other options. What we actually do with our access is explained below
+
+</Warning>
+
+You have two connection types to choose from when connecting to GAM:
+
+1. **Reporting & Management (recommended)** -- This option allows us to create all the ad units needed for our ads to serve, shortcutting a chunk of manual work by your team. Each new ad unit you create in our platform can then be created in your GAM as needed. We will also handle the complex MCM flow and site approval process, all requirements of Google to allow the serving of ads; you can therefore be confident that once everything is ticked off in our onboarding UI, that you are 100% set up to successfully serve ads. We will also pull in your reporting data each morning, allowing you to see everything in one place inside our platform blended with our own reporting data.
+
+2. **Limited** -- Would you rather keep our access to the bare minimum? No problem. We will not pull any reports or attempt to automate any part of your account set up other than syncing the required ad units. You will continue to see basic summaries of ad impressions per ad unit for billing but will still benefit from the time savings of ad unit set-up.
+
+### What exactly do we do inside your GAM account?
+
+As part of our core "Limited" integration, we create ad units. That's it. Our tag requires a parent ad unit (often the domain name of the publisher) and child ad units of a certain set-up. For example, we need a child unit for each config such as `ci-cid-1234` where `1234` is the config id. These must be present with correct naming to work.
+
+As simple as this sounds, we do all this intelligently and efficiently. Our integration works tirelessly behind the scenes to ensure that upon every change you make, the required GAM units are present and correct so your publisher tag can serve ads without issue.
+
+What we do not do is touch anything to do with ad serving, you can attach your own placements as needed and target demand in any way you see fit to ensure your partnership with Content Ignite does not affect the processes you already have in place as an organisation.
+
+Opt for our full integration, and benefit from even more automation:
+
+1. **MCM automation (GAM360 only)** -- You and your customers will be able to trigger Googles Multiple Customer Management (MCM) flow. This is a required link between you and your customer for non-owned sites. It tells Google that the publisher has granted you permission to monetize their site. This involves creating a company in your GAM and sending out an invite to your publisher. The publisher then needs to accept the invite.
+   Our full integration allows a user to send the invite to themselves and handles the set up in your GAM automatically, setting the required MCM id at the ad stack level on completion and submitting the seller_id in order to complete the supply chain object (part of the ad industries bid transparency specification and required by many partners).
+   That's a lot of steps that you'd have to remember to avoid disruption to ad serving!
+
+2. **Site approval** -- Once MCM is complete (if applicable), the publishers domain needs to be submitted and approved by Google. MCM acceptance is detected automatically and site submission is handled immediately, no input needed! Your publisher will be informed of the status of this process through out, including any issues that arise so you can work through it with them
+
+### Targeting demand
+
+It is critical that you target demand in some way, to allow ads to show. This can be done by targeting line items to the parent ad unit, or by assigning the units to placements and targeting those. There are many ways to target demand that ultimately comes down to preference and the way you have structured your GAM. The method does not matter (one of the many benefits of Content Ignite SaaS), so long as it is in place.
+
+### SaaS without GAM Integration
+
+For those with trust issues (we get it, especially given Google's open access roles), you can opt for the fully manual route. Where the set-up of ad units is left to you and your Ad Ops team.
+
+#### Unit hierarchy
+
+Ad unit set up can take two forms:
+
+1. A single unit - This is simple to set up, but limits your reporting
+2. A child unit for each tag config - By far the best set up, but without the API integration, it could be time consuming to implement
+
+Our tag will always take the given parent ad unit you provide, and attempt to fetch from the child unit named after the tag config that target matched against it. For example, if you have an in-image unit set up via config 678, we will attempt to call, for example: `/1234/example.com/ci-cid-678`
+
+If that child unit is not found in your GAM account, Google will assume serving from the next parent up: `/1234/example.com/`. This means you can get away with a simple set up, but you do forfeit reporting down to the tag config level (which might be fine if you are only running one unit with us).
+
+#### Limitations
+
+Be warned that as we roll out new features, GAM setup requirements may change and you will need to make changes to accommodate this. Additionally, we can not provide support to these types of setups.
+
+By going down the manual route, you will lose out on:
+
+1. Being able to enter ads.txt requirements and having our system inform publishers of missing lines as well as seeing a network-wide health report on ads.txt completeness
+2. Having units sync automatically as new tag configs are added (ensuring ads always have what they need to serve to the page while efficiently only creating units that we know will get used)
+3. Having unit requirements update automatically as new features and units are rolled out
+4. Auto-synchronisation of audience keys
+5. The full support of our expert team to help if any issues do arise
+6. Speedy single platform rollout of new publishers
+7. MCM handling
+8. Site approval handling
+9. AI Dynamic Floors
+
+### GAM Set-up
+
+We don't require much in the way of set-up in your GAM account, other than the parent ad unit, you are left to target demand in any way you see fit!
+
+One requirement to consider is native ads inside our adhesion and in-image units:
+
+#### Native Templates
+
+To prevent large native ads from rendering inside your adhesion or in-image unit, you need to limit the sizing via native templates inside your GAM. These are targeted to just Content Ignite placements, so they won't affect your wider network.
+
+The steps are as follows:
+
+1. Inside GAM, head to Delivery > Native
+2. Click “New native ad” and select “Single ad"
+3. Select “Guided design editor"
+4. Select ad size “728x90” and click continue
+5. Click continue again
+6. Use the inventory section to target just the Content Ignite in-image inventory (in-image and adhesion placements if used)
+7. For device category, select Desktop and Tablet
+8. Name the template at the top of the page (e.g. Content Ignite Native In-Image - Desktop)
+9. Hit “Save and activate"
+10. Repeat steps once more, but this time select “320x50” for the size and “Smartphone" and "Feature phone" for the device category
+
+#### Video
+
+Our video instream unit is built for pre-, mid- and post-roll ads only and does not support display "bumper" ads. Ensure "Inventory format” is set to "In-stream video and audio” only inside your line-items.
+
+#### Line Items (Prebid)
+
+If you are using prebid demand, you will need to set up various price priority line items to allow prebid bids to compete and potentially serve to page. Prebid offers a tool that simplifies this process as the setup would be very time-consuming to do manually: [https://docs.prebid.org/tools/line-item-manager.html](https://docs.prebid.org/tools/line-item-manager.html).
+
+What will this tool do we hear you ask? It will create a single order which will act to serve all incoming Prebid bids via key-value targeting. Under this order will be a number of price "bucket" line items, then within each line item will be a number of creatives that serve a small script whose job it is to tell Prebid that it won and that it can serve the creative to page.
+
+It may all sound a little complicated (and it is), but the Content Ignite wrapper takes care of the technical implementation and the Prebid tool helps you set up the order, line items and creatives inside your GAM as a one-time set it and forget it task.
+
+Our recommended setup is to use the "dense" option, which creates 424 line items with 5 creatives under each (not something you want to do manually). The config file we used with the tool to set up our own GAM can be found here for your reference: [https://cdn.tagdeliver.com/assets/prebid-line-item-tool.yml](https://cdn.tagdeliver.com/assets/prebid-line-item-tool.yml).
+
+## Publisher Provided Signals
+
+Content Ignite will automatically push IAB-aligned contextual categories into GAM when contextual is enabled for your publishers. This makes actionable, privacy-focused data available at your fingertips!
+
+## MCM - Linked Account
+
+Googles Multiple Customer Management (MCM) is a required link between a GAM360 integration and an organisation for non-owned sites. It tells Google that the publisher has granted the integration permission to monetize their site.
+
+Don't worry if you do not have an existing GAM account to link to, the invite that gets sent out will allow you to create a new one or pick an existing one. This is a quick process to set up, and does not require any knowledge of GAM, in fact, once you have accepted the invite and set up your account, you needn't ever use it again.
+
+In the Content Ignite platform each organisation can link to a single MCM agreement, where each MCM agreement can link only to a single organisation.
+
+You can share an MCM connection through organisation hierarchy, child organisations will have the ability to select the parents MCM at the ad stack level, giving you the flexibility to structure your publishers as needed.
+
+MCM also ties in tightly with the Supply Chain Object (SCO), an industry technology aimed at increasing transparency in the bid request. More and more buyers will require this to be in place to bid, so it is highly important to have in place to protect from revenue loss.
+
+### How do we decide when and where to apply MCM?
+
+MCM is a requirement of GAM360 accounts, so if you are using Content Ignites ad demand, or connect in a GAM360 account for SaaS usage, you will need to have MCM in place.
+
+However, MCM only applies to non-owned sites. Under publisher settings you can mark a publisher as "Owned and Operated" (O&O) by a particular organisation. This gives us the ability to deduce the correct MCM requirements.
+
+For example, if you use Content Ignite demand, your site will not be marked as O&O by Content Ignite, so we know to apply MCM. If you were a SaaS user with organisation "X" connecting in their own GAM360 account, MCM would apply by default, but if O&O is also set to "X" then MCM can be bypassed as it does not apply.
+
+If there is MCM connected to the current organisation, and the parent organisation, you will be given the option to choose which applies via the integrations "Organisation Mapping".
+
+The current MCM connected to the logged in organisation can be viewed from the "Integrations" section. Selecting "Manage" allows users to send out a new invite to connect in a new MCM. Users who have owner access to an integration can change an organisations MCM link to any non-assigned MCM agreement via the "Organisation Mapping" section, where all tags will be updated accordingly.

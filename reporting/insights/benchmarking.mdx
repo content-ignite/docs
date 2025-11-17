@@ -1,0 +1,177 @@
+---
+title: "Benchmarking"
+description: "See how you compare with your cohort and the wider network"
+---
+
+<img
+  className="block dark:hidden"
+  src="/assets/images/insights-hub-benchmarking--light.png"
+  alt="Preview of the benchmarking insights report in Fusion"
+/>
+<img
+  className="block dark:block"
+  src="/assets/images/insights-hub-benchmarking--dark.png"
+  alt="Preview of the benchmarking insights report in Fusion"
+/>
+
+The Benchmarking Insights Hub is your go-to resource for understanding how your ad tech setup and performance compare with similar publishers and the wider network. By viewing your data alongside peer averages, you can see where you stand within your cohort and spot areas for growth. Comparing with the wider network also helps reveal broader market trends – helping you identify whether changes in performance stem from your own setup or wider shifts across the industry. Use these insights to make smarter, data-led decisions, optimise your ad operations, and get the most out of Fusion.
+
+## Benchmark Groups
+
+To give meaningful context to your comparisons, all metrics in the Benchmarking Insights Hub are evaluated across three benchmark groups. Each represents a different level of comparison, helping you understand your performance from multiple perspectives.
+
+- **Publisher**
+
+  That’s you! This represents data for the selected publisher in each section and always reflects aggregated figures based on your chosen filters.
+
+- **Cohort**
+
+  Shows averaged data from comparable industry publishers, giving you a reliable comparison that closely matches your audience and setup.
+
+- **Network**
+
+  Displays an average across all other active publishers in the CI network, helping you benchmark performance at a broader scale and spot wider market trends.
+
+## IAB Categories
+
+To link you with other publishers in the same industry — forming your cohort — we use the IAB Content Taxonomy. This standard method defines what your content is about by tagging your sites or sections with IAB categories (like Sports > Football or Tech > Mobile Phones). Doing this helps ensure your inventory is clearly understood across the industry and allows us to group you with similar publishers for more meaningful benchmarking and insights.
+
+## Key Features
+
+- **Benchmark groups** are colour-coded throughout, making it easy to see which data belongs to which group: <span style={{padding:'3px 10px', backgroundColor: '#c8e6c9', borderRadius:'16px', fontSize:'0.6875rem', fontWeight:400, color:'#000000'}}>Publisher</span> <span style={{padding:'3px 10px', backgroundColor: '#efebe9', borderRadius:'16px', fontSize:'0.6875rem', fontWeight:400, color:'#000000'}}>Cohort</span> <span style={{padding:'3px 10px', backgroundColor: '#eceff1', borderRadius:'16px', fontSize:'0.6875rem', fontWeight:400, color:'#000000'}}>Network</span>
+
+- Side-by-side comparisons include a <Icon icon="trophy" iconType="solid" size={20} color="#fbc02d" /> to highlight which benchmark group is performing the strongest.
+- As with most of our Insights Hubs, you can fully customise your view using the **Filters** drawer – select data sources, dimensions, and specific segments to drill down exactly what you need.
+- Related **Insights buttons** are placed throughout to explore data in more detail, keeping all your filters synced as you navigate onward.
+- All data is carefully aggregated for your selected date range, so you can compare performance without getting lost in overly complex views.
+
+&nbsp;
+
+To make it easier to explore and compare your data, we’ve organised the data into grouped areas, found within each tab. These include:
+
+## Experience
+
+The Experience section highlights the aspects of your ad setup that influence both how your site performs and how smoothly ads load compared with other benchmarks. These cover:
+
+### Latency
+
+Comparing the main [Latency](/reporting/insights/metrics#latency-stats) metrics we track against your cohort and wider network
+
+### Ad Density
+
+Surfacing benchmarks for [Mobile Ad Density](/reporting/insights/diagnostics#mobile-ad-density-publisher-issue) and [Heavy Ad Intervention](/reporting/insights/diagnostics#heavy-ad-intervention-publisher-issue), including threshold goals
+
+### Core Web Vitals
+
+Highlighting key user-centric [CWV](/reporting/insights/cwv#metrics-we-check) performance metrics and how these stack up in comparison
+
+## Performance
+
+The Performance section shows how effectively your ads deliver results, comparing key monetisation and delivery metrics against peers and the wider network to reveal how your setup performs and where to improve.
+
+### Revenue
+
+The Revenue section focuses on CPMs to provide a fair comparison across benchmarks, and is split into three areas:
+
+#### CPM
+
+CPM is a core revenue metric that provides a level comparison across benchmarks by normalising revenue, allowing you to fairly compare your performance against your cohort and the wider network.
+
+#### Revenue Opportunity
+
+The Opportunity section highlights how differences in CPM can translate into over or underperforming revenue. Using your impressions and benchmark CPMs, it visualises potential revenue gains or losses through clear bar charts – showing how even small CPM improvements can lead to measurable uplift.
+
+<img
+  className="block dark:hidden"
+  src="/assets/images/insights-hub-benchmarking-revenue-opportunity--light.png"
+  alt="Shows the revenue opportunity bar chart inside the benchmarking insights report"
+/>
+<img
+  className="block dark:block"
+  src="/assets/images/insights-hub-benchmarking-revenue-opportunity--dark.png"
+  alt="Shows the revenue opportunity bar chart inside the benchmarking insights report"
+/>
+
+#### CPM by dimension
+
+For a deeper dive, this configurable view lets you see how your top-performing dimensions compare. It also surfaces additional dimensions from your cohort and network that may not exist in your setup, highlighting potential growth areas to explore for boosting revenue.
+
+<Note>
+**Included demand**
+
+This section focuses on **Programmatic** ad demand only, excluding Direct and House campaigns. No other exclusion are made on this data (e.g. includes all unit types etc.)
+
+</Note>
+
+### Ad Delivery
+
+Through clear side-by-side charts, other metrics from your ad delivery performance is presented, including, [Ad Load Rates](/reporting/revenue#ad-unit-loads-vs-ad-requests-vs-ad-responses-vs-ad-impressions), Click Through Rate (CTR), [Fill](/reporting/revenue#unit-fill-vs-ad-server-fill-vs-fill) and [Viewability](/reporting/insights/diagnostics#viewability-publisher-issue).
+
+## Infrastructure Health
+
+The Infrastructure Health section highlights the key systems behind your ad setup, showing how well things like Ads.txt and consent management are configured and how they compare with peers and the wider network.
+
+### Ads.txt
+
+Every Ads.txt file can be uniquely configured, but comparing key metrics can reveal opportunities for improvement. We focus on two main areas:
+
+**Relationship Weighting**
+
+See how your percentage of **Direct** demand compares and if there's room to optimise your ad setup. [Learn more](/reporting/insights/ads-txt#relationship-types)
+
+**Unique Exchanges**
+
+Check whether you have a healthy balance of [unique exchanges](/reporting/insights/ads-txt#exchanges), and how this stacks up against your cohort and the wider network.
+
+<Note>
+  Winning here doesn’t necessarily mean your Ads.txt file is optimised and
+  error-free, so be sure to check out our [Ads.txt Insights
+  Hub](https://admin.contentignite.com/report/insight/ads-txt) for a full
+  report.
+</Note>
+
+### CMPs
+
+This view focuses on [CMP Rates](/reporting/insights/diagnostics#cmp-status-graph), showing how your performance compares with both your cohort and the wider network. Since your audience should be similar, outperforming peers with higher consent rates can be a key driver of stronger monetisation.
+
+Further reading on CMPs can be found [here](/getting-started/cmp-guide).
+
+## SSP Partners
+
+The SSP Partners section provides insight into how your SSP partners are performing, including overall [bid rates](/reporting/insights/ssp#glossary) and a detailed SSP-by-SSP breakdown. Comparing these metrics with your cohort and the wider network helps you spot gaps, identify top-performing partners, and uncover opportunities to optimise your bidding strategy.
+
+### Bid Overview
+
+The Bid Overview combines all SSPs in the mix to show how the bid stream flows across each benchmark group, highlighting which performs best based on win rate. The view follows the [bid funnel](/reporting/insights/ssp#the-bid-funnel) from requests through to winning bids, with [revenue efficiency](/reporting/insights/ssp#glossary) plotted for each group to identify the most effective SSP demand setup.
+
+<img
+  className="block dark:hidden"
+  src="/assets/images/insights-hub-benchmarking-bid-overview--light.png"
+  alt="Shows the bid overview funnel chart inside the benchmarking insights report"
+/>
+<img
+  className="block dark:block"
+  src="/assets/images/insights-hub-benchmarking-bid-overview--dark.png"
+  alt="Shows the bid overview funnel chart inside the benchmarking insights report"
+/>
+
+### SSP Rate Distribution
+
+This view uses scatter charts to plot each SSP by bid and win rates, with circle size representing bid volume. It helps you see how individual SSPs perform in your setup compared with your cohort and network, highlighting potential gaps and opportunities.
+
+### SSP Performance
+
+The SSP Performance section takes a closer look at each SSP in your mix, presenting key bid metrics – such as bid rate, win rate, bid value, win value, and revenue efficiency – across the publisher, cohort, and network benchmarks. Each SSP is shown as an interactive card, with bar charts visualising performance for quick comparison.
+
+You can sort the list by the metric that matters most to you, giving a clear, top-to-bottom view of how each SSP performs within your setup. Alongside your own partners, you’ll also see other high-performing SSPs from the cohort and network that aren’t currently in your stack – highlighting potential opportunities to expand and optimise your demand mix.
+
+<img
+  className="block dark:hidden"
+  src="/assets/images/insights-hub-benchmarking-ssp-performance--light.png"
+  alt="Shows the SSP performance cards inside the benchmarking insights report"
+/>
+<img
+  className="block dark:block"
+  src="/assets/images/insights-hub-benchmarking-ssp-performance--dark.png"
+  alt="Shows the SSP performance cards inside the benchmarking insights report"
+/>

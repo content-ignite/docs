@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "willow",
+  "theme": "almond",
   "name": "Content Ignite Docs",
   "colors": {
     "primary": "#F66F5E",
@@ -9,50 +9,209 @@
   },
   "favicon": "/favicon.svg",
   "navigation": {
-    "tabs": [
+    "products": [
       {
-        "tab": "Documentation",
-        "groups": [
+        "product": "Web",
+        "description": "Use of Fusion with our web based publisher tag",
+        "icon": "globe",
+        "tabs": [
           {
-            "group": "Getting started",
-            "pages": ["index"]
-          }
-        ]
-      },
-      {
-        "tab": "Guides",
-        "groups": [
+            "tab": "Documentation",
+            "groups": [
+              {
+                "group": "Getting started",
+                "icon": "rocket",
+                "pages": [
+                  "index",
+                  "getting-started/faqs",
+                  "getting-started/signing-up",
+                  "getting-started/first-publisher",
+                  "getting-started/first-tag-config",
+                  "getting-started/going-live",
+                  {
+                    "group": "Products & concepts",
+                    "pages": [
+                      "getting-started/saas-vs-pap",
+                      "getting-started/pro-vs-mapped",
+                      "getting-started/ad-units",
+                      "getting-started/ad-stack-examples"
+                    ]
+                  }
+                ]
+              },
+              {
+                "group": "Integrations",
+                "icon": "puzzle-piece",
+                "pages": [
+                  "integrations/index",
+                  "integrations/policy-centre",
+                  "integrations/ad-servers",
+                  "integrations/ad-demand",
+                  "integrations/ad-tech",
+                  "integrations/fallbacks",
+                  "integrations/analytics",
+                  "integrations/comms",
+                  "integrations/settings"
+                ]
+              },
+              {
+                "group": "Publishers & Tags",
+                "icon": "sitemap",
+                "pages": [
+                  {
+                    "group": "Publishers",
+                    "pages": ["publishers/index", "publishers/settings"]
+                  },
+                  {
+                    "group": "Tags",
+                    "pages": [
+                      "publishers/tag",
+                      "publishers/tag-deployment",
+                      "publishers/tag-configs",
+                      "publishers/tag-ad-stacks",
+                      "publishers/tag-targeting",
+                      "publishers/experiments",
+                      "publishers/js-api"
+                    ]
+                  },
+                  {
+                    "group": "Video",
+                    "pages": ["publishers/tag-video", "publishers/video-config"]
+                  }
+                ]
+              },
+              {
+                "group": "Audiences",
+                "icon": "people-roof",
+                "pages": ["audiences/index", "audiences/contextual"]
+              },
+              {
+                "group": "Orgs & Users",
+                "icon": "building",
+                "pages": [
+                  "organisations/index",
+                  "organisations/tag",
+                  "organisations/branding",
+                  "users/index"
+                ]
+              },
+              {
+                "group": "Reporting & Alerts",
+                "icon": "chart-line",
+                "pages": [
+                  "reporting/dashboard",
+                  "reporting/alerts",
+                  "reporting/revenue",
+                  "reporting/campaigns",
+                  "reporting/experiments",
+                  "reporting/billing",
+                  "reporting/api",
+                  {
+                    "group": "Insights Hub",
+                    "pages": [
+                      "reporting/insights/index",
+                      "reporting/insights/ads-txt",
+                      "reporting/insights/benchmarking",
+                      "reporting/insights/cwv",
+                      "reporting/insights/demand-mix",
+                      "reporting/insights/diagnostics",
+                      "reporting/insights/health-score",
+                      "reporting/insights/live",
+                      "reporting/insights/metrics",
+                      "reporting/insights/revenue-analytics",
+                      "reporting/insights/revenue",
+                      "reporting/insights/ssp"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
           {
-            "group": "Getting started",
-            "pages": ["index"]
+            "tab": "Guides",
+            "pages": [
+              "getting-started/cmp-guide",
+              "guide/glossary",
+              "getting-started/top-tips",
+              "publishers/tag-core-web-vitals"
+            ]
+          },
+          {
+            "tab": "API reference",
+            "openapi": {
+              "source": "openapi.json"
+            }
+          },
+          {
+            "tab": "Changelog",
+            "pages": ["change-log", "releases"]
           }
-        ]
-      },
-      {
-        "tab": "API reference",
-        "openapi": {
-          "source": "openapi.json"
+        ],
+        "global": {
+          "anchors": [
+            {
+              "anchor": "Website",
+              "href": "https://www.contentignite.com/",
+              "icon": "home"
+            },
+            {
+              "anchor": "Blog",
+              "href": "https://www.contentignite.com/blog",
+              "icon": "newspaper"
+            }
+          ]
         }
       },
       {
-        "tab": "Changelog",
-        "pages": ["changelog"]
+        "product": "Mobile SDK",
+        "description": "Use of Fusion with our mobile SDK",
+        "icon": "mobile",
+        "tabs": [
+          {
+            "tab": "Documentation",
+            "groups": [
+              {
+                "group": "Getting started",
+                "icon": "rocket",
+                "pages": ["app/index"]
+              }
+            ]
+          },
+          {
+            "tab": "Guides",
+            "pages": [
+              "getting-started/cmp-guide",
+              "guide/glossary",
+              "getting-started/top-tips"
+            ]
+          },
+          {
+            "tab": "API reference",
+            "openapi": {
+              "source": "openapi.json"
+            }
+          },
+          {
+            "tab": "Changelog",
+            "pages": ["change-log", "releases"]
+          }
+        ],
+        "global": {
+          "anchors": [
+            {
+              "anchor": "Website",
+              "href": "https://www.contentignite.com/",
+              "icon": "home"
+            },
+            {
+              "anchor": "Blog",
+              "href": "https://www.contentignite.com/blog",
+              "icon": "newspaper"
+            }
+          ]
+        }
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Website",
-          "href": "https://www.contentignite.com/",
-          "icon": "newspaper"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://www.contentignite.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
+    ]
   },
   "logo": {
     "light": "/assets/logo/ci-logo-light.svg",
@@ -87,5 +246,15 @@
     "socials": {
       "linkedin": "https://www.linkedin.com/company/contentignite"
     }
-  }
+  },
+  "redirects": [
+    {
+      "source": "/getting-started",
+      "destination": "/"
+    },
+    {
+      "source": "/faqs",
+      "destination": "/getting-started/faqs"
+    }
+  ]
 }

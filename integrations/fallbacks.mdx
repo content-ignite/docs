@@ -1,0 +1,38 @@
+---
+title: "Fallback Creatives"
+description: "When all demand sources have been exhausted, choose how you want to handle blanks"
+---
+
+Content Ignite tech will always push for maximum advertising yield, meaning the most revenue for the publisher. This means you will not see 100% fill and as a result, you will see the occasional blank ad.
+
+Blank ads are not an issue, and by design help improve revenue. We also find that ad ops teams and site owners see a greater number of blank ads, as behaviour detection see's frequent site visits with minimal ad interaction as an undesirable user group to serve ads to.
+
+That being said, you might want to capitalise on these blank slots and fill them with house ads, sending users to your merch shop or a newsletter sign up for example. This is where fallback creatives come in!
+
+## Fallbacks vs ad served campaigns
+
+For granular control of serving frequency, client bookings or prioritisation over programmatic ads, you should traffic campaigns via the ad server. For simple use cases where you'd like to serve something when no ad would otherwise be shown, fallbacks are perfect.
+
+## Fallback Types
+
+There are two core types, a simple "Image" creative, and the more custom "Script" creative.
+
+### Image Creatives
+
+Image creatives are just as you'd expect. Select the image fallback option and upload your image asset (you can also upload a copy at twice the size for high resolution screens). You'll need to provide a title for reference and a click through URL.
+
+Its as simple as that! Click tracking will automatically be applied, so you can report on it via your standard Fusion revenue report.
+
+### Script Creatives
+
+Script creatives allow a JS script file to be served to page. The contents of which is controlled and hosted by you. This could make additional calls to dynamically load assets for example. Content Ignite can not assist with the creation of script creatives, this will be the responsibility of the publishers development team.
+
+Set up of a script creative is as simple as providing a title and the URL to the remote JS file. You can also specify the size of creative that your script will load if applicable, this will ensure your script is not loaded in unit of mismatched size.
+
+Please note, we can not track clicks for script creatives, so will only report on the number of times it was served to page.
+
+## Usage and Weighting
+
+Usage of fallbacks is done via ad stacks (learn more here: [Publisher Tag Ad Stacks](/publishers/tag-ad-stacks)). Simply drag your fallback into the ad stack as needed.
+
+You can even drag in multiple fallbacks, where a random one will be chosen upon each empty ad response. To adjust how often each creative gets served comparative to each other, you can add an optional "weighting". This number weights creatives relative to each other, where if one creative is set to "1" and another to "2", the second creative will serve twice as much as the first (equally "15" and "30" would have the same outcome).

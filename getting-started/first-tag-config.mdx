@@ -1,0 +1,63 @@
+---
+title: "3. Creating your first ad unit"
+description: "A few simple settings to get you a fully functioning ad unit"
+---
+
+<img
+  className="block dark:hidden"
+  src="/assets/images/new-tag-config--light.png"
+  alt="Preview of publisher dashboard in Fusion"
+/>
+<img
+  className="block dark:block"
+  src="/assets/images/new-tag-config--dark.png"
+  alt="Preview of publisher dashboard in Fusion"
+/>
+
+The settings that describe the ad unit type (in-image, IAB etc), its behaviour and targeting are called "tag configs".
+
+[Get to know our ad units here](/getting-started/ad-units) if you haven't done so already.
+
+Tag configs can be combined in highly flexible ways to achieve the outcome you are looking for. For example, if you want in-image on mobile to target just the header image, but on tablet and desktop to target all article images, you can simply create two tag configs for in-image, one with mobile device targeting and the relevant image targeting, and the other for desktop and tablet.
+
+Things can get even more powerful still as we come to the first big decision; our ad server or yours?
+
+## Ad stack choice
+
+Ad stacks are powerful groupings of all the various pieces that make up the ad tech ecosystem. This could be as simple as a single ad server, or as complicated as header bidding, Amazon TAM, ad block recovery tech and custom fallback creatives all bundled together.
+
+We will get you started with the minimum requirement: a single ad server. To learn more about ad stacks, check out the page here: [Publisher Tag Ad Stacks](/publishers/tag-ad-stacks).
+
+### Ad Server
+
+You have two options for the ad server (the bit that hosts the final ad auction and is responsible for providing the ads to the ad units):
+
+#### 1. Use ours (Plug-and-play)
+
+By using our ad server, you can get up and running quickly and with minimal ad operations knowledge. Once approved, our team will manage your publisher's ad demand for you. The earnings will be paid out to you on industry-leading Net30 terms and publisher rev-share.
+
+Simply select the "Default Ad Stack (P&P)" and you are done. Auto-approval will follow shortly after.
+
+#### 2. Your Google Ad Manager (SaaS)
+
+Have your own GAM account and demand? You can connect your GAM account into Fusion and benefit from all our tech including our high-impact units, centralised reporting, contextual targeting and dynamic floors.
+
+Connect your GAM now over in the "Integrations" section or by clicking the "+" icon in the left-hand sidebar, it's quick and easy. [Learn more about integrations here](/integrations).
+
+Impressions served by this setup are charged on a CPM basis.
+
+#### 3. Hybrid
+
+There is a sneaky 3rd option, and that is to use both our ad server and yours! You can use our demand and yours in a first-look second-look set up, where, for example, if your ad server does not fill a request, the opportunity will be passed on to our ad server automatically. Additionally, if you want to control some geos and use us to serve others, that's easy too! Just connect to your ad server and choose the best fit for each tag config.
+
+## Tag Config
+
+Once you have made your ad server choice and connected in your GAM account if going for option 2, you can continue and set up your first tag config.
+
+Within your publisher, select the "Create Config" button and choose the ad unit you'd like (Adhesion is a great one to get started with).
+
+You will be taken to the tag config page, with various fields on display. The fields vary per ad unit type, but should all make sense and default to sensible choices for you.
+
+Our P&P ad stack is selected by default, but for SaaS users, you can change this by clicking the ad stack and dragging in your own integration. [Learn more about the GAM integration here](/integrations/ad-servers).
+
+Once you are happy with your settings, click "Save config".

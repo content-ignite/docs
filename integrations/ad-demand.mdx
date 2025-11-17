@@ -1,0 +1,96 @@
+---
+title: "Ad Demand Integrations"
+description: "Plug in demand beyond your ad server"
+---
+
+Ad Demand partners inside Fusion come under whats known as "Header Bidding". A technology that allows a secondary ad auction to take place before the final ad server auction.
+
+## Prebid.js
+
+Prebid.js is a open source client-side header bidding solution, and is widely used across the digital advertising landscape. It allows for a client-side auction to take place between configured SSPs. The winning bid is then sent to the ad server to compete with other server side demand sources.
+
+Header bidding adds auction pressure and can compliment your ad stack set up, but it does come with the overheads of additional client resource demands. Header bidding is known to impact CWV (learn more here: [Publisher Tag Core Web Vitals](/publishers/tag-core-web-vitals)), so it is important you don't overload header bidding with too many partners, and that the set up is optimised for your site.
+
+Making use of Prebid inside Fusion is a breeze. You can connect in your own SSP relationships if you have them, or you can make use of the relationships that Content Ignite have worked to put in place.
+
+Adding a partner into your stack is as simple as dragging it in during ad stack set up. No more headaches over the complexities of prebid setup and how it communicates with your ad server, no more weeks of development resource to get everything in place, just drag and drop!
+
+Fusion will take care of everything, from integration on page to reporting. Header bidding as it should be.
+
+## Prebid Server
+
+An extension of Prebid.js is Prebid Server, where the auction is moved from the client's browser to servers hosted by Content Ignite. This minimises one of the downsides of header bidding; client side resource usage. Instead of weighing down the client browser, the heavy lifting is handled by our servers instead.
+
+The great thing is, no additional set up is needed by you! Simply include any partners marked as "Prebid Server" into you ad stack as normal, we'll take care of the rest.
+
+Another complex set up, reduced to a single drag and drop action, bliss!
+
+## OpenWrap
+
+OpenWrap is a wrapper implementation of PreBid.js, provided by Pubmatic. As it uses Prebid.js at its core, it allows several additional demand partners to enter a client-side auction and can complement your ad stack setup as Prebid does. The built-in P&P integration is available to all publishers, but must be configured by the Content Ignite Ad Ops team to function.
+
+If you have your own Pubmatic account with OpenWrap configured, you can connect it in easily.
+
+Note; you can not run Prebid along with OpenWrap as they are alternative versions of the same thing. Content Ignite recommends direct usage of Prebid, as you get far more granular control inside Fusion (just think about the experiments you could run against different demand partners!).
+
+## Amazon Publisher Services (TAM/UAM)
+
+APS is another header bidding solution that runs a server-side auction via a client-side script before passing any winning bids to the ad server. The benefit here is direct access to Amazon's demand. As with Prebid Server, the client impact is minimal as the auction is hosted on Amazon servers.
+
+Control over the individual SSPs is not possible outside of the APS platform, so it is more comparable to a wrapper like OpenWrap where you drag it into your ad stack as a single entity. The default P&P integration provided by Content Ignite is available to all and has a number of key SSPs connected in, but will require approval for each publisher on a case-by-case basis.
+
+If you have your own APS account, you can connect it easily and control the SSP partners via your APS dashboard.
+
+### APS Reporting (SaaS)
+
+<Frame caption="Example of the required reporting set up inside the APS dashboard">
+  ![](/assets/images/aps-reporting.png)
+</Frame>
+
+Unfortunately, Amazon does not have a reporting API, and states that one "is not on the roadmap". This is frustrating as reporting APIs allow for easy and seamless integration. Instead, they offer "S3 exports" which requires you to configure a report that then gets hosted as a file on Amazon's servers, this can be accessed by us through the use of a report ID, key and secret.
+
+One limitation here is that Amazon expires tokens every 90 days, with no way to extend them or re-generate them as a client. This means going into Amazon's platform every 90 days, copying the key and secret and putting them into the Fusion platform. Not exactly slick, but that's all we have to work with!
+
+**Setting up the report:**
+
+Follow these steps to set up APS reporting if connecting your own APS account into Fusion:
+
+1. Create a new report in your APS dashboard here: [https://ams.amazon.com/webpublisher/analytics/custom_reports/new](https://ams.amazon.com/webpublisher/analytics/custom_reports/new)
+2. Select a date range of "Last 7 days"
+3. Set a schedule of "Daily" with delivery to "Export to S3" and a file format of "CSV"
+4. Select the following dimensions: `Date`, `Browser Family`, `Country`, `Device Type`, `Site Name`, `Slot Name`, `Slot Size`, `Bidder`
+5. Select the following metrics: `Impressions`, `Earnings`
+6. Click "Save"
+7. Enter the name "CI API Report" (or anything of your choosing)
+8. Back in your report list view, hover over the "View details" link on the report you just created
+9. Copy the report ID & version ID into Fusion; found under "S3 Location" e.g:
+   <pre wrap style={{ fontSize: "80%" }}>
+     s3://aps-reporting-web/aps-download-publisher-31d73d2c-90bc-4f2d-943e-7ad060d80ad4/reportId=
+     <span style={{ color: "red" }}>2b34794e-5b11-47d2-b8a8-17e6c4b5e726</span>
+     /versionId=
+     <span style={{ color: "red" }}>67b7934c-a387-49af-a815-ab5160072120</span>/
+   </pre>
+
+## Google Ad Manager Setup (SaaS)
+
+With any header bidding provider, winning bids need to be passed to the ad server to compete in the final auction. The complexities of this process are handled for you by Fusion, but does require that your ad server is set up to receive these bids.
+
+If you are using Content Ignites P&P Ad Server, nothing more is required from you. However, if you are using your own Ad Server, then read on.
+
+### Orders, Line Items & Creatives
+
+APS will connect to your GAM account and auto-populate it with all the require line-items it needs, however the same is not true of Prebid.
+
+Prebid requires you to manually set up the required orders, line items and creatives. This can be streamlined with the "Line item manager" tool provided by the Prebid project. This tool is not made by Content Ignite, so we can not be responsible for it use, more information can be found here: [https://docs.prebid.org/tools/line-item-manager.html](https://docs.prebid.org/tools/line-item-manager.html).
+
+One important part of the Prebid line item set up, is pricing granularity. This is how a bid at a certain price point gets rounded so that it is handled appropriately inside the ad server (a limitation of how GAM and Prebid work together). Pricing granularity can be set via the ad stack to whatever your preference is.
+
+### Header Bidding Trafficing (HBT) -- GAM360, Beta
+
+The point previously made about price-granularity, and its requirement due to the limited way in which Prebid and GAM interact is a problem that Google is working on via a new feature called HBT.
+
+This feature does away with the need to set up orders, line items and creatives as Google directly collects and handles the winning prebid bid.
+
+However, this feature is in Beta currently, and is only available to GAM360 users. If you do have a GAM360 account, details of how you can enable this feature can be found here: [https://support.google.com/admanager/answer/12273163?hl=en](https://support.google.com/admanager/answer/12273163?hl=en)
+
+Once enabled inside your GAM account, no other set up is needed. Fusion will automatically work with Prebid and Google to pass in bids as needed!

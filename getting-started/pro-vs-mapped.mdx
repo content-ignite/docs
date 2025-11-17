@@ -1,0 +1,59 @@
+---
+title: "Fusion Pro vs Mapped"
+description: "The same platform, different approaches to Ad Server mapping"
+---
+
+While there aren't actually different "tiers" to the Fusion platform, SaaS users do have a choice to make: allow Fusion to control ad units inside Google Ad Manager or not.
+
+Allowing Fusion complete control is what we refer to as Fusion "Pro". This grants you the most flexibility and access to everything that Fusion has to offer.
+
+That being said, some publishers have systems in place such as reporting or campaign booking, that depends on a static ad unit structure. For these publishers, allowing Fusion create new units is not an option. This is where Fusion "Mapped" comes in.
+
+## Mapped
+
+By default, Fusion creates all the GAM units it needs (one unit per publisher config). This is important as it ensures reporting connects up, especially for experiments where one config competes against another, requiring two GAM units. In Fusion "Pro" we use the GAM API to create units when you set up a config. This ensure that everything needed for ad serving and reporting is perfectly in place.
+
+In "Mapped", you must manually map each config to a unit that is already set up in GAM. This adds an extra manual step, which must be done correctly, as we do not verify the unit setup in your GAM when using this approach.
+
+## Hybrid
+
+The choice between "Pro" and "Mapped" doesn't have to be all or nothing. There is a hybrid option where any units you map will be "mapped", while any you leave unmapped will default to auto-created units.
+
+The major benefit here is that all your key units can remain in place, but if you want to quickly spin up an experiment, then you can do so while leaving Fusion to create the necessary units.
+
+Hybrid is actually the default option. You can map any unit in Fusion, and once mapped, it will prevent the system from auto-creating that unit. However, if left blank, it will default to its normal behaviour.
+
+## Feature Table
+
+|                                                    | Fusion “Pro” | Fusion “Mapped” |
+| -------------------------------------------------- | ------------ | --------------- |
+| Header Bidding Wrapper                             | ✅           | ✅              |
+| Dynamic Floor Technology                           | ✅           | ✅              |
+| Unified Reporting                                  | ✅           | ✅              |
+| Contextual                                         | ✅           | ✅              |
+| Dynamic Placements                                 | ✅           | ⚠️ via hybrid   |
+| Experiments                                        | ✅           | ⚠️ via hybrid   |
+| Ad Refresh                                         | ✅           | ✅              |
+| Ad Products                                        | ✅           | ✅              |
+| Insights hub                                       | ✅           | ✅              |
+| Ad Tech (ad block, CMPs) and Fallback integrations | ✅           | ✅              |
+| Site health + Alerts (inc Ads.txt checks)          | ✅           | ✅              |
+| Managed ID Solutions                               | ✅           | ✅              |
+| In-view tech                                       | ✅           | ✅              |
+| Mobile App                                         | ✅           | ✅              |
+| Audience Builder                                   | ✅           | ✅              |
+| One-to-many unit config relationship               | ✅           | ❌              |
+| Keep your GAM unit structure                       | ❌           | ✅              |
+| Keep your existing Google Publisher Tag setup      | ❌           | ❌              |
+
+## Integration settings
+
+The GAM integration in platform has several top-level settings that can ensure Fusion never creates units in your GAM if you want to prevent the hybrid option. These are:
+
+**Auto create parent ad unit?**
+If enabled (default), Fusion will create a new parent ad unit inside GAM each time you create a new Fusion publisher. This will use the domain name as the unit name.
+
+**Auto create child ad units?**
+If enabled (default), Fusion will create a new child ad unit inside GAM for each active config in Fusion. This will be placed under the parent unit defined under "Publisher Mapping".
+
+[Learn more about GAM integration settings here](/integrations/ad-servers#google-ad-manager-gam).

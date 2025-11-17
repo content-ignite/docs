@@ -1,0 +1,115 @@
+---
+title: "SSP Insights"
+description: "How hard are your SSP demand connections working for you?"
+---
+
+<img
+  className="block dark:hidden"
+  src="/assets/images/insights-hub-ssp--light.png"
+  alt="Preview of SSP insights report in Fusion"
+/>
+<img
+  className="block dark:block"
+  src="/assets/images/insights-hub-ssp--dark.png"
+  alt="Preview of SSP insights report in Fusion"
+/>
+
+The SSP Insights hub offers a detailed view of how SSP partners are performing within the programmatic bidding process. With clear statistical and graphical insights, you can visualise the bidding pathway, identify revenue streams, and analyse bid efficiencies at a granular level — helping you fine-tune your bidding strategy and maximise revenue.
+
+## SSPs and Programmatic Header Bidding
+
+In the Prebid ecosystem, Supply-Side Platforms (SSPs) connect publishers with demand sources, facilitating real-time bidding (RTB) to maximise competition for ad inventory. When a page loads, Prebid.js sends bid requests to multiple SSPs, which evaluate the opportunity and return bids. Prebid.js then processes these bids, passing the highest eligible one to the ad server (typically Google Ad Manager) for the final auction.
+
+By tracking key metrics like bid rate, win rate, and revenue, we are able to present this data on SSP performance and inform how to better optimise their setup. This could include prioritising high-performing SSPs or removing underperforming ones, refining demand strategies or adjusting floor prices.
+
+## The Bid Funnel
+
+The top-level view shows how ad requests flow through each stage, from the total bid requests through to winning bid amounts, highlighting both the value and percentage at each step. With publisher and date filters applied, you can easily track the progression of your bid requests down the funnel.
+
+Additionally the highest and lowest performers are highlighted, helping you identify which SSPs, or specific dates for a single SSP, could benefit from making strategic adjustments.
+
+<img
+  className="block dark:hidden"
+  src="/assets/images/insights-hub-ssp-bid-funnel--light.png"
+  alt="Shows a snapshot of the bid funnel stats show in the SSP insights report"
+/>
+<img
+  className="block dark:block"
+  src="/assets/images/insights-hub-ssp-bid-funnel--dark.png"
+  alt="Shows a snapshot of the bid funnel stats show in the SSP insights report"
+/>
+
+## Bid Rates
+
+The first graphical view breaks down each bid metric per SSP, alongside bid and win rates, allowing you to spot trends and compare performance.
+
+Understanding these metrics helps you identify which SSPs are driving the most engagement, where bid opportunities may be underperforming, and how efficiently bids are converting into wins.
+
+## Revenue
+
+Revenue is plotted for each SSP, showing win revenue against total bid revenue — both as an amount and percentage. An overlay of revenue efficiency helps publishers assess how well an SSP converts bid requests into actual revenue. This could be key to understanding the profitability of each SSP in the auction and reveal which partners are delivering the highest returns.
+
+## Data table view
+
+Alongside the graphical insights, the SSP Insights provides a fully exportable tabular view, allowing you to filter, sort, and analyse the data however you need.
+
+## Filter Options
+
+### Single SSPs
+
+In addition to viewing the overall and comparable SSPs together, our tool allows you to break down the data for a single SSP using the filter dropdown list. When viewing the SSP dimension, each graph will represent a breakdown of the bidding information by date, helping you spot trends for the selected SSP over time.
+
+### Multiple Dimensions
+
+Beyond breaking down data for SSPs, our Insights tool lets you explore bidding performance by device and country. This helps identify regions or platforms with the most potential, and highlights areas where filtering out underperforming configurations could be beneficial.
+
+### Further Fine-tuning
+
+Along with global filters for date and publisher, the SSP Insights also provides flexibility in presenting data. As with most revenue-based insights, you can view totals in both Gross and Net revenue. Additionally, you can switch between total values for the selected date range and average values.
+
+The total values provide a full picture of revenue generation, while average values highlight trends and performance stability, helping to identify areas for improvement or optimisation.
+
+## Glossary
+
+**Bid Requests**  
+The number of requests sent to SSPs for ad inventory.
+
+**Bids**  
+The number of bids received by SSPs in response to a bid request.
+
+**No Bids**  
+The number of bid requests where no bid was submitted. This is the difference between the total bid requests and the number of bids received.
+
+**Won Bids**  
+The number of bids that won the auction on the highest amount and were selected to display the ad.
+
+**Lost Bids**  
+The number of bids that were not selected in the auction. This is the difference between the total bids made and the won bids.
+
+**Bid Rate**  
+The percentage of bid requests that received at least one bid. (Bids / Bid Requests) \* 100.
+
+**Win Rate**  
+The percentage of bids that resulted in a win. (Won Bids / Bids) \* 100.
+
+**Bid Revenue**  
+The total amount of revenue generated from all bids submitted.
+
+**Won Bid Revenue**  
+The total amount of revenue generated from bids that were won.
+
+**Bid Value**  
+The amount of revenue associated with a single bid.
+
+**Win Value**  
+The amount of revenue associated with a winning bid.
+
+**Revenue Efficiency**  
+A percentage of the won bid revenue over the total amount of bid requests. (Won Bid Revenue / Bid Requests) \* 100,000.
+
+## Useful Resources
+
+- [About Prebid.js](https://prebid.org/about/)
+- [Prebid Server: Understanding Prebid’s Server-side Header Bidding](https://www.mile.tech/blog/prebid-server)
+- [How to optimize header bidding setup](https://docs.prebid.org/overview/how-many-bidders-for-header-bidding)
+- [The perfect mix of SSPs for Publishers](https://www.pubstack.io/topics/perfect-ssp-mix-for-publishers)

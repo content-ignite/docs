@@ -1,0 +1,103 @@
+---
+title: "JS API"
+description: "Our tag has a number of public methods for setting data and triggering actions"
+---
+
+<Warning>
+  **Cloudflare Rocket Loader Warning**
+
+    For any on page scripts using the Content Ignite JS API, it is important that you exclude the script from Rocket Loader (if used), which defers JS and in the case of the examples below, can prevent them from running altogether. Our JS API is a simple and fast way to queue the passing of information to our publisher tag, and as a result of the code not running immediately, has nil impact on page performance. [Read more](/getting-started/going-live#notes-on-caching-and-firewalls)
+
+</Warning>
+
+## Passing data to ID/Signal providers
+
+```ts title="Definition"
+.passSignalData(type: 'email'|'phone', value: string)
+```
+
+When passing us PI for use by id/signal providers, ensure you pass it on every page load that the PI is available.
+
+For email, the obvious one is on login and every page load while logged in, but a secondary important scenario is newsletter sign up! In this case, you are looking to pass the email address at every opportunity.
+
+<Note>
+  **Privacy**
+
+    It is worth noting that any PI passed through using this method never reaches Content Ignites servers. We do not store this data in any way, we simply act as the "pipes" to pass it to the ID vendors you've configured in Fusion, all handled client side.
+
+</Note>
+
+```js title="Example"
+window.__ciads = window.__ciads || { cmd: [] };
+window.__ciads.cmd.push(() => {
+  window.__ciads.passSignalData("email", "jamie@contentignite.com");
+});
+```
+
+## Setting targeting
+
+```ts title="Definition"
+.setTargeting(key: string, values: string | string[])
+```
+
+This method allows you to pass custom page targeting directly to our tag, this could be data returned by your CMS for example.
+
+<Warning>
+  It is against our terms of service, and Googles, to pass in Personal
+  Information via this feature, things such as email addresses, age, gender etc
+  are forbidden.
+</Warning>
+
+```js title="Example"
+window.__ciads = window.__ciads || { cmd: [] };
+window.__ciads.cmd.push(() => {
+  window.__ciads.setTargeting("tags", ["news", "politics"]);
+});
+```
+
+## SPA reloads
+
+```ts title="Definition"
+.reload()
+```
+
+Strictly for use in SPA's (Single Page Applications). This will cause a new page impression to register and all existing ads to be destroyed and re-built.
+
+```js title="Example"
+window.__ciads = window.__ciads || { cmd: [] };
+window.__ciads.cmd.push(() => {
+  window.__ciads.reload();
+});
+```
+
+## Tag Events
+
+For custom development, there are several JavaScript events that are triggered throughout an ads life cycle. You can hook into these as needed to perform additional follow-up actions.
+
+These are standard JavaScript events, available on the window the tag was deployed into.
+
+For example, for a direct tag-on-page deployment, you can listen to an event with the following:
+
+```js title="Example"
+window.addEventListener("ci_al", function (e) {
+  console.log(e.detail);
+});
+```
+
+Depending on the event, a `detail` object is returned with the following optional field:
+
+- `detail.config_id` - STRING - The id of the ad unit the event was triggered from
+- `detail.msg` - STRING - Further details of the event
+
+The following events are available:
+
+| **Event Name**          | **Description**                                                                                                                                                                                                                                |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Audience Push `ci_ap`   | Fired when an audience is matched and will be pushed into Ad Manager. Fired once per ad unit.                                                                                                                                                  |
+| Ad Impression `ci_ai`   | Fired when an ad has had a viewable impression (50% of the ad’s pixels are visible in the browser window for a continuous 1 second.)                                                                                                           |
+| Page Impression `ci_pi` | Fired once for each page once the tag has loaded                                                                                                                                                                                               |
+| Ad Unit Load `ci_aul`   | Fired once an ad unit has been loaded. Once user consent has been received (if applicable) and an ad has been served. For in-view units, this will be once the in-view event was detected.                                                     |
+| Ad Load `ci_al`         | Fired once an ad unit has been loaded. Once user consent has been received (if applicable) and an ad has been served. For in-view units, this will be once the in-view event was detected. For refresh units, this will fire once per refresh. |
+| Ad Miss `ci_am`         | Fired if an ad unit did not receive an ad (either ad_load or ad_miss will be triggered for each ad and any subsequent refreshes)                                                                                                               |
+| Consent Denied `ci_cd`  | Fired when user consent is required but was not given                                                                                                                                                                                          |
+| Tag Error `ci_te`       | Fired on an unexpected tag error                                                                                                                                                                                                               |

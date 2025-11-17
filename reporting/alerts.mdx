@@ -1,0 +1,48 @@
+---
+title: "Notifications & Alerts"
+description: "Fusion can keep in the loop at all times, via your preferred comms method"
+---
+
+<img
+  className="block dark:hidden"
+  src="/assets/images/notification-preferences--light.png"
+  alt="Preview of notification preference options in Fusion"
+/>
+<img
+  className="block dark:block"
+  src="/assets/images/notification-preferences--dark.png"
+  alt="Preview of notification preference options in Fusion"
+/>
+
+Each day thousands of events are triggered in our platform, anything from aknowledging the re-build of a publisher tag, to urgent health alerts for things like revenue drop-off.
+
+Each user has the ability to receive these notifications via web push notifications or email, or through the [connection of a communications integration](/integrations/comms) at the organisation level.
+
+## Event Group Subscription
+
+You can manage the event groups you are subscribed to from your account page: [/account](https://admin.contentignite.com/account)
+
+The event groups you can subscribe to are as follows:
+
+| Event Group         | Email Default? | Web Push Default? | Description                                                                                                 |
+| ------------------- | -------------- | ----------------- | ----------------------------------------------------------------------------------------------------------- |
+| Tag & SDK Updates   | ❌             | ❌                | Any changes that trigger a re-build; publisher status change, config change, audience enablement etc        |
+| Background Activity | ❌             | ✅                | For delayed actions triggered by you, e.g. tag build complete                                               |
+| Onboarding          | ✅             | ✅                | Any onboarding step; MCM, site approval, publisher appeal, suspensions, new publisher, new organisation etc |
+| Health Alerts       | ✅             | ✅                | Revenue drop off, traffic drop off                                                                          |
+| Billing             | ✅             | ❌                | Invoice Generated, paid, in arrears, new profile set up or removed                                          |
+| Experiment Activity | ✅             | ❌                | Experiment end, winner auto activated                                                                       |
+| Ads.txt Updates     | ✅             | ❌                | New requirements, now up-to-date                                                                            |
+| User Access         | ✅             | ❌                | Includes adding new users, existing users added to new organisations and user suspension                    |
+| Integrations        | ✅             | ❌                | Expiry warnings, new integrations added, removed                                                            |
+| Policy              | ✅             | ❌                | Terms have been accepted                                                                                    |
+| System              | ✅             | ✅                | System notices, such as reporting outages or industry alerts                                                |
+| Personal            | ✅             | ❌                | [Non-Optional] Password reset, welcome emails etc                                                           |
+
+Be sure to whitelist no-reply@hey.contentignite.com in your email provider to ensure you receive email notifications.
+
+Web notifications will only be delivered if you have Fusion open in your browser. If you'd like more consistent delivery of push notifications, consider [installing Fusion as a web application](/getting-started/top-tips#web-app).
+
+## Organisation Hierarchy
+
+If you have access to multiple organisation, weather that's in a parent-child arrangement, or separate entities, your subscription to the above events is managed per organisation. That means if you switch organisations, you'd be able to manage all your preferences independently.

@@ -1,0 +1,108 @@
+---
+title: "Integrations Settings"
+description: "Dive into an integrations and set your preferences"
+---
+
+<img
+  className="block dark:hidden"
+  src="/assets/images/integration-settings--light.png"
+  alt="Preview of integrations settings in Fusion"
+/>
+<img
+  className="block dark:block"
+  src="/assets/images/integration-settings--dark.png"
+  alt="Preview of integrations settings in Fusion"
+/>
+
+## Description
+
+The contents of this field will show up when a user hovers over the integration during ad stack selection. This allows you to explain to the user what this option is.
+
+## Filters
+
+Use filters to control the options available at the ad stack level. For example, if you have multiple organisations and a GAM account for each, you could connect them all at the parent level and restrict each integration to its appropriate organisation. Or even filter out our default GAM option if you are SaaS only.
+
+This removes the chance of human error where the wrong integration is selected because there are multiple options available to select.
+
+You can include or exclude both organisation and publishers.
+
+Note; excluding an organisation does not hide it from the list of integrations on the integrations management page. Users with access to integrations can still see it and can modify the filters at any level of your organisation hierarchy.
+
+## Ads.txt Requirements
+
+Here you can optionally input your line-separated ads.txt requirements for this integration if applicable. This will do several things when selected inside an ad stack:
+
+1. Each publisher will see these ads.txt lines listed as go-live requirements (preventing issues before they can happen)
+2. We check the status of all our publisher's ads.txt daily and flag anything that is missing in the UI for all to see
+3. We send out a report once a week to publishers highlighting any missing ads.txt lines
+4. You can view the status of ads.txt completeness across your network via your health report
+
+### Macros
+
+We have a number of available macros for use when an ads.txt line needs to contain publisher or organisation information as part of it, these are:
+
+- `__UID__` -- This is the publisher's unique ID inside the Content Ignite system
+- `__OID__` -- The ID of the publishers parent organisation
+- `__PID__` -- The ID of the highest parent organisation
+- `__ID1__` -- In the case of GAM, this is the Network ID
+- `__ID2__` -- In the case of GAM, this is the MCM ID
+- `__UID_DOMAIN__` -- The publishers domain
+- `__OID_DOMAIN__` -- The domain of the publishers parent organisation
+- `__PID_DOMAIN__` -- The domain of the highest parent organisation
+
+These can be used to include the ID in the ads.txt line:
+
+```txt
+contentignite.com, __UID__, DIRECT
+```
+
+This will be substituted for each publisher, so for a publisher with UID 12345, they will see the following requirement in their ads.txt section:
+
+```txt
+contentignite.com, 12345, DIRECT
+```
+
+If the macro is empty, for example, no MCM ID has been entered, that entire line will be left out.
+
+#### UID Macro
+
+The UID macro enables the implementation of specific ads.txt lines for each publisher during the integration setup. Simply include this macro at the beginning of the line like so:
+
+```txt
+[UID:81111] contentignite.com, 12345, DIRECT
+[UID:82222] contentignite.com, 67890, DIRECT
+```
+
+### Direct vs Reseller
+
+Have direct relationships with some publishers, but indirect with others? This often means different ads.txt lines.
+
+To accommodate this, we have two flags that can be inserted before an adx.txt line so our system can make the correct choice for each publisher. The first part is correctly setting the "Managed" status of each child organisation, where managed means you have a direct relationship.
+
+Then for any lines that need to change based on this, you can add `[managed]` or `[unmanaged]` before it. For example:
+
+```txt
+[managed] pubmatic.com, 160530, DIRECT, 5d62403b186f2ace
+[unmanaged] pubmatic.com, 160530, RESELLER, 5d62403b186f2ace
+openx.com, 539625136, RESELLER
+```
+
+For the above, the first line will only show for managed publishers, the second line will only show for unmanaged publishers, and the last line will show for all publishers.
+
+## Mapping
+
+Certain integrations require mapping. This is the process of connecting an entity in the third-party integration platform, with an entity inside of Fusion.
+
+A common example of this is publisher mapping, where it is likely that each publisher needs to be set up in the third-party platform, and will have some sort of unique identifier associated with it. You can then enter this identifier into Fusion, against the correct publisher via Publisher Mapping.
+
+This ensures that when you build an ad stack that is shared across publishers, Fusion can deduce the correct id to use when running an ad auction on-site. Do it once and forget about it!
+
+Mapping can be done at any point, such as before updating the ad stack.
+
+You can also map from within an organisation, publisher or config. The net result is the same, its just a question of what works best for you. Typically on boarding a new integration, it would be easier to map everything from within that integration, but onboarding a new publisher, it would likely be more streamlined to map all integrations in one go from within the publisher.
+
+## Additional fields
+
+Integrations can present any number of additional fields and options to you, for example, Google Ad Manager has toggles for various behaviours.
+
+Each field will have a description of its use, provided by the integration.

@@ -1,0 +1,365 @@
+---
+title: "Publisher Tag Targeting"
+description: "On web we target units with CSS selectors and use filters to refine it"
+---
+
+## Positional Targeting
+
+<img
+  className="block dark:hidden"
+  src="/assets/images/element-targeting--light.png"
+  alt="Preview of the config targeting field in Fusion"
+/>
+<img
+  className="block dark:block"
+  src="/assets/images/element-targeting--dark.png"
+  alt="Preview of the config targeting field in Fusion"
+/>
+
+On-page placement of an ad unit is achieved via CSS selectors. You will need to be able to look at your website's HTML and pick the elements you want to target, and using your knowledge of CSS selectors be able to uniquely identify them in code.
+
+Don't worry if all of this sounds alien, CSS Selector-based targeting is highly flexible, but requires an experienced web developer to implement. If you don't have a web developer on your team, a member of our team will be available to help!
+
+### Advanced CSS selectors
+
+Most of your targeting will use basic CSS selectors, as shown in the example tables below. These consist of using classes and IDs to identify and target your desired page elements. However, we support a large range of more advanced selectors, one useful one you may find helpful is the `:nth-child` selector.
+
+These types of selectors allow you to do useful things such as targeting every 3rd paragraph on an article page (`.article-page p:nth-child(3n)`). Or targeting every 4th paragraph starting with the 1st (`.article-page p:nth-child(4n-7)`)
+
+More information on `:nth-child` selectors can be found here: [https://css-tricks.com/useful-nth-child-recipies/](https://css-tricks.com/useful-nth-child-recipies/).
+
+It is also worth noting that you can include multiple selectors in a single config by simply using a comma, no need for multiple configs!
+
+**CSS Extension**
+
+We have implemented an extension to CSS to allow for index selection of matches, this is the `:eq(n)` selector, where `n` is a zero indexed number. For example, if you've got a list of blog posts listed on a category page, mixed in with other containers, it can actually be very hard to select the "second match" of a given class, because CSS selectors like `nth-of-kind` always count from the first element, not the first "matched" element.
+
+In this example, we could use `.blog-post:eq(1)` to select the second match! (With zero indexing, the first match is `0`, second is `1` etc).
+
+### In-Image Examples
+
+| Type        | Selector            | Example Notes                                                                                                                                                                         |
+| ----------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| class + img | `.post_content img` | To target the contents of an element (div, span etc) use class (.) In the example you would be targeting all `<img />` tags, inside of the element `<div class="post_content"></div>` |
+| id + img    | `#content img`      | To target the contents of an element (div, span etc) use id (#) In the example you would be targeting all `<img />` tags, inside of the element `<div id="content"></div>`            |
+| class       | `.post_content`     | To target the contents of an element (div, span etc) use class (.) In the example you would be targeting all `<div class="post_content"></div>` elements                              |
+| id          | `#content`          | To target the contents of an element (div, span etc) use class (#) In the example you would be targeting all `<div id="content"></div>` elements                                      |
+
+### In-Article Examples
+
+| Type        | Selector          | Example Notes                                                                                                                                                                     |
+| ----------- | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| class + tag | `.post_content p` | To target the contents of an element (div, span etc) use class (.) In the example you would be targeting all `<p>` tags, inside of the element `<div class="post_content"></div>` |
+| id + tag    | `#content p`      | To target the contents of an element (div, span etc) use id (#) In the example you would be targeting all `<p>` tags, inside of the element `<div id="content"></div>`            |
+| class       | `.post_content`   | To target the contents of an element (div, span etc) use class (.) In the example you would be targeting all `<div class="post_content"></div>` elements                          |
+| id          | `#content`        | To target the contents of an element (div, span etc) use class (#) In the example you would be targeting all `<div id="content"></div>` elements                                  |
+
+## Device Targeting
+
+You can also target individual configs based on device type (mobile, tablet or desktop), or any combination thereof. Simply select the devices you need, simple!
+
+This opens up a huge range of flexibility. Want a video unit that sticks on desktop & tablet, but not on mobile? Easy. Create one config with desktop & tablet selected and sticky enabled. Duplicate the config and select just mobile while disabling sticky.
+
+Use as many individual configs as you need to achieve your desired setup!
+
+## Geographic Targeting
+
+Target countries easily by including or excluding them as required. Target fallback creatives to better match the audience or tailor your ad stack!
+
+## Browser Targeting
+
+You can target any of the top 7 browsers, representing 95% of all internet traffic. This is great for trialling different ad stacks for the likes of Safari with its intelligent tracking prevention features, vs others.
+
+## Viewport Targeting
+
+<img
+  className="block dark:hidden"
+  src="/assets/images/viewport-filter--light.png"
+  alt="Preview of the viewport filter field in Fusion"
+/>
+<img
+  className="block dark:block"
+  src="/assets/images/viewport-filter--dark.png"
+  alt="Preview of the viewport filter field in Fusion"
+/>
+
+While device targeting as described above allows for quick and easy targeting of key device widths, viewport targeting offers highly customisable width targeting to perfectly match your sites custom breakpoints.
+
+If your site has a special wide breakpoint such as anything equal to or above 1400px, you can easily target this with a value of `≥1400px`.
+
+This field will accept up to two values; a start value and an end value (to capture a breakpoint range), or just one value with an open start or open end (see example below).
+
+All values will be assumed `px`, pixels. We accept the following comparison operators:
+
+- `>=` Greater than or equal to.
+- `<=` Less than or equal to.
+- `>` Greater than.
+- `<` Less than.
+
+Remember to enter your viewport declaration in to the field and hit enter to commit it, you can then add a second one if required, hitting enter again.
+
+### Examples
+
+1. `<576px` -- Open start, so anything from 0 up to a maximum of 575px
+2. `≥576px` -- Open end, so anything from 576px upwards
+3. `≥1200px`,`<1400px` -- Range, anything from 1200px up to 1399px
+
+## URL Path Targeting
+
+<img
+  className="block dark:hidden"
+  src="/assets/images/audiences--light.png"
+  alt="Preview of the URL filter field in Fusion"
+/>
+<img
+  className="block dark:block"
+  src="/assets/images/audiences--dark.png"
+  alt="Preview of the URL filter field in Fusion"
+/>
+
+We also support config targeting down to the URL path. Only want adhesion on article pages? Want to try out a new config on a single old article? Not a problem!
+
+URL path targeting is done via one of two behaviours; include or exclude.
+
+Selecting "include" enables the config on all pages that match your list of URL paths. "Exclude" enables the config on all pages that **don't** match your URL path list.
+
+Matches are made against the URL path, the bit highlighted in green here:
+
+<code>
+  <span style={{ color: "#3f6ec6" }}>
+    https://docs.contentignite.com
+    <span style={{ color: "#1c7d4d" }}>/publishers/tag-targeting/</span>
+    #advanced-css-selectors
+  </span>
+</code>
+
+So to match the above URL, the target would need to be `/publishers/tag-targeting/`.
+
+### Wildcard Matching
+
+We also support wildcard matching where you'd like to match against URL path patterns.
+
+For example, take the following common URLs where there is a category and a post name in the URL:
+
+- <code>
+    <span style={{ color: "#3f6ec6" }}>
+      https://the-race.com/formula-1/aston-martin-f1-chief-szafnauer-exits-team/
+    </span>
+  </code>
+- <code>
+    <span style={{ color: "#3f6ec6" }}>
+      https://the-race.com/formula-e/formula-es-new-qualifying-format/
+    </span>
+  </code>
+- <code>
+    <span style={{ color: "#3f6ec6" }}>
+      https://the-race.com/motogp/what-to-expect-from-petruccis-dream-dakar-switch/
+    </span>
+  </code>
+
+What if we wanted to match all "formula-1" articles on this site? This is where the wildcard character comes in; `*`, it matches any number of characters.
+
+To target _"formula-1"_ articles, we can simply use the target:
+
+```
+/formula-1/*
+```
+
+We always match from the start of the path to the end of the path. In this case, the wildcard character matches anything after `/formula-1/`, therefore matching any articles within that section as they start with `/formula-1/` and end with any other characters.
+
+Also, consider the following URLs:
+
+- <code>
+    <span style={{ color: "#3f6ec6" }}>
+      https://the-race.com/formula-e/results
+    </span>
+  </code>
+- <code>
+    <span style={{ color: "#3f6ec6" }}>
+      https://the-race.com/motogp/results
+    </span>
+  </code>
+
+We could easily target all result pages with:
+
+```
+/*/results
+```
+
+In this case, (because we match from the start to the finish) the wildcard character matches any characters at the start of the URL path, and then we match `/results` at the end of the URL path.
+
+Combine wildcard matching with the ability to add as many entries as needed and you can tailor advertising across your site in an incredibly flexible way, down to a hyper-targeted level.
+
+<Warning>
+  **Something or nothing**
+
+    Please note that `*` matches *anything*, including *nothing*. If you'd like to match "something" like any subsection under `/section/`, use a double wildcard like so: `/section/**`
+
+</Warning>
+
+### Additional Examples
+
+<table className="table [&_th]:text-left">
+  <thead>
+    <tr>
+      <th>Target</th>
+      <th>Example Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>/</code>
+      </td>
+      <td>Matches the home page only</td>
+    </tr>
+    <tr>
+      <td>
+        <code>/news</code>
+      </td>
+      <td>
+        Matches the news page only
+        <br />
+        e.g. Would match:
+        <ul>
+          <li>
+            <span style={{ color: "#3f6ec6" }}>
+              https://www.newspaper.com/news
+            </span>
+          </li>
+        </ul>
+        but wouldn't match:
+        <ul>
+          <li>
+            <span style={{ color: "#3f6ec6" }}>
+              https://www.newspaper.com/news/covid-is-over
+            </span>
+          </li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>/news/*</code>
+      </td>
+      <td>
+        Matches pages within the news section only
+        <br />
+        e.g. Would match:
+        <ul>
+          <li>
+            <span style={{ color: "#3f6ec6" }}>
+              https://www.newspaper.com/news/covid-is-over
+            </span>
+          </li>
+        </ul>
+        but wouldn't match:
+        <ul>
+          <li>
+            <span style={{ color: "#3f6ec6" }}>
+              https://www.newspaper.com/news
+            </span>
+          </li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>/news*</code>
+      </td>
+      <td>
+        Matches any pages whose URL path starts with "news"
+        <br /> e.g. Would match:
+        <ul>
+          <li>
+            <span style={{ color: "#3f6ec6" }}>
+              https://www.newspaper.com/news/covid-is-over
+            </span>
+          </li>
+          <li>
+            <span style={{ color: "#3f6ec6" }}>
+              https://www.newspaper.com/news
+            </span>
+          </li>
+          <li>
+            <span style={{ color: "#3f6ec6" }}>
+              https://www.newspaper.com/news-archive
+            </span>
+          </li>
+          <li>
+            <span style={{ color: "#3f6ec6" }}>
+              https://www.newspaper.com/news/2020/01
+            </span>
+          </li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>/news/*/01/*</code>
+      </td>
+      <td>
+        Could match any news article posted in January (given a well-structured
+        URL)
+        <br />
+        e.g. Would match:
+        <ul>
+          <li>
+            <span style={{ color: "#3f6ec6" }}>
+              https://www.newspaper.com/news/2024/01/covid-is-over
+            </span>
+          </li>
+          <li>
+            <span style={{ color: "#3f6ec6" }}>
+              https://www.newspaper.com/news/2020/01/what-have-we-done
+            </span>
+          </li>
+        </ul>
+        but wouldn't match:
+        <ul>
+          <li>
+            <span style={{ color: "#3f6ec6" }}>
+              https://www.newspaper.com/news/2024/01/
+            </span>
+          </li>
+          <li>
+            <span style={{ color: "#3f6ec6" }}>
+              https://www.newspaper.com/news/2022/02/covid-is-still-going
+            </span>
+          </li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>/news/**</code>
+      </td>
+      <td>
+        Could match any news article posted in January (given a well-structured
+        URL)
+        <br />
+        e.g. Would match:
+        <ul>
+          <li>
+            <span style={{ color: "#3f6ec6" }}>
+              https://www.newspaper.com/news/2024/01/covid-is-over
+            </span>
+          </li>
+          <li>
+            <span style={{ color: "#3f6ec6" }}>
+              https://www.newspaper.com/news/2020/01/what-have-we-done
+            </span>
+          </li>
+        </ul>
+        but wouldn't match:
+        <ul>
+          <li>
+            <span style={{ color: "#3f6ec6" }}>
+              https://www.newspaper.com/news/
+            </span>
+          </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>

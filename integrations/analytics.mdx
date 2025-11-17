@@ -1,0 +1,56 @@
+---
+title: "Analytics Integrations"
+description: "Empower Fusion with data from your analytics platform"
+---
+
+Website analytics data provides valuable insights into your site's performance and audience behaviour. By connecting a Google Analytics account (with more integrations to come), Fusion leverages this data to deliver blended analytical reporting and actionable insights.
+
+Our [Revenue Analytics Insights Hub](/reporting/insights/revenue-analytics) allows publishers to gain a comprehensive view of earnings performance through a series of graphical and statistical views that cross-reference revenue with key analytic metrics. This helps publishers identify trends, uncover traffic sources or audience segments driving the most revenue, and refine content strategies to target high-performing areas. The actionable insights enable data-driven decisions to fine-tune revenue strategies, optimise performance, and align user experience improvements with financial goals.
+
+## Connecting in Google Analytics (GA)
+
+Follow [these steps](/integrations#connection) to connect your Google Analytics account and begin integrating your data into Fusion.
+
+## Mapping the GA property ID
+
+Once you've verified the integration and connected your account, the next step is to map the Property ID to the Google Analytics properties you want Fusion to track. Here's how to do it:
+
+1.  **Log In**: Head to your Google Analytics account using the profile you want to connect.
+2.  **Locate the Property ID(s)**:
+
+    - Open the **Admin** settings.
+    - Under **Property**, click on **Property Details**.
+    - Find and copy your Property ID, usually a 9-digit numeric code.
+
+3.  **Manage the GA Integration**:
+
+    - In Fusion, go to the Google Analytics (GA4) section under [Integrations](https://admin.contentignite.com/integration). Click the three-dot **more** icon and select the option to **Manage** the integration.
+
+Fusion gives you two ways to map Property IDs - **Organisation Mapping** and **Publisher Mapping** - depending on how you would like the data to be linked and reported.
+
+### Organisation Mapping
+
+This is the recommended method. It lets you map multiple GA properties to one organisation, and Fusion will automatically sync the data to the right publishers within that organisation.
+
+Benefits include:
+
+- Add multiple GA property ID's for each publisher GA connection - Fusion takes care of the dynamic syncing to the correct publishers under your organisation.
+- It uses exact domain matching, so Fusion will only report on data for the domains that matter (no staging or subdomain noise).
+- It's all managed in one place.
+
+Setting it up:
+
+1. Under **Organisation Property ID Mapping**, pick the organisation, then paste your Property ID(s) into the Property ID column.
+2. If entering multiple properties, separate them with commas.
+3. Click **Save** to activate and start fetching analytics data straight away.
+
+### Publisher Mapping
+
+This method links a Property ID to a single publisher. Use this if you want all the GA data under that property - including staging sites and subdomains - to go to that publisher.
+
+Setting it up:
+
+1. Under **Publisher Property ID Mapping**, choose the publisher and enter the Property ID into the Property ID column.
+2. Click **Save** to activate and start fetching analytics data straight away.
+
+Once it's all set up, Fusion will begin syncing your GA data, giving you valuable insights to help optimise your performance and revenue.
