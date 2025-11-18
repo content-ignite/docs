@@ -129,11 +129,30 @@
           },
           {
             "tab": "Guides",
-            "pages": [
-              "getting-started/cmp-guide",
-              "guide/glossary",
-              "getting-started/top-tips",
-              "publishers/tag-core-web-vitals"
+            "groups": [
+              {
+                "group": "Industry concepts",
+                "icon": "graduation-cap",
+                "pages": ["getting-started/cmp-guide"]
+              },
+              {
+                "group": "FAQ's",
+                "icon": "circle-question",
+                "pages": [
+                  "getting-started/faqs",
+                  "guide/google-faqs",
+                  "guide/ops-faqs"
+                ]
+              },
+              {
+                "group": "Helpful Resources",
+                "icon": "book-open",
+                "pages": [
+                  "guide/glossary",
+                  "getting-started/top-tips",
+                  "publishers/tag-core-web-vitals"
+                ]
+              }
             ]
           },
           {

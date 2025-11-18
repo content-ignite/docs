@@ -5,21 +5,28 @@ description: "Let's cover off some common FAQ's for publishers looking at Conten
 
 Any burning questions that we haven't covered off here? We'd love to know them! Please reach out via [hello@contentignite.com](mailto:hello@contentignite.com)
 
-### How do I reach out for additional support?
+<AccordionGroup>
+<Accordion title="How do I reach out for additional support?">
 
 You can create a ticket in our support centre, found here: [https://resource.contentignite.com/support](https://resource.contentignite.com/support).
 
-### Where do I log into my dashboard from?
+</Accordion>
+
+<Accordion title="Where do I log into my dashboard from?">
 
 The dashboard log-in can be found here: [https://admin.contentignite.com/](https://admin.contentignite.com/).
 
-### Why am I seeing blank ads?
+</Accordion>
+
+<Accordion title="Why am I seeing blank ads?">
 
 We optimise based on yield. This is the balancing of CPM's and fill to ensure you get the most revenue possible by maximising the value of your inventory. This will lead to blank ads now and then, but more revenue!
 
 The bottom line is, more fill **does not equal** more revenue.
 
-### Just one tag on page? really? How would we target units?
+</Accordion>
+
+<Accordion title="Just one tag on page? really? How would we target units?">
 
 So unlike using the standard Google Publisher Tag, where `<script/>` elements need to be placed throughout your site, and units need defining in the head of your site, we operate on a true one tag solution. Place our tag in the head of your page once, and forget about it.
 
@@ -27,7 +34,9 @@ But how do we target ads? We use standard CSS selectors to target ads, we can us
 
 All of this is set up inside our Fusion platform, so you dont need to keep making development changes to your site for every change in ad targeting or behavior.
 
-### What does your tag look like?
+</Accordion>
+
+<Accordion title="What does your tag look like?">
 
 Once you have set up a publisher in Fusion, you will find your publisher tag shown to you.
 
@@ -39,27 +48,39 @@ Our tag is a JavaScript script tag, and looks something like this:
 
 This tag is unique for each publisher and is designed to run site-wide by being placed directly in the head of your site along with a CMP (where applicable), and that's all you need!
 
-### Why is Ads.txt so important?
+</Accordion>
+
+<Accordion title="Why is Ads.txt so important?">
 
 This is a text file included on your website to list authorised companies selling your ad inventory, aimed at increasing transparency and reducing fraud. If it is incomplete or incorrect, it can have huge ramifications for the monetisation of your website. Check out [this Article](https://www.contentignite.com/article/mastering-ads-txt-file-optimisation-with-content-ignites-insight-tool) for a easy overview on how you can easily improve the health of yours.
 
-### How do I submit a direct campaign request?
+</Accordion>
+
+<Accordion title="How do I submit a direct campaign request?">
 
 You can submit requests for campaigns by filling out a [form here](https://www.notion.so/Campaigns-d65647eb001b4f9b969f8b2a6276b42c?pvs=21). We also **require** you to fill out the google sheets insertion sheet attached to the notion submission form. Please populate all fields of the sheet and if not there is no required targeting or info populate the field with **N/A**.
 
-### What creative file types can we use for direct campaigns?
+</Accordion>
+
+<Accordion title="What creative file types can we use for direct campaigns?">
 
 We accept jpg, png, gif files as raw creatives. We also accept GAM compatible HTML5 Zip files and certain 3rd party code compatible with GAM
 
-### How can I stop particular advertisers advertising on certain sites?
+</Accordion>
+
+<Accordion title="How can I stop particular advertisers advertising on certain sites?">
 
 Content Ignite can set Protections for you. Just send a block list to adops@contentignite.com
 
-### How do I conduct an Experiment?
+</Accordion>
+
+<Accordion title="How do I conduct an Experiment?">
 
 This [Article](https://www.contentignite.com/article/optimising-website-ad-performance-using-content-ignites-experiment-technology) will show you how to set an Experiment. However, for the first one or two, we recommend dropping us a note with the details so we can check the set up for you.
 
-### Migrating over from Google Publisher Tag
+</Accordion>
+
+<Accordion title="Migrating over from Google Publisher Tag">
 
 If Content Ignite is becoming your sole ad-tech provider and you are moving over from Google, the setup process is pretty seamless. First and foremost, there is Google's GPT tag that gets replaced with your Content Ignite Publisher tag:
 
@@ -149,7 +170,9 @@ Finally, you will have ad containers throughout your site with unique ID's such 
 
 Then simply enter the container ID's into the Fusion platform as unit targets to place ads in your existing containers! Nice and simple, and even means you can easily switch back at any time (although we are confident you won't want to).
 
-### How do SaaS setups work?
+</Accordion>
+
+<Accordion title="How do SaaS setups work?">
 
 The Fusion platform can be fully set up to use your connections (your GAM account, your SSP's), ours, or a mix of both. When using your own connections, this is classed as SaaS (Software As A Service).
 
@@ -159,7 +182,9 @@ To use a SaaS setup, you can connect your GAM account into Fusion via our [integ
 
 The same goes for ad demand, if you already have contracts in place with SSP's, you can set those up in Fusion too.
 
-### For SaaS, do we need to re-map all our units and targeting?
+</Accordion>
+
+<Accordion title="For SaaS, do we need to re-map all our units and targeting?">
 
 If you have containers on page already, you can easily add them into Fusion, no changes to your site are required in this regard. Our team can even help migrate targeting for you so you are up and running quickly.
 
@@ -167,13 +192,17 @@ Targeting inside your Ad Server (if using our SaaS feature) can also remain the 
 
 Our aim is not to change the way you are set up to work, but to be flexible and agnostic as a platform. Read more about [Fusion "Pro" vs Fusion "Mapped"](/getting-started/pro-vs-mapped) if you want to preserve your entire ad unit setup within GAM.
 
-### Your Google Ad Manager Account or Ours?
+</Accordion>
+
+<Accordion title="Your Google Ad Manager Account or Ours?">
 
 This is actually up to you! For those who dont want to be overly involved in ad operations, the simplest route to monetisation is to use Content Ignites GAM account where we pay you your revenure share each month, but you can also use your GAM account (SaaS) or even use both:
 
 A hybrid setup can have different ad servers targeted to different geos, audiences etc, or served via a "second-look", where if your ad server fails to return an ad, ours can jump in and attempt to fill the opportunity. View our [example ad stacks](/getting-started/ad-stack-examples) to find out more.
 
-### How does the second look "hybrid" setup work?
+</Accordion>
+
+<Accordion title='How does the second look "hybrid" setup work?'>
 
 Through our drag-and-drop ad stacks, you can drag multiple Google Ad Manager ad servers in. The order matters here as only one ad server gets first-look, then another can get second-look and so on.
 
@@ -181,7 +210,9 @@ There is no setup inside of GAM needed to make this work. We get all the relevan
 
 If using our Ad Server in the mix, all the P&P requirements apply; billing information so we can pay you your earnings, MCM connection in place, site approved etc. Then your ad server will need to be set up with all SaaS requirements in place. This is why we class this as a "hybrid" setup. View our [example ad stacks](/getting-started/ad-stack-examples) to find out more.
 
-### What is your "Fallback" feature?
+</Accordion>
+
+<Accordion title='What is your "Fallback" feature?'>
 
 Creative fallbacks give you the opportunity to fill a space that has otherwise failed to serve an ad. "Blanks" or missed ad opportunities are common and by design as we always optimise for yield, meaning more revenue for you the publisher.
 
@@ -192,3 +223,6 @@ All fallbacks impressions are tracked, and image fallbacks are click-tracked and
 You can even configure multiple fallback and have them cycle (and even weight them accordingly).
 
 Fallbacks do not replace booked campaigns, where you can target creative, control serving and compete with programmatic, they are purely a final chance to fill a space when all other options have been exhausted. View our [example ad stacks](/getting-started/ad-stack-examples) to find out more.
+
+</Accordion>
+</AccordionGroup>

@@ -1,0 +1,707 @@
+---
+title: "Operational FAQ's"
+description: "Frequently asked questions on ad operations"
+---
+
+## Ad Operations
+
+<AccordionGroup>
+<Accordion title="What creative file types can I use for direct campaigns?">
+
+    We accept the following creative formats for direct campaigns:
+
+    - **Static and animated images**: JPG, PNG, and GIF
+    - **HTML5 creatives**: GAM-compatible HTML5 ZIP files (must include a properly formatted `manifest.json` and adhere to Google Ad Manager specifications)
+    - **Third-party ad tags**: We accept 3rd-party code (JavaScript or iframe tags) from certified vendors that are compatible with Google Ad Manager (GAM). This includes ad tags from platforms like Google Campaign Manager, Sizmek, Flashtalking, and other trusted sources. All third-party tags must support secure (HTTPS) delivery and adhere to industry standards.
+
+</Accordion>
+
+<Accordion title="What size of creative should I supply?">
+
+    Please ensure your creatives are fixed at 72dpi and 1x versions as a priority.  Additional double sized creatives can be provided for better resolution but are not required.   Larger files will need to be resized which can significantly impact the turnaround time of your campaign submission
+
+</Accordion>
+
+<Accordion title="How do I submit a forecast request?">
+
+    You can submit forecast requests here;  [https://contentignite.notion.site/Campaigns-d65647eb001b4f9b969f8b2a6276b42c](https://www.notion.so/Campaigns-d65647eb001b4f9b969f8b2a6276b42c?pvs=21)
+
+</Accordion>
+
+<Accordion title="How do I submit a direct campaign request?">
+
+    You can submit requests for campaigns here [https://contentignite.notion.site/Campaigns-d65647eb001b4f9b969f8b2a6276b42c](https://www.notion.so/Campaigns-d65647eb001b4f9b969f8b2a6276b42c?pvs=21) we also **require** you to fill out the google sheets insertion sheet attached to the notion submission form. Please populate all fields of the sheet and if not there is no required targeting or info populate the field with **N/a**.
+
+</Accordion>
+
+<Accordion title="How do I stop particular advertisers?">
+
+    Send an Advertiser name directly to block but if you have seen an ad from an advertiser you particularly want to block, click the ad and send us the URL of the landing page, this will block the ads for that particular advertiser and campaign.
+
+</Accordion>
+
+<Accordion title="Can I also submit a screenshot of an ad to block?">
+
+    Yes. We prefer you to click the ad and send the landing page URL but if you have been submitted a screenshot from one of your team or users with the ad to block, some SSPs allow us to submit an image of the ad to find and block that creative and advertiser.
+
+</Accordion>
+
+<Accordion title="How do I improve fill rate/revenue?">
+
+    We use dynamic floor technology to get you the highest yielding ad slots possible but if you would prefer lower yields and higher fills, we can create lower floor rates to ensure more ads are delivered. If you just don’t like seeing blank ad spaces, our preference will always be to leave the dynamic floor technology live (to get you higher yields) and you can supply us ‘backfill’ ad creative that would serve in the event of not being able to monetise the ad slot.
+
+</Accordion>
+
+<Accordion title="Why is my ad latency high?">
+
+    High ad latency can be caused by a range of factors, and pinpointing a single root cause is rarely straightforward. Common contributors include the number of Supply Side Platforms (SSPs) involved and the configured timeout settings. The more SSPs you integrate, the more complex and time-consuming the ad decision process can become. Similarly, if timeouts are set too generously, it can delay ad delivery while the system waits for slower responses.Ultimately, resolving high ad latency often requires a process of experimentation—testing different configurations, reducing the number of SSPs, adjusting timeouts, or streamlining demand partners—to identify what works best for your setup.
+
+</Accordion>
+</AccordionGroup>
+
+## CMP
+
+<AccordionGroup>
+<Accordion title="How do I fix low CMP consent rates?">
+
+    We have seen unnecessary scripts such as [Rocket Loade](https://developers.cloudflare.com/speed/optimization/content/rocket-loader/)r that could be causing lazy loading of the CMP, which will cause delays or errors in ads loading.
+
+</Accordion>
+
+<Accordion title="Do I need a CMP stub?">
+
+    The stub script is integral for our implementation, acting as a preliminary placeholder to capture consent signals even before the full CMP is loaded. Placing the stub script directly on page in the head of your HTML ensures it runs promptly, avoids a high CMP error rate and boosts revenue.
+
+    Read more here: https://docs.contentignite.com/getting-started/going-live/#notes-on-cmps
+
+</Accordion>
+
+<Accordion title="How to find a CMP stub on page">
+
+    To find a CMP (Consent Management Provider) stub on a webpage, you can follow these steps:
+
+    1. **Inspect the Page Source**: Right-click on the webpage and select "Inspect" or "View Page Source" from the context menu. This opens the Developer Tools in most browsers like Chrome, Firefox, or Edge.
+    2. **Search for CMP Keywords**: In the Developer Tools, you can use the search function (usually accessible by pressing `Ctrl+F` or `Cmd+F`) to look for keywords associated with CMPs. Common terms to search for include `__cmp`, `__tcfapi`, `consent`, `gdpr`, `optin`, and names of popular CMP platforms like OneTrust, Quantcast, or Cookiebot.
+    3. **Look for Script Tags**: CMPs are often initialized through script tags in the HTML. Look for script tags that include URLs or paths suggesting a connection to a CMP. This might look something like `<script src="https://somecmp.com/loader.js"></script>`.
+    4. **Check for External Scripts and iFrames**: CMPs might load their functionality from external sources. You can examine the network requests (in the Network tab of Developer Tools) for any CMP-related files being fetched when the page loads.
+    5. **Observe Cookies and Local Storage**: CMPs manage consent preferences and might store these settings in cookies or local storage. Using the Application tab in Developer Tools, check for entries related to consent.
+    6. **JavaScript Objects**: Some CMPs create global JavaScript objects that can be accessed via the console in Developer Tools. Typing common CMP object names like `__cmp`, `__tcfapi`, or the names of known CMP services and checking for a non-null response can indicate the presence of a CMP.
+
+    These steps will help you identify whether a CMP is being used on a website and understand how it's implemented.
+
+</Accordion>
+
+<Accordion title="Who should I add to my CMP as Vendors?">
+
+    CI Vendors List:
+
+    Content Ignite
+
+    Adform A/S
+
+    Index Exchange, Inc.
+
+    Sovrn, Inc.
+
+    Onetag limited
+
+    OpenX
+
+    PubMatic, Inc
+
+    TripleLift, Inc.
+
+    Google Advertising Products
+
+    Improve Digital
+
+    Smaato, Inc.
+
+    Yahoo EMEA Limited
+
+    Magnite, Inc.
+
+    Equativ
+
+    ADYOULIKE SA
+
+    LoopMe Limited
+
+    Unruly Group LLC
+
+    Criteo
+
+    The MediaGrid Inc.
+
+    Onfocus (adagio)
+
+    Sharethrough, Inc
+
+    ADman Interactive SLU
+
+    Monet Engine Inc
+
+    PulsePoint, Inc.
+
+    Emodo, Inc.
+
+    Verve Group Europe GmbH
+
+    Xandr, Inc.
+
+    Microsoft Advertising
+
+    LinkedIn Ireland Unlimited Company
+
+    Revcontent
+
+    GumGum, Inc.
+
+    Ogury Ltd
+
+    Seedtag Advertising S.L
+
+    [media.net](http://media.net/)
+
+    The UK Trade Desk Ltd
+
+    Amazon Ad Server
+
+    Amazon Advertising
+
+    Yieldmo, Inc.
+
+    Beachfront Media LLC
+
+    Mintegral International Limited
+
+    Sonobi, Inc
+
+    Intercept Interactive Inc. dba Undertone
+
+    Kargo Global Inc.
+
+    Smile Wanted Group
+
+</Accordion>
+</AccordionGroup>
+
+## Technical Setup
+
+<AccordionGroup>
+<Accordion title="Do Content Ignite require me to replace the Google Publisher Tag (GPT) on page?">
+
+    Yes. When a new publisher transitions over to Content Ignite we replace their GPT Tags with the Content Ignite GPT & One tag. When the publisher has no direct sales campaigns this is very straightforward - but when direct sales are involved we have to treat the setup slightly differently:
+
+    - Option (1) In most instances CI will be responsible for the publisher's ad operations and trafficking and deliver those campaigns via our own GAM instance.
+    - Option (2) If the publisher wishes to remain in control we typically work via a "Teams" function in GAM. These campaigns would still flow via our GAM instance, but the publisher has access to traffic those campaigns.
+
+</Accordion>
+
+<Accordion title="Why is Ads.txt so important?">
+
+    https://www.contentignite.com/article/mastering-ads-txt-file-optimisation-with-content-ignites-insight-tool
+
+</Accordion>
+
+<Accordion title="Why do I need Ads.txt?">
+
+    See guide: [Mastering Ads.txt](https://www.contentignite.com/article/mastering-ads-txt-file-optimisation-with-content-ignites-insight-tool)
+
+</Accordion>
+
+<Accordion title="I have updated my Ads.txt but its not showing in the platform">
+
+    Your ads.txt files are crawled every 5 hours so changes will not be immediate, but will appear swiftly.  If you do not see the changes after 24hours, please contact adops@contentignite.com
+
+</Accordion>
+
+<Accordion title="How do I fix GA integration issues?">
+
+    Follow the property ID mapping process in Fusion admin panel
+
+</Accordion>
+
+<Accordion title="Google Analytics is not pulling through to Fusion">
+
+    Mapping the GA property ID[¶](https://docs.contentignite.com/integrations/analytics/#mapping-the-ga-property-id)After verifying the integration and establishing the connection, you’ll need to map the Property ID to the specific Google Analytics properties you want Fusion to track. Here’s how to do it:
+
+    1. **Log In**: Access your Google Analytics account under the account you'd like to connect.
+    2. **Locate the Property ID**:
+        - Open the **Admin** settings.
+        - Under **Property**, select **Property Details**.
+        - Find and copy your Property ID, typically a 9-digit numeric code.
+    3. **Map the Property ID**:
+        - Navigate to Google Analytics (GA4) in the [Integrations](https://admin.contentignite.com/integration) section in Fusion, click the **more** icon (with the 3 dots) and select the option to **Manage** the integration.
+        - Under **Property ID Mapping**, select the relevant publisher and paste the copied Property ID into the Publisher ID column.
+    4. **Save and Activate**: Click **Save** to activate the integration and start fetching analytics data straight away.
+
+    [Mapping the GA property ID](https://docs.contentignite.com/integrations/analytics/#mapping-the-ga-property-id)
+
+    [Integrations and Analytics](https://docs.contentignite.com/integrations/analytics/)
+
+</Accordion>
+
+<Accordion title="What about GPT replacement?">
+
+    Required for new publishers, with special handling for direct sales
+
+</Accordion>
+
+<Accordion title="I’m unable to log in. What do I do?">
+
+    The most common reason for this is (ironically) because an Ad Blocker is in place.  If this is not the case, please get in touch with the details of the bowser you’re using and a screen grab of what you’re seeing so we can dig into it.
+
+</Accordion>
+
+<Accordion title="Why do I need to whitelist Content Ignite’s bot?">
+
+    This is what checks your site for outages, is vital for contextual crawling and various other protective features. Our bot identifies itself with the following user agent: ContentIgniteBot/1.0 (compatible; Mozilla/5.0; +https://api.tagdeliver.com)
+
+</Accordion>
+
+<Accordion title="Can the ads.txt file be hosted on a subdomain like 'www', or does it need to be on the root domain?">
+
+    The IAB Tech Lab's ads.txt specification explicitly states that the file must be hosted on the root domain, not on any subdomain.Ads.txt must exist from the root domain, so always enter the domain direct in the browser, e.g.
+
+    rootdomain [.com/ads.txt](http://wareable.com/ads.txt) , running it on www. is invalid
+
+</Accordion>
+
+<Accordion title="Why am I getting console errors?">
+
+    This is not uncommon with programatic ads as creatives can take any shape or form. We suggest testing your site with basic and predictable ad server creative using the following query string parameters: `?cipt_test_ads=true&cipt_no_hb_ads=true` 
+
+</Accordion>
+
+<Accordion title="I am seeing an occasional error in the prebid.js console - is this a concern?">
+
+    If you are seeing nothing on the page affected or any issues such as partners not bidding then this is nothing to worry about, this error is commonly seen in Prebid.js setups where multiple SSPs are firing at the same time, causing occasional race conditions or timing overlaps. These are typically non-critical and do not affect ad delivery, making them a normal occurrence in complex header bidding environments.
+
+</Accordion>
+</AccordionGroup>
+
+## Campaign Management
+
+<AccordionGroup>
+<Accordion title="Where do I find the data for my live or previous direct campaigns?">
+
+    Campaign reports are stored within the reporting feature on the fusion platform (login using your email and password to admin.contentignite.com unless using custom CI wrapper), you can view latest data after 7:30am when the reports are updated with the last 24 hours of data.
+
+    https://admin.contentignite.com/report/campaign
+
+</Accordion>
+
+<Accordion title="Where do I find campaign data?">
+
+    Access campaign reports through the Fusion platform reporting feature after 7:30am daily
+
+    https://admin.contentignite.com/report/campaign
+
+</Accordion>
+
+<Accordion title="What are the recommended creative sizes for my direct campaigns?">
+
+    Standard sizes: 728x90, 970x250, 300x600, 320x50, 300x250
+
+</Accordion>
+
+<Accordion title="Can I use custom ad unit sizes for my direct campaigns?">
+
+    Yes. Custom sizes can be added to  Ad Unit Configs by typing the size (900x400 for example) in to the Unit Size field within the config settings and clicking the prompt to add
+
+</Accordion>
+
+<Accordion title="Can I rename GAM ad units?">
+
+    Yes, for SaaS clients or Teams access (ID remains fixed)
+
+</Accordion>
+
+<Accordion title="How do I name Fusion configs?">
+
+    Use Config Label under Advanced Options > Scheduling & Naming
+
+</Accordion>
+
+<Accordion title="Do you support 3rd party tags for campaign creatives?">
+
+    Yes, we can support ad serving of 3rd party JS and iFrame tags but we require these to meet Google Ad Manager and IAB specifications. Ideally any 3rd party tags should be recognisable by Google Ad Manager for correct tracking macro insertion such as click macros.
+
+</Accordion>
+
+<Accordion title="Do you support HTML5 Creatives?">
+
+    Yes, we can support ad serving HTML5 Creative Bundles providing they are correctly setup to Google Ad Manager specs - https://support.google.com/admanager/answer/7046799?sjid=8068901518823437570-EU
+
+</Accordion>
+</AccordionGroup>
+
+## Ad Unit Management
+
+<AccordionGroup>
+<Accordion title="Can I name the ad unit configs in Fusion?">
+
+    Yes, especially if you’re a Plug & Play client. From within the ad unit config setting select the 'Advanced Options' dropdown. You will see a group of options named 'Scheduling & Naming' and a field called 'Config Label' where you can add you desired config name.
+
+</Accordion>
+
+<Accordion title="Can I rename ad units in GAM?">
+
+    Yes, if you are a SaaS client or have ‘Teams’ access. Any Child ad units that are published from fusion to GAM can be renamed it is just the ad unit ID which will not be editable.
+
+</Accordion>
+
+<Accordion title="Can I use bespoke sizes for ad units?">
+
+    Yes. Custom sizes can be added to  Ad Unit Configs by typing the size (900x400 for example) in to the Unit Size field within the config settings and clicking the prompt to add.
+
+</Accordion>
+</AccordionGroup>
+
+## Experiments & Testing
+
+<AccordionGroup>
+<Accordion title="How do I run an Experiment?">
+
+    Follow the guide at: [Content Ignite Experiment Guide](https://www.contentignite.com/article/optimising-website-ad-performance-using-content-ignites-experiment-technology)
+
+</Accordion>
+
+<Accordion title="How do I conduct an Experiment?">
+
+    Read our article here: https://www.contentignite.com/article/optimising-website-ad-performance-using-content-ignites-experiment-technology
+
+</Accordion>
+</AccordionGroup>
+
+## Protections, Quality & Blocks
+
+<AccordionGroup>
+<Accordion title="How can I stop particular advertisers advertising on certain publishers sites?">
+
+    Via Protections in Google Ad Manager and for each SSP on each website - block by either sending an email or adding the block/protection into the SSP manually.
+
+</Accordion>
+
+<Accordion title="Can I have a look at the type of quality of ads showing on particular sites?">
+
+    We can review quality of ads in the Ad Review Center in Google Ad Manager. If you would like to use a 3rd-party to do this like Geoedge and TheMediaTrust, you can reach out to those companies individually and contract directly - then speak to CI about adding them as an integration in Fusion.
+
+</Accordion>
+
+<Accordion title="What IPs should or bots should we allow from Content Ignite to prevent any blocking of requests?">
+  Our bots user agent is below and should be whitelisted. In addition to this,
+  it is highly important that bot targeted files (robot.txt, ads.txt,
+  sitemap.xml etc) are all excluded from your WAF, as blocking access to these
+  can harm SEO, ad revenue and more. `ContentIgniteBot/1.0 (compatible;
+  Mozilla/5.0; +[https://api.tagdeliver.com](https://api.tagdeliver.com/))`
+</Accordion>
+
+<Accordion title="Do Content Ignite store IP address, device ID or cookie ID data and where this data will be stored?">
+
+    We don't store PI. IP address and UA are present in our raw server logs but don't go into long term storage. The only contact we have is the Hash, which uses IP and US in a secured way. Things like device ids, cookies etc are not used or stored by CI.
+
+    Please see our Privacy Policy (section 4) for more information
+
+    https://www.contentignite.com/privacy-policy
+
+    https://docs.google.com/presentation/d/1sIRaz8HQhySSDDfi6DhCmejQya5xKPt5Zatv_WtXCJ8/edit?usp=sharing
+
+</Accordion>
+
+<Accordion title="I want to investigate a bad ad?">
+
+    If you spot the bad ad on the page and want to keep it there to inspect where the ad was served from follow the below instructions:
+
+    To enable the debug feature on page without activating the debugging mode enabled in the fusion publisher settings you **MUST** follow step 1.
+
+    If you already have debugging enabled in fusion publisher setting skip to step 2.
+    ***Important to note* you will not be able to capture the bid data on the page before the debug script is enabled, so we advise having this enabled in publisher settings rather than adding to the URL and waiting for the bad ad to be produced.***
+
+    1. Add this string to the end of the page url `?cipt_debug=true&cipt_disable_refresh=true`
+
+        ***important to note*** when adding the query string parameters to the url make sure the url doesn't already include a `?` such as `example.com?page_id=1234` as in this case you would need to include our debug parameters starting with `&` not `?` so `&cipt_debug=true&cipt_disable_refresh=true`*
+
+    2. Open page inspect and select console view
+    3. Amongst the script you will see a list of completed auctions with the assigned unit and the partner who won the auction
+    ***Important to note*** If you don't see the SSP win for a unit, that means either GAM (Adx, Open Bidding, Campaigns) or Amazon has won the auction, as neither shares details about the creative that get served.*
+    4. Please export all this data in the console view and send it over to [adops@contentignite.com](mailto:adops@contentignite.com) in a plain text file.
+    *If this does not return any information about the prebid auction SSP that usually means it was won by one of the previously mentioned ad servers which do not share creative details, to confirm this you can filter by `auction`  (it will show as *APS or adx as the winning bidder)*
+
+</Accordion>
+
+<Accordion title="Why do I see `Ad Removed` on my ad units?">
+
+    Some ads can be removed from the browser which is called **heavy ad intervention (HAI) by Google Chrome.** This can be affected by **overall browser resource usage**, not just the individual ad unit.
+
+    Here's a breakdown:
+
+    ### What triggers a "heavy ad intervention"?
+
+    Chrome defines a *heavy ad* as one that uses more than:
+
+    - **4 MB** of network data,
+    - **15 seconds** of CPU usage in any 30-second window,
+    - or **60 seconds** of total CPU usage overall.
+
+    If an ad exceeds **any one** of those thresholds, Chrome may block or unload it.
+
+    ---
+
+    ### But what if the **browser is already under strain**?
+
+    If a page is already consuming significant CPU or memory due to:
+
+    - lots of JavaScript activity,
+    - multiple videos,
+    - animations,
+    - complex rendering tasks,
+    - or just too many tabs open,
+
+    ...then even **marginal ad units** may cross the thresholds more easily.
+
+    In other words:
+
+    - A "normally fine" ad unit might tip over the limit **faster** if the system is already under pressure.
+    - The thresholds are **absolute**, but how quickly an ad hits them can vary depending on the environment.
+
+    ---
+
+    If you are seeing heavy ad intervention or seeing ad units not loading, it may not always be because the ad itself is misbehaving — the **page context and user environment matter too**.
+
+    Read more here https://docs.contentignite.com/reporting/insights/diagnostics/#heavy-ad-intervention-publisher-issue
+
+</Accordion>
+</AccordionGroup>
+
+## Floors
+
+<AccordionGroup>
+<Accordion title="How do I create a Dynamic Floor Set Up?">
+
+    1. Created new custom key-values (ci-df) in GAM
+        1. Create the `ci-df` key
+        2. Copy and paste the following values as values with with Value Type `Predefined` selected
+            - Values
+
+                ```
+                0.01
+                0.02
+                0.03
+                0.04
+                0.05
+                0.06
+                0.07
+                0.08
+                0.09
+                0.10
+                0.11
+                0.12
+                0.13
+                0.14
+                0.15
+                0.16
+                0.17
+                0.18
+                0.19
+                0.20
+                0.21
+                0.22
+                0.23
+                0.24
+                0.25
+                0.26
+                0.27
+                0.28
+                0.29
+                0.30
+                0.31
+                0.32
+                0.33
+                0.34
+                0.35
+                0.36
+                0.37
+                0.38
+                0.39
+                0.40
+                0.41
+                0.42
+                0.43
+                0.44
+                0.45
+                0.46
+                0.47
+                0.48
+                0.49
+                0.50
+                0.51
+                0.52
+                0.53
+                0.54
+                0.55
+                0.56
+                0.57
+                0.58
+                0.59
+                0.60
+                0.61
+                0.62
+                0.63
+                0.64
+                0.65
+                0.66
+                0.67
+                0.68
+                0.69
+                0.70
+                0.71
+                0.72
+                0.73
+                0.74
+                0.75
+                0.76
+                0.77
+                0.78
+                0.79
+                0.80
+                0.81
+                0.82
+                0.83
+                0.84
+                0.85
+                0.86
+                0.87
+                0.88
+                0.89
+                0.90
+                0.91
+                0.92
+                0.93
+                0.94
+                0.95
+                0.96
+                0.97
+                0.98
+                0.99
+                1.00
+                1.01
+                1.02
+                1.03
+                1.04
+                1.05
+                1.06
+                1.07
+                1.08
+                1.09
+                1.10
+                1.11
+                1.12
+                1.13
+                1.14
+                1.15
+                1.16
+                1.17
+                1.18
+                1.19
+                1.20
+                1.21
+                1.22
+                1.23
+                1.24
+                1.25
+                1.26
+                1.27
+                1.28
+                1.29
+                1.30
+                1.31
+                1.32
+                1.33
+                1.34
+                1.35
+                1.36
+                1.37
+                1.38
+                1.39
+                1.40
+                1.41
+                1.42
+                1.43
+                1.44
+                1.45
+                1.46
+                1.47
+                1.48
+                1.49
+                1.50
+                1.51
+                1.52
+                1.53
+                1.54
+                1.55
+                1.56
+                1.57
+                1.58
+                1.59
+                1.60
+                1.61
+                1.62
+                1.63
+                1.64
+                1.65
+                1.66
+                1.67
+                1.68
+                1.69
+                1.70
+                1.71
+                1.72
+                1.73
+                1.74
+                1.75
+                1.76
+                1.77
+                1.78
+                1.79
+                1.80
+                1.81
+                1.82
+                1.83
+                1.84
+                1.85
+                1.86
+                1.87
+                1.88
+                1.89
+                1.90
+                1.91
+                1.92
+                1.93
+                1.94
+                1.95
+                1.96
+                1.97
+                1.98
+                1.99
+                2.00
+                ```
+
+    2. Edit your existing AdX line item
+        1. Set start time to now, set end time to unlimited
+        2. Set to Run of Network
+        3. Set Inventory Type to `Display` (set more up for `Interstitial` etc)
+        4. Set Custom Targeting to;
+            1. `ci-df` is any of `0.01` , `0.02` etc for the 200 values
+            ![Screenshot from GAM showing custom targeting setup for dynamic floors](/assets/images/dynamic-floors-custom-targeting.png)
+
+    3. Add each Unified Pricing Rule to GAM
+        1. name = `ci-df-0.01`
+        2. custom targeting = `ci-df` is any of `0.01`
+        3. check `Set floor prices`
+        4. Branded = `0.01`
+        ![Screenshot from GAM showing Unified Pricing Rule set up for dynamic floors](/assets/images/dynamic-floors-upr.png)
+
+</Accordion>
+</AccordionGroup>
