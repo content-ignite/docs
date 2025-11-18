@@ -256,5 +256,13 @@
       "source": "/faqs",
       "destination": "/getting-started/faqs"
     }
-  ]
+  ],
+  "integrations": {
+    "mixpanel": {
+      "projectToken": "fc7b08126e10fb2d84045ec168c79cad"
+    },
+    "ga4": {
+      "measurementId": "G-NDK4RRP90X"
+    }
+  }
 }

@@ -4,16 +4,9 @@ description: "Welcome to the world of Content Ignite!"
 mode: "wide"
 ---
 
-<img
-  className="block dark:hidden"
-  src="/assets/images/docs-banner--light.svg"
-  alt="Welcome Graphic"
-/>
-<img
-  className="block dark:block"
-  src="/assets/images/docs-banner--dark.svg"
-  alt="Welcome Graphic"
-/>
+import Image from "/snippets/Image.jsx";
+
+<Image src="docs-banner.svg" alt="Welcome Graphic" />
 
 ## Getting help
 
@@ -23,7 +16,7 @@ Our docs should provide everything you need to get started and to support you as
 
 <Card
   title="Get Support"
-  icon="rocket"
+  icon="life-ring"
   href="https://resource.contentignite.com/support"
   horizontal
 >
@@ -37,7 +30,7 @@ Get familiar with our platforms concepts by reading up on them here, or by follo
 <Columns cols={2}>
   <Card
     title="SaaS vs P&P vs Fully Managed"
-    icon="pen-to-square"
+    icon="circle-nodes"
     href="/getting-started/saas-vs-pap"
   >
     Different approaches, but the same platform and fundamental features &
@@ -45,13 +38,17 @@ Get familiar with our platforms concepts by reading up on them here, or by follo
   </Card>
   <Card
     title='Fusion "Pro" vs Fusion "Mapped"'
-    icon="palette"
+    icon="compass-drafting"
     href="/getting-started/pro-vs-mapped"
   >
     If you choose to go the "SaaS" route, you have control over the ad unit
     structure inside your GAM
   </Card>
-  <Card title="Our Ad Units" icon="map" href="/getting-started/ad-units">
+  <Card
+    title="Our Ad Units"
+    icon="screwdriver-wrench"
+    href="/getting-started/ad-units"
+  >
     Get to know our ad units across web and app; everything from standard IAB,
     to our bespoke high-impact units
   </Card>
@@ -67,8 +64,9 @@ If you are new to Content Ignite, you probably have a lot of questions about how
 
 <Card
   title="Common questions & answers"
-  icon="stars"
+  icon="circle-question"
   href="/getting-started/faqs"
+  horizontal
 >
   Jump on over to our Intro to Content Ignite Tech for common getting started
   FAQ's.
@@ -78,23 +76,25 @@ If you are new to Content Ignite, you probably have a lot of questions about how
 
 Once signed up and signed in, you will see an onboarding banner on your dashboard. This will guide you through every step needed to get live and earning! Here is an overview of the top level steps required:
 
-<Steps>
-  <Step title="Signing up" href="/getting-started/signing-up">
-    Create your account and verify your email address
-  </Step>
-  <Step
-    title="Creating your first publisher"
-    href="/getting-started/first-publisher"
-  >
-    Get your publisher verified and approved
-  </Step>
-  <Step
-    title="Creating your first tag config"
-    href="/getting-started/first-tag-config"
-  >
-    Configs provide everything needed to serve an ad
-  </Step>
-  <Step title="Going live" href="/getting-started/going-live">
-    Worth through your in platform onboarding steps to get live
-  </Step>
-</Steps>
+<Card title="Signing up" icon="1" horizontal href="/getting-started/signing-up">
+  Create your account and verify your email address
+</Card>
+<Card
+  title="Creating your first publisher"
+  icon="2"
+  horizontal
+  href="/getting-started/first-publisher"
+>
+  Get your publisher verified and approved
+</Card>
+<Card
+  title="Creating your first tag config"
+  icon="3"
+  horizontal
+  href="/getting-started/first-tag-config"
+>
+  Configs provide everything needed to serve an ad
+</Card>
+<Card title="Going live" icon="4" horizontal href="/getting-started/going-live">
+  Worth through your in platform onboarding steps to get live
+</Card>

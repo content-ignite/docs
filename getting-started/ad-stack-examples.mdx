@@ -3,20 +3,16 @@ title: "Ad Stack Examples"
 description: "Your demand sources, ad servers and tech; grouped"
 ---
 
+import Image from "/snippets/Image.jsx";
+
 Ad stacks may seem overwhelming at first glance, their inherent flexibility leads to a magnitude of configuration options, but we can assure you they are very easy to grasp and use! So let's explore some real-world examples from simple to complex.
 
 ## The minimalist
 
 The minimum you need to get up and running with digital ads is an ad server! Ours is available by default, and if you have connected in your own, then that will be available too. You can have a fully working setup with this simple ad stack.
 
-<img
-  className="block dark:hidden"
-  src="/assets/images/ad-stack-simple--light.png"
-  alt="A simple ad stack containing a single Google Ad Manager ad server"
-/>
-<img
-  className="block dark:block"
-  src="/assets/images/ad-stack-simple--dark.png"
+<Image
+  src="ad-stack-simple.png"
   alt="A simple ad stack containing a single Google Ad Manager ad server"
 />
 
@@ -24,14 +20,8 @@ The minimum you need to get up and running with digital ads is an ad server! Our
 
 Enabling Prebid is as simple as dragging in a Prebid SSP into your stack, if the SSP supports it, you can set it to run server-side via Content Ignites Prebid Server. The same goes for Amazon UAM/TAM, just drag it in to enable it!
 
-<img
-  className="block dark:hidden"
-  src="/assets/images/ad-stack-demand--light.png"
-  alt="Three prebid.js SSPs and Amazon UAM/TAM in an ad stack with a single Google Ad Manager ad server"
-/>
-<img
-  className="block dark:block"
-  src="/assets/images/ad-stack-demand--dark.png"
+<Image
+  src="ad-stack-demand.png"
   alt="Three prebid.js SSPs and Amazon UAM/TAM in an ad stack with a single Google Ad Manager ad server"
 />
 
@@ -39,14 +29,8 @@ Enabling Prebid is as simple as dragging in a Prebid SSP into your stack, if the
 
 The final block in ad stacks is Fallbacks. These serve when nothing else has, and take the form of either simple image creatives (image & link) or advanced script creatives (created and hosted by you). You can create fallbacks from within an ad stack and drag it in to enable it. More than one can be used too, and will be cycled through at random.
 
-<img
-  className="block dark:hidden"
-  src="/assets/images/ad-stack-the-works--light.png"
-  alt="Various ad demand SSPs, an ad server and some fallback creatives within an ad stack"
-/>
-<img
-  className="block dark:block"
-  src="/assets/images/ad-stack-the-works--dark.png"
+<Image
+  src="ad-stack-the-works.png"
   alt="Various ad demand SSPs, an ad server and some fallback creatives within an ad stack"
 />
 
@@ -58,14 +42,8 @@ Unlike days of the past, there is no need to mess around with passback tags and 
 
 All of that boils down to you simply dragging a second ad server into the ad stack:
 
-<img
-  className="block dark:hidden"
-  src="/assets/images/ad-stack-multi-server--light.png"
-  alt="A full ad stack set up, with two ad servers"
-/>
-<img
-  className="block dark:block"
-  src="/assets/images/ad-stack-multi-server--dark.png"
+<Image
+  src="ad-stack-multi-server.png"
   alt="A full ad stack set up, with two ad servers"
 />
 
@@ -79,13 +57,7 @@ Note that both servers need to be set up as applicable to the ad demand you have
 
 If your ad server was first-look, and failed to load an ad, the flow may look something like this:
 
-<img
-  className="block dark:hidden"
-  src="/assets/images/multi-server-flow--light.png"
-  alt="The flow of ad demand though the first ad server then second call to ad demand passing on to second look ad server"
-/>
-<img
-  className="block dark:block"
-  src="/assets/images/multi-server-flow--dark.png"
+<Image
+  src="multi-server-flow.png"
   alt="The flow of ad demand though the first ad server then second call to ad demand passing on to second look ad server"
 />
