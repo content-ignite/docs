@@ -23,7 +23,6 @@
                 "icon": "rocket",
                 "pages": [
                   "index",
-                  "getting-started/faqs",
                   "getting-started/signing-up",
                   "getting-started/first-publisher",
                   "getting-started/first-tag-config",
@@ -133,7 +132,10 @@
               {
                 "group": "Industry concepts",
                 "icon": "graduation-cap",
-                "pages": ["getting-started/cmp-guide"]
+                "pages": [
+                  "getting-started/cmp-guide",
+                  "publishers/tag-core-web-vitals"
+                ]
               },
               {
                 "group": "FAQ's",
@@ -147,11 +149,7 @@
               {
                 "group": "Helpful Resources",
                 "icon": "book-open",
-                "pages": [
-                  "guide/glossary",
-                  "getting-started/top-tips",
-                  "publishers/tag-core-web-vitals"
-                ]
+                "pages": ["guide/glossary", "getting-started/top-tips"]
               }
             ]
           },
