@@ -18,6 +18,7 @@
   "paths": {
     "/v1/report": {
       "get": {
+        "x-mint": { "mcp": { "enabled": true } },
         "summary": "/report",
         "tags": ["Reporting", "Revenue Reports"],
         "responses": {
