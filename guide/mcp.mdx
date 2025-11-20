@@ -1,0 +1,83 @@
+---
+title: "MCP Server (Experimental)"
+description: "Connect the Content Ignite MCP server to your AI client"
+---
+
+## Prerequisite: Node.js
+
+The MCP server requires Node.js to run. Verify your Node.js installation by opening a terminal or command prompt and running:
+
+```
+node --version
+```
+
+If Node.js is not installed, download it from [nodejs.org](https://nodejs.org). We recommend the LTS (Long Term Support) version for stability.
+
+## Configuring your client
+
+<Tabs>
+    <Tab title="Claude">
+        <Steps>
+            <Step title="Open Claude Desktop Settings">
+                Start by accessing the Claude Desktop settings. Click on the Claude menu in
+                your system’s menu bar (not the settings within the Claude window itself)
+                and select “Settings…” 
+                
+                On macOS, this appears in the top menu bar
+
+                This opens the Claude Desktop configuration window, which is separate from your Claude account settings.
+
+            </Step>
+            <Step title="Access Developer Settings">
+                In the Settings window, navigate to the “Developer” tab in the left sidebar. This section contains options for configuring MCP servers and other developer features.
+
+                Click the “Edit Config” button to open the configuration file.
+
+                This action creates a new configuration file if one doesn’t exist, or opens your existing configuration. The file is located at:
+
+                - macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
+                - Windows: `%APPDATA%\Claude\claude_desktop_config.json`
+
+            </Step>
+            <Step title="Configure the Filesystem Server">
+                Replace the contents of the configuration file with the following JSON structure. This configuration tells Claude Desktop to start the Content Ignite MCP Server with access to your specific account:
+
+                ```json
+                {
+                    "mcpServers": {
+                        "Content Ignite": {
+                            "command": "npx",
+                            "args": [
+                                "-y"
+                                "mcp-remote",
+                                "https://docs.contentignite.com/mcp",
+                                "--header",
+                                "Authorization:${AUTH_HEADER}"
+                            ],
+                            "env": {
+                                "AUTH_HEADER": "Bearer <auth-token>"
+                            }
+                        }
+                    }
+                }
+                ```
+
+                Ensure you replacing `<auth-token>` with your **API Access Token** from your [Fusion account page](https://admin.contentignite.com/account).
+            </Step>
+            <Step title="Restart Claude Desktop">
+                After saving the configuration file, completely quit Claude Desktop and restart it. The application needs to restart to load the new configuration and start the MCP server.
+
+                Upon successful restart, you’ll see an MCP server indicator in the bottom-right corner of the conversation input box.
+
+                Click on this indicator to view the available tools provided by the Content Ignite MCP Server.
+
+                If the server indicator doesn’t appear, reach out to your account manager for assistance.
+
+            </Step>
+        </Steps>
+    </Tab>
+    <Tab title="ChatGPT">
+        Unfortunately, ChatGPT's desktop clients to not yet support MCP. We expect this to change soon.
+    </Tab>
+
+</Tabs>
